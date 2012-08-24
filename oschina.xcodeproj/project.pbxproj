@@ -20,6 +20,7 @@
 		DA282A93155CD5B2002D773A /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA282A91155CD5B2002D773A /* FriendCell.xib */; };
 		DA282A96155CD731002D773A /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = DA282A94155CD731002D773A /* man.png */; };
 		DA282A97155CD731002D773A /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = DA282A95155CD731002D773A /* woman.png */; };
+		DA28E3CA15E721FE003FF524 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA28E3C915E721FE003FF524 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DA3358791507417400F6671E /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3358771507417300F6671E /* TweetCell.m */; };
 		DA33587A1507417400F6671E /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA3358781507417400F6671E /* TweetCell.xib */; };
 		DA33587D150745B800F6671E /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA33587C150745B800F6671E /* Tweet.m */; };
@@ -64,7 +65,6 @@
 		DA7A86641545077900EDC685 /* ASIWebPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A86631545077900EDC685 /* ASIWebPageRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DA7A8666154507D100EDC685 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7A8665154507D100EDC685 /* libxml2.dylib */; };
 		DA7B75E515539BD800461B45 /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B75E415539BD800461B45 /* Favorite.m */; };
-		DA7B76001553E4ED00461B45 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B75FF1553E4ED00461B45 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DA7CAF74155A6FEB007FD375 /* FavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7CAF72155A6FEB007FD375 /* FavoritesView.m */; };
 		DA7CAF75155A6FEB007FD375 /* FavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7CAF73155A6FEB007FD375 /* FavoritesView.xib */; };
 		DA7CEFF6154BAC5D002A8725 /* commentlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7CEFF5154BAC5D002A8725 /* commentlist@2x.png */; };
@@ -380,6 +380,8 @@
 		DA282A91155CD5B2002D773A /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		DA282A94155CD731002D773A /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
 		DA282A95155CD731002D773A /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
+		DA28E3C815E721FE003FF524 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		DA28E3C915E721FE003FF524 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		DA3358761507417300F6671E /* TweetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
 		DA3358771507417300F6671E /* TweetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		DA3358781507417400F6671E /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
@@ -445,8 +447,6 @@
 		DA7A8665154507D100EDC685 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		DA7B75E315539BD800461B45 /* Favorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
 		DA7B75E415539BD800461B45 /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
-		DA7B75FE1553E4ED00461B45 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = "../../../Users/wangjun/Downloads/RegexKitLite-4.0/RegexKitLite.h"; sourceTree = "<group>"; };
-		DA7B75FF1553E4ED00461B45 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = "../../../Users/wangjun/Downloads/RegexKitLite-4.0/RegexKitLite.m"; sourceTree = "<group>"; };
 		DA7CAF71155A6FEB007FD375 /* FavoritesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesView.h; sourceTree = "<group>"; };
 		DA7CAF72155A6FEB007FD375 /* FavoritesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesView.m; sourceTree = "<group>"; };
 		DA7CAF73155A6FEB007FD375 /* FavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesView.xib; sourceTree = "<group>"; };
@@ -953,8 +953,8 @@
 		DA7B75FD1553E4A400461B45 /* Regex */ = {
 			isa = PBXGroup;
 			children = (
-				DA7B75FE1553E4ED00461B45 /* RegexKitLite.h */,
-				DA7B75FF1553E4ED00461B45 /* RegexKitLite.m */,
+				DA28E3C815E721FE003FF524 /* RegexKitLite.h */,
+				DA28E3C915E721FE003FF524 /* RegexKitLite.m */,
 			);
 			name = Regex;
 			sourceTree = "<group>";
@@ -2063,7 +2063,6 @@
 				DAC0FB2D1549529500BD54CD /* ObjectReply.m in Sources */,
 				DAB37432154BCF7200CD3279 /* CommentRefer.m in Sources */,
 				DA7B75E515539BD800461B45 /* Favorite.m in Sources */,
-				DA7B76001553E4ED00461B45 /* RegexKitLite.m in Sources */,
 				DACF2CBC1558A900008D485C /* LoadingCell.m in Sources */,
 				DAE4A0F5155A0AC9006AB969 /* SearchResult.m in Sources */,
 				DAE4A0F8155A0BD8006AB969 /* Friend.m in Sources */,
@@ -2108,6 +2107,7 @@
 				DAB7F46415E1EF6A008F4C85 /* UIBubbleTableView.m in Sources */,
 				DAB7F46515E1EF6A008F4C85 /* UIBubbleTableViewCell.m in Sources */,
 				DAB7F46F15E1F1D4008F4C85 /* BubbleView.m in Sources */,
+				DA28E3CA15E721FE003FF524 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
