@@ -93,16 +93,5 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:all]];
     }
 }
-- (void)postStatusDidSucceed:(WeiboClient*)sender obj:(NSObject*)obj;
-{
-    if (hud) {
-        [hud hide:YES];
-    }
-    if (progressView != nil) {
-        [progressView dismissWithClickedButtonIndex:0 animated:YES];
-        
-    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"成功分享" message:@"成功分享到新浪微博" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil];
-    [alert show];
-}
+
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OAuthEngine.h"
-#import "WeiboClient.h"
-#import "OAuthController.h"
+//#import "OAuthEngine.h"
+//#import "WeiboClient.h"
+//#import "OAuthController.h"
 #import "Tool.h"
 #import "ShareObject.h"
 #import "UITap.h"
@@ -17,7 +17,7 @@
 #define SinaAppKey @"3616966952"
 #define SinaAppSecret @"fd81f6d31427b467f49226e48a741e28"
 
-@interface ShareView : UIViewController<OAuthControllerDelegate>
+@interface ShareView : UIViewController
 {
     NSString * url;
     NSString * content;
@@ -39,6 +39,5 @@
 
 - (IBAction)click_qqshare:(id)sender;
 - (IBAction)click_weibo:(id)sender;
-- (void)postStatusDidSucceed:(WeiboClient*)sender obj:(NSObject*)obj;
 
 @end
