@@ -1,0 +1,23 @@
+//
+//  NewsBaseView.h
+//  oschina
+//
+//  Created by wangjun on 12-3-6.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "NewsView.h"
+#import "PostsView.h"
+
+@interface NewsBaseView : UIViewController
+
+@property (strong, nonatomic) NewsView * lastestNews;
+@property (strong, nonatomic) NewsView * hotNews;
+@property (strong, nonatomic) PostsView * hotPosts;
+@property (strong, nonatomic) IBOutlet UIView *viewMain;
+- (IBAction)selector_LatestNews:(id)sender;
+- (IBAction)selector_HotNews:(id)sender;
+- (IBAction)selector_HotPosts:(id)sender;
+
+@end
