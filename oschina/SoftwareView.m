@@ -99,6 +99,16 @@
     isLoading = YES;
     [self.tableSoftwares reloadData];
 }
+-(void)reloadType
+{
+    [self clear];
+    [self reload];
+}
+-(void)clear
+{
+    [softwares removeAllObjects];
+    isLoadOver = NO;
+}
 
 #pragma TableView的处理
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
