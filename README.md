@@ -58,6 +58,7 @@ iphone-app
 ## **项目的功能流程** ##
 
 #### 1、APP启动流程 ####
+
 OSAppDelegate 的启动方法中，声明一个 UITabBarController，然后依次将<br/>
 NewsBase<br/>
 PostBase<br/>
@@ -65,3 +66,11 @@ TweetBase2<br/>
 ProfileBase<br/>
 SettingView<br/>
 填充到5个UITabItem里
+
+
+#### 2、ipa文件生成流程 ####
+
+1,在OSX系统上启动iTunes程序<br/>
+2,启动Xcode，将项目中的 OSChina/Products/oschina.app 按住command键然后用鼠标拖放到iTunes的应用程序栏目<br/>
+3,然后在iTunes程序中右键点击"开源中国"图标，在弹出的的菜单中选择"在Finder中显示"，这样你就看到ipa文件的路径了。
+
