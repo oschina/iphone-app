@@ -131,17 +131,6 @@
 		DAB7F45115E1EF47008F4C85 /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44915E1EF47008F4C85 /* bubbleMine@2x.png */; };
 		DAB7F45215E1EF47008F4C85 /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44A15E1EF47008F4C85 /* bubbleSomeone.png */; };
 		DAB7F45315E1EF47008F4C85 /* bubbleSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44B15E1EF47008F4C85 /* bubbleSomeone@2x.png */; };
-		DAB7F45415E1EF47008F4C85 /* typingMine.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44C15E1EF47008F4C85 /* typingMine.png */; };
-		DAB7F45515E1EF47008F4C85 /* typingMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44D15E1EF47008F4C85 /* typingMine@2x.png */; };
-		DAB7F45615E1EF47008F4C85 /* typingSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44E15E1EF47008F4C85 /* typingSomeone.png */; };
-		DAB7F45715E1EF47008F4C85 /* typingSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F44F15E1EF47008F4C85 /* typingSomeone@2x.png */; };
-		DAB7F46215E1EF6A008F4C85 /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7F45915E1EF6A008F4C85 /* NSBubbleData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DAB7F46315E1EF6A008F4C85 /* NSBubbleDataInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7F45B15E1EF6A008F4C85 /* NSBubbleDataInternal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DAB7F46415E1EF6A008F4C85 /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7F45D15E1EF6A008F4C85 /* UIBubbleTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DAB7F46515E1EF6A008F4C85 /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7F45F15E1EF6A008F4C85 /* UIBubbleTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DAB7F46615E1EF6A008F4C85 /* UIBubbleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F46015E1EF6A008F4C85 /* UIBubbleTableViewCell.xib */; };
-		DAB7F46F15E1F1D4008F4C85 /* BubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7F46D15E1F1D4008F4C85 /* BubbleView.m */; };
-		DAB7F47015E1F1D4008F4C85 /* BubbleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB7F46E15E1F1D4008F4C85 /* BubbleView.xib */; };
 		DAB848BA153D827B002A63DF /* 640X185(1).png in Resources */ = {isa = PBXBuildFile; fileRef = DAB848B9153D827B002A63DF /* 640X185(1).png */; };
 		DAB92D47156B755200F31954 /* MyPortraitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB92D45156B755200F31954 /* MyPortraitCell.m */; };
 		DAB92D48156B755200F31954 /* MyPortraitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB92D46156B755200F31954 /* MyPortraitCell.xib */; };
@@ -547,23 +536,6 @@
 		DAB7F44915E1EF47008F4C85 /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		DAB7F44A15E1EF47008F4C85 /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
 		DAB7F44B15E1EF47008F4C85 /* bubbleSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSomeone@2x.png"; sourceTree = "<group>"; };
-		DAB7F44C15E1EF47008F4C85 /* typingMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typingMine.png; sourceTree = "<group>"; };
-		DAB7F44D15E1EF47008F4C85 /* typingMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typingMine@2x.png"; sourceTree = "<group>"; };
-		DAB7F44E15E1EF47008F4C85 /* typingSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typingSomeone.png; sourceTree = "<group>"; };
-		DAB7F44F15E1EF47008F4C85 /* typingSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typingSomeone@2x.png"; sourceTree = "<group>"; };
-		DAB7F45815E1EF6A008F4C85 /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBubbleData.h; sourceTree = "<group>"; };
-		DAB7F45915E1EF6A008F4C85 /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBubbleData.m; sourceTree = "<group>"; };
-		DAB7F45A15E1EF6A008F4C85 /* NSBubbleDataInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBubbleDataInternal.h; sourceTree = "<group>"; };
-		DAB7F45B15E1EF6A008F4C85 /* NSBubbleDataInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBubbleDataInternal.m; sourceTree = "<group>"; };
-		DAB7F45C15E1EF6A008F4C85 /* UIBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableView.h; sourceTree = "<group>"; };
-		DAB7F45D15E1EF6A008F4C85 /* UIBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableView.m; sourceTree = "<group>"; };
-		DAB7F45E15E1EF6A008F4C85 /* UIBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewCell.h; sourceTree = "<group>"; };
-		DAB7F45F15E1EF6A008F4C85 /* UIBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableViewCell.m; sourceTree = "<group>"; };
-		DAB7F46015E1EF6A008F4C85 /* UIBubbleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIBubbleTableViewCell.xib; sourceTree = "<group>"; };
-		DAB7F46115E1EF6A008F4C85 /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
-		DAB7F46C15E1F1D4008F4C85 /* BubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleView.h; sourceTree = "<group>"; };
-		DAB7F46D15E1F1D4008F4C85 /* BubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleView.m; sourceTree = "<group>"; };
-		DAB7F46E15E1F1D4008F4C85 /* BubbleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BubbleView.xib; sourceTree = "<group>"; };
 		DAB848B9153D827B002A63DF /* 640X185(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "640X185(1).png"; sourceTree = "<group>"; };
 		DAB92D44156B755200F31954 /* MyPortraitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPortraitCell.h; sourceTree = "<group>"; };
 		DAB92D45156B755200F31954 /* MyPortraitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPortraitCell.m; sourceTree = "<group>"; };
@@ -1343,27 +1315,10 @@
 		DAC9636615D502FF007552AC /* ChatBubble */ = {
 			isa = PBXGroup;
 			children = (
-				DAB7F45815E1EF6A008F4C85 /* NSBubbleData.h */,
-				DAB7F45915E1EF6A008F4C85 /* NSBubbleData.m */,
-				DAB7F45A15E1EF6A008F4C85 /* NSBubbleDataInternal.h */,
-				DAB7F45B15E1EF6A008F4C85 /* NSBubbleDataInternal.m */,
-				DAB7F45C15E1EF6A008F4C85 /* UIBubbleTableView.h */,
-				DAB7F45D15E1EF6A008F4C85 /* UIBubbleTableView.m */,
-				DAB7F45E15E1EF6A008F4C85 /* UIBubbleTableViewCell.h */,
-				DAB7F45F15E1EF6A008F4C85 /* UIBubbleTableViewCell.m */,
-				DAB7F46015E1EF6A008F4C85 /* UIBubbleTableViewCell.xib */,
-				DAB7F46115E1EF6A008F4C85 /* UIBubbleTableViewDataSource.h */,
 				DAB7F44815E1EF47008F4C85 /* bubbleMine.png */,
 				DAB7F44915E1EF47008F4C85 /* bubbleMine@2x.png */,
 				DAB7F44A15E1EF47008F4C85 /* bubbleSomeone.png */,
 				DAB7F44B15E1EF47008F4C85 /* bubbleSomeone@2x.png */,
-				DAB7F44C15E1EF47008F4C85 /* typingMine.png */,
-				DAB7F44D15E1EF47008F4C85 /* typingMine@2x.png */,
-				DAB7F44E15E1EF47008F4C85 /* typingSomeone.png */,
-				DAB7F44F15E1EF47008F4C85 /* typingSomeone@2x.png */,
-				DAB7F46C15E1F1D4008F4C85 /* BubbleView.h */,
-				DAB7F46D15E1F1D4008F4C85 /* BubbleView.m */,
-				DAB7F46E15E1F1D4008F4C85 /* BubbleView.xib */,
 			);
 			name = ChatBubble;
 			sourceTree = "<group>";
@@ -1967,12 +1922,6 @@
 				DAB7F45115E1EF47008F4C85 /* bubbleMine@2x.png in Resources */,
 				DAB7F45215E1EF47008F4C85 /* bubbleSomeone.png in Resources */,
 				DAB7F45315E1EF47008F4C85 /* bubbleSomeone@2x.png in Resources */,
-				DAB7F45415E1EF47008F4C85 /* typingMine.png in Resources */,
-				DAB7F45515E1EF47008F4C85 /* typingMine@2x.png in Resources */,
-				DAB7F45615E1EF47008F4C85 /* typingSomeone.png in Resources */,
-				DAB7F45715E1EF47008F4C85 /* typingSomeone@2x.png in Resources */,
-				DAB7F46615E1EF6A008F4C85 /* UIBubbleTableViewCell.xib in Resources */,
-				DAB7F47015E1F1D4008F4C85 /* BubbleView.xib in Resources */,
 				DACA288D15EC6A0500874570 /* MyBubbleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2102,11 +2051,6 @@
 				DAB06CA915DA369D007311E4 /* AFXMLRequestOperation.m in Sources */,
 				DAB06CAA15DA369D007311E4 /* UIImageView+AFNetworking.m in Sources */,
 				DAB06CAD15DA3842007311E4 /* AFOSCClient.m in Sources */,
-				DAB7F46215E1EF6A008F4C85 /* NSBubbleData.m in Sources */,
-				DAB7F46315E1EF6A008F4C85 /* NSBubbleDataInternal.m in Sources */,
-				DAB7F46415E1EF6A008F4C85 /* UIBubbleTableView.m in Sources */,
-				DAB7F46515E1EF6A008F4C85 /* UIBubbleTableViewCell.m in Sources */,
-				DAB7F46F15E1F1D4008F4C85 /* BubbleView.m in Sources */,
 				DA28E3CA15E721FE003FF524 /* RegexKitLite.m in Sources */,
 				DACA288815EC633800874570 /* ChatPopView.m in Sources */,
 				DACA288C15EC6A0500874570 /* MyBubbleView.m in Sources */,
