@@ -190,7 +190,7 @@
                                     }
                                     [Tool getOSCNotice2:operation.responseString];
                                     isLoading = NO;
-                                    NSString *response = operation.responseString;  
+                                    NSString *response = operation.responseString; 
                                     @try {
                                         
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];

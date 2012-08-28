@@ -14,6 +14,7 @@
 #import "Tool.h"
 #import "ApiError.h"
 #import "BubbleView.h"
+#import "MyBubbleView.h"
 
 #define FetchCount 10;
 

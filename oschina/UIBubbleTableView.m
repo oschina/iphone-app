@@ -52,7 +52,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) [self initializator];
+    if (self)
+        [self initializator];
     return self;
 }
 
@@ -89,27 +90,47 @@
 
 - (void)reloadData
 {
+    
     // Cleaning up
 	self.bubbleDictionary = nil;
     
     // Loading new data
     int count = 0;
+    count = [self.bubbleDataSource rowsForBubbleTable:self];
+    if (count <= 0) {
+        return;
+    }
+    NSLog(@"内部 这一次个数: %d", count);
+    if (count == 1) {
+        NSBubbleData *data = [self.bubbleDataSource bubbleTableView:self dataForRow:0];
+        if (data == nil || [data.text isEqualToString:@" "]) {
+            NSLog(@"内部 果然为空 取消方法");
+            return;
+        }
+    }
+    NSLog(@"内部 %d",count);
     self.bubbleDictionary = [[[NSMutableDictionary alloc] init] autorelease];
     
-    if (self.bubbleDataSource && (count = [self.bubbleDataSource rowsForBubbleTable:self]) > 0)
+    if (self.bubbleDataSource && count > 0)
     {        
         NSMutableArray *bubbleData = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
-        
         for (int i = 0; i < count; i++)
         {
+            //调用该方法需要更改 在数据还没有的时候不能执行
             NSObject *object = [self.bubbleDataSource bubbleTableView:self dataForRow:i];
-            assert([object isKindOfClass:[NSBubbleData class]]);
-            [bubbleData addObject:object];
+            NSBubbleData * data = (NSBubbleData *)object;
+//            NSLog(@"%@_%@",data.text, data.date);
+            if (object == nil ) {
+                continue;
+            }
+            else {
+                [bubbleData addObject:object];
+            }
+//            assert([object isKindOfClass:[NSBubbleData class]]);
         }
         
         [bubbleData sortUsingComparator:^NSComparisonResult(id obj1, id obj2)
         {
-
 //            NSBubbleData *bubbleData1 = (NSBubbleData *)obj1;
 //            NSBubbleData *bubbleData2 = (NSBubbleData *)obj2;
             
@@ -130,7 +151,12 @@
         {
             NSBubbleDataInternal *dataInternal = [[[NSBubbleDataInternal alloc] init] autorelease];
             
-            dataInternal.data = (NSBubbleData *)[bubbleData objectAtIndex:i];
+            NSBubbleData * bu = [bubbleData objectAtIndex:i];
+            if (bu == nil ) {
+                continue;
+            }
+            
+            dataInternal.data = (NSBubbleData *)bu;
             dataInternal.type = NSBubbleDataTypeNormalBubble;
             
             // Calculating cell height
@@ -228,6 +254,7 @@
     NSString *key = [sortedArray objectAtIndex:indexPath.section];
     
     NSBubbleDataInternal *dataInternal = ((NSBubbleDataInternal *)[[self.bubbleDictionary objectForKey:key] objectAtIndex:indexPath.row]);
+    
     
     if (dataInternal.type == NSBubbleDataTypeNormalBubble)
     {    

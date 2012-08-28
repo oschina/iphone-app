@@ -24,6 +24,7 @@
 @synthesize refers;
 @synthesize height_reference;
 @synthesize appClient;
+@synthesize width_bubble;
 
 - (id)initWithParameters:(int)nid andImg:(NSString *)nimg andAuthor:(NSString *)nauthor andAuthorID:(int)nauthorid andContent:(NSString *)nContent andPubDate:(NSString *)nPubDate andReplies:(NSMutableArray *)array andRefers:(NSMutableArray *)nrefers
      andAppClient:(int)nappclient
@@ -38,7 +39,7 @@
     c.replies = array;
     c.refers = nrefers;
     c.appClient = nappclient;
-    
+    c.width_bubble = 0;
     if (nrefers != nil && nrefers.count > 0) {
         UIView * referView = [Tool getReferView:nrefers];
         c.height_reference = referView.frame.size.height + 7;

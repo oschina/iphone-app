@@ -1,46 +1,28 @@
-//
-//  BubbleView.m
-//  oschina
-//
-//  Created by wangjun on 12-8-20.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
-//
 
-#import "BubbleView.h"
+#import "MyBubbleView.h"
 
-@interface BubbleView ()
-
-@end
-
-@implementation BubbleView
-@synthesize bubbleTable;
+@implementation MyBubbleView
+@synthesize tableBubbles;
 @synthesize friendID;
 @synthesize friendName;
 
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    bubbleTable.bubbleDataSource = self;
-    bubbleTable.snapInterval = 130;
-    bubbleTable.typingBubble = NSBubbleTypingTypeSomebody;
-    
+    //数据集合初始化
     comments = [[NSMutableArray alloc] initWithCapacity:20];
-    
+    //标题
     self.navigationItem.title = self.friendName;
-    
+    //留言按钮
     UIBarButtonItem * bar = [[UIBarButtonItem alloc] initWithTitle:@"给Ta留言" style:UIBarButtonItemStyleBordered target:self action:@selector(clickPubMessage:)];
     self.navigationItem.rightBarButtonItem = bar;
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBubble:) name:@"NextBubble" object:nil];
     
     //加载
-    [self reload];
-}
-
--(void)nextBubble:(NSNotification *)notification
-{
     [self reload];
 }
 
@@ -50,6 +32,12 @@
     pubMessage.receiverid = self.friendID;
     pubMessage.receiver = self.friendName;
     [self.navigationController pushViewController:pubMessage animated:YES];
+}
+
+- (void)viewDidUnload
+{
+    [self setTableBubbles:nil];
+    [super viewDidUnload];
 }
 
 -(void)reload
@@ -74,7 +62,7 @@
                                     isLoading = NO;
                                     NSString *response = operation.responseString;  
                                     [Tool getOSCNotice2:response];
-
+                                    
                                     @try {
                                         
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
@@ -87,7 +75,7 @@
                                         TBXMLElement *commentlist = [TBXML childElementNamed:@"comments" parentElement:root];
                                         TBXMLElement *first = [TBXML childElementNamed:@"comment" parentElement:commentlist];
                                         if (!first) {
-                                            [self.bubbleTable reloadData];
+                                            [self.tableBubbles reloadData];
                                             isLoadOver = YES;
                                             return;
                                         }
@@ -100,7 +88,7 @@
                                         TBXMLElement *content = [TBXML childElementNamed:@"content" parentElement:first];
                                         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:first];
                                         TBXMLElement *appclient = [TBXML childElementNamed:@"appclient" parentElement:first];
-
+                                        
                                         Comment *c = [[Comment alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andContent:[TBXML textForElement:content]  andPubDate:[TBXML textForElement:pubDate] andReplies:Nil andRefers:Nil andAppClient:appclient == nil ? 1 : [TBXML textForElement:appclient].intValue];
                                         //判断是否
                                         if (![Tool isRepeatComment: comments andComment:c]) {
@@ -128,19 +116,31 @@
                                                 break;
                                             }
                                         }
+                                        
+                                        //计算宽度
+                                        for (Comment *c in newComments) {
+                                            if (c.authorid == [Config Instance].getUID) {
+//                                                ChatPopView *p = [[ChatPopView alloc] initWithFrame:CGRectMake(58, 23, 250, 80) popDirection:ePopDirectionRight];
+//                                                c.width_bubble = p.frame.size.width;
+//                                                contentLabel.font = [UIFont fontWithName:@"Arial" size:14];
+//                                                contentLabel.numberOfLines = 0;
+                                                UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 250-15, 80)];
+                                                l.font = [UIFont fontWithName:@"Arial" size:14];
+                                                l.numberOfLines = 0;
+                                                l.text = c.content;
+                                                [l sizeToFit];
+//                                                self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, contentLabel.frame.size.width+30, contentLabel.frame.size.height + 15);
+                                                c.width_bubble = l.frame.size.width + 30;
+                                            }
+                                        }
+                                        
                                         [comments addObjectsFromArray:newComments];
-//                                        for (int i=0; i<comments.count; i++) {
-//
-//                                            Comment *c = [comments objectAtIndex:i];
-//                                            NSLog(@"%@  %@",c.content,c.pubDate);
-//                                        }
                                     }
                                     @catch (NSException *exception) {
                                         [NdUncaughtExceptionHandler TakeException:exception];
                                     }
                                     @finally {
-                                        NSLog(@"开始");
-                                        [self.bubbleTable reloadData];
+                                        [self.tableBubbles reloadData];
                                     }
                                     
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -152,40 +152,94 @@
                                     }
                                 }];                                                  
     isLoading = YES;
-//    [self.bubbleTable reloadData];
-    
 }
 
-- (void)viewDidUnload
+#pragma mark UITableView
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self setBubbleTable:nil];
-    [super viewDidUnload];
-}
-
-#pragma TableView
-
-- (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView
-{
-//    return comments.count+1;
-//    NSLog(@"第二个数: %d",comments.count);
-    
-    return comments.count+1;
-}
-
-- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
-{
-    if (row >= comments.count) {
-        
-        NSLog(@"返回空气泡 row: %d   count: %d", row, comments.count);
-        NSBubbleData *b = [[NSBubbleData alloc] initWithText:nil andDate:[NSDate date] andType:NSBubbleTypingTypeNobody];
-        return b;
-        
-//        return nil;
+    if (isLoadOver) {
+        return comments.count == 0 ? 1 :comments.count;
     }
-    Comment *c = [comments objectAtIndex:row];
-    NSBubbleData * b = [NSBubbleData dataWithText:c.content andDate:[Tool NSStringDateToNSDate:c.pubDate] andType:c.authorid == [Config Instance].getUID?BubbleTypeMine:BubbleTypeSomeoneElse];
-    return b;
-    
+    else
+        return comments.count + 1;
 }
-
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int index = indexPath.row;
+    if (index < comments.count) {
+        Comment *m = (Comment *)[comments objectAtIndex:index];
+        return m.height+8;
+//        ChatPopView * p = [[ChatPopView alloc] initWithFrame:CGRectMake(70, 7, 240, 80) popDirection:ePopDirectionRight];
+//        [p setText:m.content];
+//        return p.frame.size.height;
+    }
+    else
+        return 62;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //如果有数据
+    if (comments.count > 0) {
+        if (indexPath.row < comments.count) 
+        {
+            UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NormalCellIdentifier];
+            Comment *c = [comments objectAtIndex:indexPath.row];
+            UILabel * lblTime = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+            lblTime.font = [UIFont boldSystemFontOfSize:12.0];
+            lblTime.textColor = [UIColor lightGrayColor];
+            lblTime.textAlignment = UITextAlignmentCenter;
+            lblTime.backgroundColor = [UIColor clearColor];
+            lblTime.text = [Tool intervalSinceNow:c.pubDate];
+            [cell.contentView addSubview:lblTime];
+            ChatPopView *p;
+            if (c.authorid == [Config Instance].getUID) {
+//                p = [[ChatPopView alloc] initWithFrame:CGRectMake(58, 23, 250, 80) popDirection:ePopDirectionRight];
+                float origin = 58;
+                if (c.width_bubble < 250) {
+                    origin = 58 + (250 - c.width_bubble);
+                }
+                p = [[ChatPopView alloc] initWithFrame:CGRectMake(origin, 23, 250, 80) popDirection:ePopDirectionRight];
+            }
+            else
+            {
+                p = [[ChatPopView alloc] initWithFrame:CGRectMake(2, 23, 250, 80) popDirection:ePopDirectionLeft];
+            }
+            [p setText:c.content];
+            [cell.contentView addSubview:p];
+            return  cell;
+        }
+        else
+        {
+            if ([Config Instance].isNetworkRunning)
+            {
+                return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"" andLoadingString:[Config Instance].isCookie ? (isLoading ? loadingTip : loadNext20Tip) : @"您还没有登录,无法查看" andIsLoading:isLoading];   
+            }
+            else
+            {
+                return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:noNetworkTip andLoadingString:noNetworkTip andIsLoading:isLoading];
+            }
+        }
+    }
+    //如果没有数据
+    else 
+    {
+        if ([Config Instance].isNetworkRunning)
+        {
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"" andLoadingString:[Config Instance].isCookie ? (isLoading ? loadingTip : loadNext20Tip) : @"您还没有登录,无法查看" andIsLoading:isLoading];
+        }
+        else
+        {
+            return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:noNetworkTip andLoadingString:noNetworkTip andIsLoading:isLoading];
+        }
+    }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    int row = [indexPath row];
+    if (row >= comments.count) 
+    {
+        [self reload];
+    }
+}
 @end

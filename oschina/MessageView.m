@@ -103,7 +103,7 @@
     [[AFOSCClient sharedClient] getPath:url parameters:nil
                                 
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                
+                                 
                                     if (!noRefresh) {
                                         [self clear];
                                     }
@@ -399,7 +399,12 @@
     else {
         
         Message * m = [msgs objectAtIndex:row];
-        BubbleView * b = [BubbleView new];
+//        BubbleView * b = [BubbleView new];
+//        b.hidesBottomBarWhenPushed = YES;
+//        b.friendID = m.friendid;
+//        b.friendName = m.friendName;
+        
+        MyBubbleView * b = [MyBubbleView new];
         b.hidesBottomBarWhenPushed = YES;
         b.friendID = m.friendid;
         b.friendName = m.friendName;
