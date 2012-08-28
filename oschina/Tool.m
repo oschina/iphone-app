@@ -455,9 +455,19 @@
                             return YES;
                         }
                     }
-                    else if(count == 4)
+                    else if(count >= 4)
                     {
-                        NSString *tag = [array objectAtIndex:3];
+//                        NSString *tag = [array objectAtIndex:3];
+                        NSString *tag = @"";
+                        if (array.count == 4) {
+                            tag = [array objectAtIndex:3];
+                        }
+                        else
+                        {
+                            for (int i=3; i<count-1; i++) {
+                                tag = [NSString stringWithFormat:@"%@/%@", [array objectAtIndex:i],[array objectAtIndex:i+1]];
+                            }
+                        }
                         NSString *tag2 = [tag stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                         PostsView *pview = [PostsView new];
                         pview.tag = tag;

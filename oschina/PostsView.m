@@ -120,14 +120,18 @@
         }
         int pageIndex = allCount / 20;
         NSString *url;
+        NSMutableDictionary *dict = nil;
         if (self.tag == nil) {
             url = [NSString stringWithFormat:@"%@?catalog=%d&pageIndex=%d&pageSize=20", api_post_list, self.catalog, pageIndex];
         }
         else
         {
-            url = [NSString stringWithFormat:@"%@?tag=%@&pageIndex=%d&pageSize=20", api_post_list, self.tag, pageIndex];
+//            NSLog(@"搜索tag: %@",self.tag);
+//            url = [NSString stringWithFormat:@"%@?tag=%@&pageIndex=%d&pageSize=20", api_post_list, self.tag, pageIndex];
+            url = api_post_list;
+            dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.tag,@"tag",@"20",@"pageSize",[NSString stringWithFormat:@"%d",pageIndex], @"pageIndex", nil];
         }
-        [[AFOSCClient sharedClient] getPath:url parameters:Nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[AFOSCClient sharedClient] getPath:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 
             @try {
                 [Tool getOSCNotice2:operation.responseString];
