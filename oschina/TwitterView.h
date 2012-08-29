@@ -29,6 +29,8 @@
     //下拉刷新
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
+    
+    BOOL isInitialize;
 }
 
 //TableView

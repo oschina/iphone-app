@@ -28,6 +28,7 @@
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
 
+    BOOL isInitialize;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tablePosts;
 //异步加载图片专用

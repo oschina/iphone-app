@@ -39,7 +39,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
     
     //开始加载
-    [self reload:YES];
+//    [self reload:YES];
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (isInitialize == NO) {
+        [self reload:YES];
+        isInitialize = YES;
+    }
+    
+    if ([Config Instance].isNeedReloadTweets && self._uid >= 0) {
+        [self clear];
+        [self reload:YES];
+        [Config Instance].isNeedReloadTweets = NO;
+    }
 }
 -(void)refreshed:(NSNotification *)notification
 {
@@ -209,14 +222,7 @@
     isLoading = YES;
     [self.tableTweets reloadData];
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    if ([Config Instance].isNeedReloadTweets && self._uid >= 0) {
-        [self clear];
-        [self reload:YES];
-        [Config Instance].isNeedReloadTweets = NO;
-    }
-}
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     if (self.imageDownloadsInProgress != nil) {

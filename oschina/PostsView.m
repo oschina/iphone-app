@@ -22,7 +22,8 @@
     allCount = 0;
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
     posts = [[NSMutableArray alloc] initWithCapacity:20];
-    [self reload:YES];
+
+//    [self reload:YES];
     
     //下拉刷新
     if (_refreshHeaderView == nil) {
@@ -42,6 +43,14 @@
         UIBarButtonItem *btnHome = [[UIBarButtonItem alloc] initWithTitle:@"问答首页" style:UIBarButtonItemStyleBordered target:self action:@selector(clickHome:)];
         //这种情况下 没有Tab
         self.navigationItem.rightBarButtonItem = btnHome;
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (isInitialize == NO) {
+        isInitialize = YES;
+        [self reload:YES];
     }
 }
 
