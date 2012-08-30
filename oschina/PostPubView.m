@@ -47,7 +47,7 @@
     [super viewDidUnload];
 }
 
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self viewDidUnload];
@@ -105,7 +105,7 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.segmentCatalog.selectedSegmentIndex = [Config Instance].questionIndex;
     NSString *title = [Config Instance].questionTitle;
@@ -157,7 +157,7 @@
 
 
 #pragma 调整输入框
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -165,7 +165,7 @@
     [UIView commitAnimations];
     return YES;
 }
--(BOOL)textViewShouldEndEditing:(UITextView *)textView
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];

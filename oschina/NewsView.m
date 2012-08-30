@@ -32,7 +32,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
 }
--(void)refreshed:(NSNotification *)notification
+- (void)refreshed:(NSNotification *)notification
 {
     if (notification.object) {
         if ([(NSString *)notification.object isEqualToString:@"0"]) {
@@ -41,12 +41,12 @@
         }
     }
 }
--(void)doneManualRefresh
+- (void)doneManualRefresh
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:self.tableNews];
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:self.tableNews];
 }
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self viewDidUnload];
@@ -61,20 +61,20 @@
 }
 
 //重新载入类型
--(void)reloadType:(int)ncatalog
+- (void)reloadType:(int)ncatalog
 {
     self.catalog = ncatalog;
     [self clear];
     [self.tableNews reloadData];
     [self reload:NO];
 }
--(void)clear
+- (void)clear
 {
     allCount = 0;
     [news removeAllObjects];
     isLoadOver = NO;
 }
--(void)reload:(BOOL)noRefresh
+- (void)reload:(BOOL)noRefresh
 {
     //如果有网络连接
     if ([Config Instance].isNetworkRunning) {
@@ -166,7 +166,7 @@
 }
 
 #pragma TableView的处理
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([Config Instance].isNetworkRunning) {
         if (isLoadOver) {
@@ -178,15 +178,15 @@
     else
         return news.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 62;
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [Tool getCellBackgroundColor];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([news count] > 0) {
         if ([indexPath row] < [news count]) 
@@ -226,7 +226,7 @@
         return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"已经加载全部新闻" andLoadingString:(isLoading ? loadingTip : loadNext20Tip) andIsLoading:isLoading];
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int row = [indexPath row];
@@ -264,37 +264,37 @@
 }
 
 #pragma 下提刷新
--(void)reloadTableViewDataSource
+- (void)reloadTableViewDataSource
 {
     _reloading = YES;
 }
--(void)doneLoadingTableViewData
+- (void)doneLoadingTableViewData
 {
     _reloading = NO;
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableNews];
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
 }
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
--(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
 {
     [self reloadTableViewDataSource];
     [self refresh];
 }
--(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
 {
     return _reloading;
 }
--(NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
+- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
 {
     return [NSDate date];
 }
--(void)refresh
+- (void)refresh
 {
     if ([Config Instance].isNetworkRunning) {
         isLoadOver = NO;

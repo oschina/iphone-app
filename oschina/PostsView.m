@@ -46,7 +46,7 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     if (isInitialize == NO) {
         isInitialize = YES;
@@ -55,13 +55,13 @@
 }
 
 //回到问答首页
--(void)clickHome:(id)sender
+- (void)clickHome:(id)sender
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma 双击Tab刷新
--(void)refreshed:(NSNotification *)notification
+- (void)refreshed:(NSNotification *)notification
 {
     if (notification.object) {
         if ([(NSString *)notification.object isEqualToString:@"1"]) {
@@ -70,7 +70,7 @@
         }
     }
 }
--(void)doneManualRefresh
+- (void)doneManualRefresh
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:self.tablePosts];
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:self.tablePosts];
@@ -97,28 +97,28 @@
     }
     [self viewDidUnload];
 }
--(void)reloadType:(int)ncatalog
+- (void)reloadType:(int)ncatalog
 {
     self.catalog = ncatalog;
     [self clear];
     [self.tablePosts reloadData];
     [self reload:NO];
 }
--(void)clear
+- (void)clear
 {
     allCount = 0;
     [posts removeAllObjects];
     [imageDownloadsInProgress removeAllObjects];
     isLoadOver = NO;
 }
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if (self.imageDownloadsInProgress != nil) {
         NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
         [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     }
 }
--(void)reload:(BOOL)noRefresh
+- (void)reload:(BOOL)noRefresh
 {
     if ([Config Instance].isNetworkRunning) {
         if (isLoading || isLoadOver) {
@@ -203,7 +203,7 @@
 }
 
 #pragma TableView处理
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([Config Instance].isNetworkRunning) {
         if (isLoadOver) {
@@ -215,7 +215,7 @@
     else 
         return posts.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row < posts.count) {
         return 69;
@@ -223,11 +223,11 @@
     else
         return 62;
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [Tool getCellBackgroundColor];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([posts count] > 0) 
     {
@@ -289,14 +289,14 @@
         return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"已经加载全部帖子" andLoadingString:(isLoading ? loadingTip : loadNext20Tip)  andIsLoading:isLoading];
     }
 }
--(void)clickImg:(id)sender
+- (void)clickImg:(id)sender
 {
     UITap *tap = (UITap *)sender;
     if (tap) {
         [Tool pushUserDetail:tap.tag andNavController:self.parentViewController.navigationController];
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int row = [indexPath row];
@@ -327,37 +327,37 @@
 }
 
 #pragma 下提刷新
--(void)reloadTableViewDataSource
+- (void)reloadTableViewDataSource
 {
     _reloading = YES;
 }
--(void)doneLoadingTableViewData
+- (void)doneLoadingTableViewData
 {
     _reloading = NO;
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tablePosts];
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
 }
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
--(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
 {
     [self reloadTableViewDataSource];
     [self refresh];
 }
--(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
 {
     return _reloading;
 }
--(NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
+- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
 {
     return NSDate.date;
 }
--(void)refresh
+- (void)refresh
 {
     if ([Config Instance].isNetworkRunning) {
         isLoadOver = NO;
@@ -383,7 +383,7 @@
 }
 
 #pragma 下载图片
--(void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
 {
     NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:key];
@@ -396,7 +396,7 @@
         [iconDownloader startDownload];
     }
 }
--(void)appImageDidLoad:(NSString *)index
+- (void)appImageDidLoad:(NSString *)index
 {
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:index];
     if (iconDownloader) 

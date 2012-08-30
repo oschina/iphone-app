@@ -31,15 +31,15 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableNews;
 @property int catalog;
--(void)reloadType:(int)ncatalog;
--(void)reload:(BOOL)noRefresh;
+- (void)reloadType:(int)ncatalog;
+- (void)reload:(BOOL)noRefresh;
 
 //清空
--(void)clear;
+- (void)clear;
 
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

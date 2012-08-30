@@ -10,9 +10,9 @@
 
 @interface SoftwareUnit : NSObject
 
-@property (retain,nonatomic) NSString * name;
-@property (retain,nonatomic) NSString * description;
-@property (retain,nonatomic) NSString * url;
+@property (copy,nonatomic) NSString * name;
+@property (copy,nonatomic) NSString * description;
+@property (copy,nonatomic) NSString * url;
 
 - (id)initWithParameters:(NSString *)newName andDescription:(NSString *)newDescription andUrl:(NSString *)newUrl;
 

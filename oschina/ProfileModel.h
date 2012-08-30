@@ -11,8 +11,8 @@
 @interface ProfileModel : NSObject
 
 @property int tag;
-@property (retain,nonatomic) NSString * key;
-@property (retain,nonatomic) NSString * value;
+@property (copy,nonatomic) NSString * key;
+@property (copy,nonatomic) NSString * value;
 
 - (id)initWithParameters:(NSString *)nKey andValue:(NSString *)nValue andTag:(int)nTag;
 

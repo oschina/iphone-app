@@ -19,7 +19,14 @@
 @synthesize commentCount;
 @synthesize documentType;
 
-- (id)initWithParameters:(int)nid andUrl:(NSString *)nurl andTitle:(NSString *)ntitle andPubDate:(NSString *)npubDate andAuthorName:(NSString *)nauthorName andAuthorUID:(int)nauthorUID andCommentCount:(int)nCommentCount andDocumentType:(int)nDocumentType
+- (id)initWithParameters:(int)nid 
+                  andUrl:(NSString *)nurl 
+                  andTitle:(NSString *)ntitle 
+                  andPubDate:(NSString *)npubDate 
+                  andAuthorName:(NSString *)nauthorName 
+                  andAuthorUID:(int)nauthorUID 
+                  andCommentCount:(int)nCommentCount 
+                  andDocumentType:(int)nDocumentType
 {
     BlogUnit *b = [[BlogUnit alloc] init];
     b._id = nid;

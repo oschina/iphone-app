@@ -23,7 +23,18 @@
 @synthesize favorite;
 @synthesize tags;
 
-- (id)initWithParameters:(int)newid andTitle:(NSString *)ntitle andUrl:(NSString *)nUrl andPortrait:(NSString *)nportrait andBody:(NSString *)nbody andAuthor:(NSString *)nauthor andAuthorID:(int)nauthorid andPubDate:(NSString *)nPubDate andAnswer:(int)nanswerCount andView:(int)nviewCount andFavorite:(BOOL)nfavorite andTags:(NSMutableArray *)_tags
+- (id)initWithParameters:(int)newid 
+                andTitle:(NSString *)ntitle 
+                andUrl:(NSString *)nUrl 
+                andPortrait:(NSString *)nportrait 
+                andBody:(NSString *)nbody 
+                andAuthor:(NSString *)nauthor 
+                andAuthorID:(int)nauthorid 
+                andPubDate:(NSString *)nPubDate 
+                andAnswer:(int)nanswerCount 
+                andView:(int)nviewCount 
+                andFavorite:(BOOL)nfavorite 
+                andTags:(NSMutableArray *)_tags
 {
     SinglePostDetail *p = [[SinglePostDetail alloc] init];
     p._id = newid;

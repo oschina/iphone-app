@@ -23,7 +23,7 @@
     NSString *img = [NSString stringWithFormat:@"<div style='margin:auto;width:640px;'><img width='640' style='vertical-align:middle' src='%@'/></div>", self.imgHref];
     [self.webView loadHTMLString:img baseURL:nil];
 }
--(void)clickCloseThis:(id)sender
+- (void)clickCloseThis:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }

@@ -12,8 +12,8 @@
 
 @property int objid;
 @property int type;
-@property (nonatomic,retain) NSString * title;
-@property (nonatomic,retain) NSString * url;
+@property (nonatomic,copy) NSString * title;
+@property (nonatomic,copy) NSString * url;
 
 - (id)initWithParameters:(int)nobjid andType:(int)nType andTitle:(NSString *)ntitle andUrl:(NSString *)nurl;
 

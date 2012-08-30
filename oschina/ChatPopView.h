@@ -20,8 +20,8 @@ typedef enum tagPopDirection
 @property (nonatomic,retain) UILabel * contentLabel;
 @property (assign) ePopDirection direction;
 
--(id) initWithFrame:(CGRect)frame popDirection:(ePopDirection)d;
--(void)setText:(NSString *)str;
+- (id) initWithFrame:(CGRect)frame popDirection:(ePopDirection)d;
+- (void)setText:(NSString *)str;
 
 
 @end

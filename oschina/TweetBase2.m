@@ -48,7 +48,7 @@
     [btnPubTweet setAction:@selector(clickPubTweet:)];
     self.navigationItem.rightBarButtonItem = btnPubTweet;
 }
--(void)clickPubTweet:(id)sender
+- (void)clickPubTweet:(id)sender
 {
     if ([Config Instance].isLogin == NO) {
         [Tool noticeLogin:self.view andDelegate:self andTitle:@"请先登录后再发表动弹"];
@@ -58,11 +58,11 @@
     pubTweet.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pubTweet animated:YES];
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.navigationController andParent:self];
 }
--(void)segmentAction:(id)sender
+- (void)segmentAction:(id)sender
 {
     switch (self.segment_title.selectedSegmentIndex) {
         case 0:
@@ -90,7 +90,7 @@
             break;
     }
 }
--(NSString *)getSegmentTitle
+- (NSString *)getSegmentTitle
 {
     switch (self.segment_title.selectedSegmentIndex) {
         case 0:
@@ -110,7 +110,7 @@
     self.twitterView = nil;
     self.segment_title = nil;
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"login" object:[Config Instance].isCookie ? @"1" : @"0"];
     if (self.segment_title == nil || self.twitterView == nil) {

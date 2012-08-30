@@ -16,7 +16,7 @@
 - (IBAction)clickPubMessage:(id)sender;
 - (IBAction)clickbackground:(id)sender;
 //接受者
-@property (nonatomic,retain) NSString * receiver;
+@property (nonatomic,copy) NSString * receiver;
 @property int receiverid;
 @property BOOL isFromUserView;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Receiver;

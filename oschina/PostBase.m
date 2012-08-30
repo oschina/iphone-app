@@ -20,7 +20,7 @@
     }
     return self;
 }
--(void)myInit
+- (void)myInit
 {
     self.tabBarItem.image = [UIImage imageNamed:@"answer"];
     self.tabBarItem.title = @"问答";
@@ -52,7 +52,7 @@
     [btnPubPost setAction:@selector(clickPubPost:)];
     self.navigationItem.rightBarButtonItem = btnPubPost;
 }
--(void)clickPubPost:(id)sender
+- (void)clickPubPost:(id)sender
 {
     if ([Config Instance].isLogin == NO) {
         [Tool noticeLogin:self.view andDelegate:self andTitle:@"请先登录后再发表问答"];
@@ -63,7 +63,7 @@
     pub.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pub animated:YES];
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.navigationController andParent:self];
 }
@@ -73,11 +73,11 @@
     [self viewDidUnload];
 }
 
--(void)segmentAction:(id)sender
+- (void)segmentAction:(id)sender
 {
     [self.postsView reloadType:self.segment_title.selectedSegmentIndex + 1];
 }
--(NSString *)getSegmentTitle
+- (NSString *)getSegmentTitle
 {
     switch (self.segment_title.selectedSegmentIndex) {
         case 0:
@@ -101,7 +101,7 @@
     self.segment_title = nil;
     self.postsView = nil;
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"login" object:[Config Instance].isCookie ? @"1" : @"0"];
     if (self.segment_title == nil || self.postsView == nil) {

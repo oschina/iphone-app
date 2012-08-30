@@ -10,7 +10,7 @@
 
 @implementation Tool
 
-+(UIAlertView *)getLoadingView:(NSString *)title andMessage:(NSString *)message
++ (UIAlertView *)getLoadingView:(NSString *)title andMessage:(NSString *)message
 {
     UIAlertView *progressAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
     UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -19,11 +19,11 @@
     [activityView startAnimating];
     return progressAlert;
 }
-+(ApiError *)getApiError:(ASIHTTPRequest *)request
++ (ApiError *)getApiError:(ASIHTTPRequest *)request
 {
     return [Tool getApiError2:request.responseString];
 }
-+(ApiError *)getApiError2:(NSString *)response
++ (ApiError *)getApiError2:(NSString *)response
 {
     @try {
         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
@@ -47,11 +47,11 @@
         //        return [[ApiError alloc] initWithParameters:-1 andMessage:@"出现异常"];
     }
 }
-+(Comment *)getMyLatestComment:(ASIHTTPRequest *)request
++ (Comment *)getMyLatestComment:(ASIHTTPRequest *)request
 {
     return [Tool getMyLatestComment2:request.responseString];
 }
-+(Comment *)getMyLatestComment2:(NSString *)response
++ (Comment *)getMyLatestComment2:(NSString *)response
 {
 //    NSString *response = [request responseString];
     TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
@@ -70,14 +70,14 @@
     return comment;
 
 }
-+(NSString *)getBBSIndex:(int)index
++ (NSString *)getBBSIndex:(int)index
 {
     if (index < 0) {
         return @"";
     }
     return [NSString stringWithFormat:@"%d楼", index+1];
 }
-+(NSMutableArray *)getRelativeNews:(NSString *)request
++ (NSMutableArray *)getRelativeNews:(NSString *)request
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:request error:nil];
     TBXMLElement *root = xml.rootXMLElement;    
@@ -105,7 +105,7 @@
         return nil;
     }
 }
-+(NSString *)generateRelativeNewsString:(NSArray *)array
++ (NSString *)generateRelativeNewsString:(NSArray *)array
 {
     if (array == nil || [array count] == 0) {
         return @"";
@@ -116,7 +116,7 @@
     }
     return [NSString stringWithFormat:@"<hr/>相关文章<div style='font-size:14px'><p/>%@</div>", middle];
 }
-+(NSString *)generateCommentDetail:(Comment *)comment
++ (NSString *)generateCommentDetail:(Comment *)comment
 {
     NSString *first = [NSString stringWithFormat:@"<div style='color:#0D6DA8;font-size:16px'>%@ 发表于%@</div>", comment.author, comment.pubDate];
     NSString *second = [NSString stringWithFormat:@"<div style='font-size:15px;line-height:20px'>%@</div>",comment.content];
@@ -131,7 +131,7 @@
     }
     return [NSString stringWithFormat:@"<body style='background-color:#EBEBF3'>%@%@%@</body>", first, second,three];
 }
-+(void)toTableViewBottom:(UITableView *)tableView isBottom:(BOOL)isBottom
++ (void)toTableViewBottom:(UITableView *)tableView isBottom:(BOOL)isBottom
 {
     if (isBottom) {
         NSUInteger sectionCount = [tableView numberOfSections];
@@ -150,7 +150,7 @@
         [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
-+(NSString *)getCommentLoginNoticeByCatalog:(int)catalog
++ (NSString *)getCommentLoginNoticeByCatalog:(int)catalog
 {
     switch (catalog) {
         case 1:
@@ -163,7 +163,7 @@
     }
     return @"请先登录后发表评论";
 }
-+(void)roundTextView:(UITextView *)txtView
++ (void)roundTextView:(UITextView *)txtView
 {
     txtView.layer.borderColor = UIColor.grayColor.CGColor;
     txtView.layer.borderWidth = 1;
@@ -171,13 +171,13 @@
     txtView.layer.masksToBounds = YES;
     txtView.clipsToBounds = YES;
 }
-+(void)noticeLogin:(UIView *)view andDelegate:(id)delegate andTitle:(NSString *)title
++ (void)noticeLogin:(UIView *)view andDelegate:(id)delegate andTitle:(NSString *)title
 {
     UIActionSheet * loginSheet = [[UIActionSheet alloc] initWithTitle:title delegate:delegate cancelButtonTitle:@"返回" destructiveButtonTitle:nil otherButtonTitles:@"登录", nil];
 //    [loginSheet showInView:view];
     [loginSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
-+(void)processLoginNotice:(UIActionSheet *)actionSheet andButtonIndex:(NSInteger)buttonIndex andNav:(UINavigationController *)nav andParent:(UIViewController *)parent
++ (void)processLoginNotice:(UIActionSheet *)actionSheet andButtonIndex:(NSInteger)buttonIndex andNav:(UINavigationController *)nav andParent:(UIViewController *)parent
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:@"登录"]) {
@@ -188,7 +188,7 @@
         [nav pushViewController:loginView animated:YES];
     }
 }
-+(void)pushNewsDetail:(News *)news andNavController:(UINavigationController *)navController andIsNextPage:(BOOL)isNextPage
++ (void)pushNewsDetail:(News *)news andNavController:(UINavigationController *)navController andIsNextPage:(BOOL)isNextPage
 {
     switch (news.newsType) {
             //标准新闻
@@ -263,7 +263,7 @@
             break;
     }
 }
-+(void)pushPostDetail:(Post *)post andNavController:(UINavigationController *)navController
++ (void)pushPostDetail:(Post *)post andNavController:(UINavigationController *)navController
 {
     UITabBarController *postTab = [[UITabBarController alloc] init];
     postTab.title = @"问答详情";
@@ -288,7 +288,7 @@
     postTab.hidesBottomBarWhenPushed = YES;
     [navController pushViewController:postTab animated:YES];
 }
-+(void)pushTweetDetail:(Tweet *)tweet andNavController:(UINavigationController *)navController
++ (void)pushTweetDetail:(Tweet *)tweet andNavController:(UINavigationController *)navController
 {
     UITabBarController *tweetTab = [[UITabBarController alloc] init];
     TweetDetail *tweetDetail = [[TweetDetail alloc] init];
@@ -308,7 +308,7 @@
     tweetTab.hidesBottomBarWhenPushed = YES;
     [navController pushViewController:tweetTab animated:YES];
 }
-+(void)pushUserDetail:(int)uid andNavController:(UINavigationController *)navController
++ (void)pushUserDetail:(int)uid andNavController:(UINavigationController *)navController
 {
     //如果时匿名用户 则不进入
     if (uid <= 0) {
@@ -336,7 +336,7 @@
    
     [navController pushViewController:userTab animated:YES];
 }
-+(void)pushUserDetailWithName:(NSString *)name andNavController:(UINavigationController *)navController
++ (void)pushUserDetailWithName:(NSString *)name andNavController:(UINavigationController *)navController
 {
 //    NSLog(@"执行一次");
 //    UserView *uv = [[UserView alloc] init];
@@ -361,7 +361,7 @@
     
     [navController pushViewController:userTab animated:YES];
 }
-+(BOOL)analysis:(NSString *)url andNavController:(UINavigationController *)navController
++ (BOOL)analysis:(NSString *)url andNavController:(UINavigationController *)navController
 {
     NSString *search = @"oschina.net";
     //判断是否包含 oschina.net 来确定是不是站内链接
@@ -482,12 +482,12 @@
         return NO;
    }
 }
-+(OSCNotice *)getOSCNotice:(ASIHTTPRequest *)request
++ (OSCNotice *)getOSCNotice:(ASIHTTPRequest *)request
 {
     NSString *response = [request responseString];
     return [Tool getOSCNotice2:response];
 }
-+(OSCNotice *)getOSCNotice2:(NSString *)response
++ (OSCNotice *)getOSCNotice2:(NSString *)response
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
     TBXMLElement *root = xml.rootXMLElement;  
@@ -513,7 +513,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:Notification_NoticeUpdate object:oc];
     return oc;
 }
-+(void)playAudio:(BOOL)isAlert
++ (void)playAudio:(BOOL)isAlert
 {
     NSString * path = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] resourcePath], isAlert ? @"/alertsound.wav" : @"/soundeffect.wav"];
     SystemSoundID soundID;
@@ -521,17 +521,13 @@
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
     AudioServicesPlaySystemSound(soundID);
 }
-+(UIColor *)getColorForCell:(int)row
++ (UIColor *)getColorForCell:(int)row
 {
     return row % 2 ?
     [UIColor colorWithRed:235.0/255.0 green:242.0/255.0 blue:252.0/255.0 alpha:1.0]:
     [UIColor colorWithRed:248.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0];
-    
-//    return row % 2 ?
-//    [UIColor colorWithRed:248.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0]:
-//    [UIColor colorWithRed:235.0/255.0 green:242.0/255.0 blue:252.0/255.0 alpha:1.0];
 }
-+(void)clearWebViewBackground:(UIWebView *)webView
++ (void)clearWebViewBackground:(UIWebView *)webView
 {
     UIWebView *web = webView;
     for (id v in web.subviews) {
@@ -540,7 +536,7 @@
         }
     }
 }
-+(void)doSound:(id)sender
++ (void)doSound:(id)sender
 {
     NSError *err;
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"soundeffect" ofType:@"wav"]] error:&err];
@@ -549,14 +545,13 @@
     [player prepareToPlay];
     [player play];
 }
-
-+(void)pushTweetImgDetail:(NSString *)img andParent:(UIViewController *)parent
++ (void)pushTweetImgDetail:(NSString *)img andParent:(UIViewController *)parent
 {
     TweetImgDetail *imgDetail = [[TweetImgDetail alloc] init];
     imgDetail.imgHref = img;
     [parent presentModalViewController:imgDetail animated:YES];
 }
-+(NSString *)getTextViewString:(NSString *)author andObjectType:(int)objectType andObjectCatalog:(int)objectCatalog andObjectTitle:(NSString *)title  andMessage:(NSString *)message andPubDate:(NSString *)pubDate andReply:(ObjectReply *)reply
++ (NSString *)getTextViewString:(NSString *)author andObjectType:(int)objectType andObjectCatalog:(int)objectCatalog andObjectTitle:(NSString *)title  andMessage:(NSString *)message andPubDate:(NSString *)pubDate andReply:(ObjectReply *)reply
 {
     NSString *_author = [NSString stringWithFormat:@"<color>%@</color>",author];
     NSString *_message = @"";
@@ -565,7 +560,6 @@
     switch (objectType) {
         case 6:
         {
-//            _message = @"<light> 发布了一个职位 </light>"
             _message = [NSString stringWithFormat:@"<light> 发布了一个职位 </light><color>%@</color>\n%@",title,message];
         }
             break;
@@ -676,7 +670,7 @@
     NSString *result = [NSString stringWithFormat:@"%@%@%@%@",_author,_message,_reply,_pubDate];
     return result;
 }
-+(NSString *)getTextViewString2:(NSString *)author andObjectType:(int)objectType andObjectCatalog:(int)objectCatalog andObjectTitle:(NSString *)title andMessage:(NSString *)message andPubDate:(NSString *)pubDate andReply:(ObjectReply *)reply
++ (NSString *)getTextViewString2:(NSString *)author andObjectType:(int)objectType andObjectCatalog:(int)objectCatalog andObjectTitle:(NSString *)title andMessage:(NSString *)message andPubDate:(NSString *)pubDate andReply:(ObjectReply *)reply
 {
     NSString *_author = @"";
     if (author != nil) {
@@ -802,7 +796,7 @@
     NSString *result = [NSString stringWithFormat:@"%@%@%@%@",_author,_message,_reply,_pubDate];
     return result;
 }
-+(NSString *)getAppClientString:(int)appClient
++ (NSString *)getAppClientString:(int)appClient
 {
     switch (appClient) {
         case 1:
@@ -819,17 +813,14 @@
             return @"";
     }
 }
-+(void)ReleaseWebView:(UIWebView *)webView
++ (void)ReleaseWebView:(UIWebView *)webView
 {
     [webView stopLoading];
     [webView setDelegate:nil];
     webView = nil;
 }
-
 + (NSString *)intervalSinceNow: (NSString *) theDate 
 {
-//    NSLog(theDate);
-//    theDate = @"2012-04-24 5:41:20";
     NSDateFormatter *date=[[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *d=[date dateFromString:theDate];
@@ -837,16 +828,11 @@
     
     
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-//    dat = [NSDate dateWithTimeInterval:+(8*60*60) sinceDate:dat];
     NSTimeInterval now=[dat timeIntervalSince1970]*1;
     NSString *timeString=@"";
     NSTimeInterval cha=now-late;
     
     if (cha/3600<1) {
-//        timeString = [NSString stringWithFormat:@"%f", cha/60 == 0.0 ? 1 : cha/60];
-//        if (timeString == @"0") {
-//            timeString = @"1";
-//        }
         if (cha/60<1) {
             timeString = @"1";
         }
@@ -881,18 +867,16 @@
 +(int)getTextViewHeight:(UITextView *)txtView andUIFont:(UIFont *)font andText:(NSString *)txt
 {
     float fPadding = 16.0;
-//    CGSize constraint = CGSizeMake(txtView.contentSize.width - fPadding, CGFLOAT_MAX);
     CGSize constraint = CGSizeMake(txtView.contentSize.width - 10 - fPadding, CGFLOAT_MAX);
     CGSize size = [txt sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     float fHeight = size.height + 16.0;
     return fHeight;
 }
-+(int)getDaysCount:(int)year andMonth:(int)month andDay:(int)day
++ (int)getDaysCount:(int)year andMonth:(int)month andDay:(int)day
 {
     return year*365 + month * 31 + day;
 }
-//重复性判断
-+(BOOL)isRepeatNews:(NSMutableArray *)all andNews:(News *)n
++ (BOOL)isRepeatNews:(NSMutableArray *)all andNews:(News *)n
 {
     if (all == nil) {
         return NO;
@@ -904,7 +888,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatPost:(NSMutableArray *)all andPost:(Post *)p
++ (BOOL)isRepeatPost:(NSMutableArray *)all andPost:(Post *)p
 {
     if (all == nil) {
         return NO;
@@ -916,7 +900,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatTweet:(NSMutableArray *)all andTweet:(Tweet *)t
++ (BOOL)isRepeatTweet:(NSMutableArray *)all andTweet:(Tweet *)t
 {
     if (all == nil) {
         return NO;
@@ -928,7 +912,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatMessage:(NSMutableArray *)all andMessage:(Message *)m
++ (BOOL)isRepeatMessage:(NSMutableArray *)all andMessage:(Message *)m
 {
     if (all == nil) {
         return NO;
@@ -940,7 +924,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatComment:(NSMutableArray *)all andComment:(Comment *)c
++ (BOOL)isRepeatComment:(NSMutableArray *)all andComment:(Comment *)c
 {
     if (all == nil) {
         return NO;
@@ -952,7 +936,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatActive:(NSMutableArray *)all andActive:(Activity *)a
++ (BOOL)isRepeatActive:(NSMutableArray *)all andActive:(Activity *)a
 {
     if (all == nil) {
         return NO;
@@ -964,7 +948,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatFavorite:(NSMutableArray *)all andFav:(Favorite *)f
++ (BOOL)isRepeatFavorite:(NSMutableArray *)all andFav:(Favorite *)f
 {
     if (all == nil) {
         return NO;
@@ -976,7 +960,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatUserBlog:(NSMutableArray *)all andBlogUnit:(BlogUnit *)b
++ (BOOL)isRepeatUserBlog:(NSMutableArray *)all andBlogUnit:(BlogUnit *)b
 {
     if (all == nil) {
         return NO;
@@ -988,7 +972,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatSearch:(NSMutableArray *)all andResult:(SearchResult *)s
++ (BOOL)isRepeatSearch:(NSMutableArray *)all andResult:(SearchResult *)s
 {
     if (all == nil) {
         return NO;
@@ -1000,7 +984,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatFriend:(NSMutableArray *)all andFriend:(Friend *)f
++ (BOOL)isRepeatFriend:(NSMutableArray *)all andFriend:(Friend *)f
 {
     if (all == nil) {
         return NO;
@@ -1012,7 +996,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatSoftware:(NSMutableArray *)all andSoftware:(SoftwareUnit *)s
++ (BOOL)isRepeatSoftware:(NSMutableArray *)all andSoftware:(SoftwareUnit *)s
 {
     if (all == nil) {
         return  NO;
@@ -1024,7 +1008,7 @@
     }
     return NO;
 }
-+(BOOL)isRepeatSoftwareCatalog:(NSMutableArray *)all andSoftwareCatalog:(SoftwareCatalog *)s
++ (BOOL)isRepeatSoftwareCatalog:(NSMutableArray *)all andSoftwareCatalog:(SoftwareCatalog *)s
 {
     if (!all) {
         return NO;
@@ -1036,16 +1020,15 @@
     }
     return NO;
 }
-+(UIColor *)getBackgroundColor
++ (UIColor *)getBackgroundColor
 {
     return [UIColor colorWithRed:235.0/255 green:235.0/255 blue:243.0/255 alpha:1.0];
 }
-+(UIColor *)getCellBackgroundColor
++ (UIColor *)getCellBackgroundColor
 {
     return [UIColor colorWithRed:235.0/255 green:235.0/255 blue:243.0/255 alpha:1.0];
 }
-
-+(SingleNews *)readStrNewsDetail:(NSString *)str
++ (SingleNews *)readStrNewsDetail:(NSString *)str
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1071,8 +1054,7 @@
     
     return singleNews;
 }
-
-+(SinglePostDetail *)readStrSinglePostDetail:(NSString *)str
++ (SinglePostDetail *)readStrSinglePostDetail:(NSString *)str
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1112,8 +1094,7 @@
     SinglePostDetail * singlePost = [[SinglePostDetail alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andUrl:[TBXML textForElement:url] andPortrait:[TBXML textForElement:portrait] andBody:[TBXML textForElement:body] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andAnswer:[[TBXML textForElement:answerCount] intValue] andView:[[TBXML textForElement:viewCount] intValue] andFavorite:[[TBXML textForElement:fav] intValue] == 1 andTags:_tags];
     return singlePost;
 }
-
-+(Software *)readStrSoftwareDetail:(NSString *)str
++ (Software *)readStrSoftwareDetail:(NSString *)str
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1143,8 +1124,7 @@
     
     return s;
 }
-
-+(Blog *)readStrBlogDetail:(NSString *)str
++ (Blog *)readStrBlogDetail:(NSString *)str
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1169,8 +1149,7 @@
     
     return b;
 }
-
-+(NSMutableArray *)readStrNewsArray:(NSString *)str andOld:(NSMutableArray *)olds
++ (NSMutableArray *)readStrNewsArray:(NSString *)str andOld:(NSMutableArray *)olds
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1245,7 +1224,7 @@
     }
     return news;
 }
-+(NSMutableArray *)readStrUserBlogsArray:(NSString *)str andOld:(NSMutableArray *)olds
++ (NSMutableArray *)readStrUserBlogsArray:(NSString *)str andOld:(NSMutableArray *)olds
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1302,7 +1281,7 @@
     }
     return blogs;
 }
-+(NSMutableArray *)readStrPostArray:(NSString *)str andOld:(NSMutableArray *)olds
++ (NSMutableArray *)readStrPostArray:(NSString *)str andOld:(NSMutableArray *)olds
 {
     NSMutableArray * newPosts = [[NSMutableArray alloc] initWithCapacity:20];
     TBXML *xml = [[TBXML alloc] initWithXMLString:str error:nil];
@@ -1348,14 +1327,14 @@
     }
     return newPosts;
 }
-+(void)saveCache:(int)type andID:(int)_id andString:(NSString *)str
++ (void)saveCache:(int)type andID:(int)_id andString:(NSString *)str
 {
     NSUserDefaults * setting = [NSUserDefaults standardUserDefaults];
     NSString * key = [NSString stringWithFormat:@"detail-%d-%d",type, _id];
     [setting setObject:str forKey:key];
     [setting synchronize];
 }
-+(NSString *)getCache:(int)type andID:(int)_id
++ (NSString *)getCache:(int)type andID:(int)_id
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     NSString *key = [NSString stringWithFormat:@"detail-%d-%d",type, _id];
@@ -1363,14 +1342,14 @@
     NSString *value = [settings objectForKey:key];
     return value;
 }
-+(void)saveSoftware:(NSString *)softwareName andString:(NSString *)str
++ (void)saveSoftware:(NSString *)softwareName andString:(NSString *)str
 {
     NSUserDefaults * setting = [NSUserDefaults standardUserDefaults];
     NSString * key = [NSString stringWithFormat:@"detail-%d-%@",3, softwareName];
     [setting setObject:str forKey:key];
     [setting synchronize];
 }
-+(NSString *)getSoftware:(NSString *)softwareName
++ (NSString *)getSoftware:(NSString *)softwareName
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     NSString *key = [NSString stringWithFormat:@"detail-%d-%@",3, softwareName];
@@ -1378,12 +1357,10 @@
     NSString *value = [settings objectForKey:key];
     return value;
 }
-+(void)deleteAllCache
++ (void)deleteAllCache
 {
-//    NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-//    [settings remo]
 }
-+(NSMutableArray *)getReplies:(TBXMLElement *)first
++ (NSMutableArray *)getReplies:(TBXMLElement *)first
 {
     TBXMLElement *replies = [TBXML childElementNamed:@"replies" parentElement:first];
     if (!replies) {
@@ -1415,7 +1392,7 @@
     }
     return result;
 }
-+(NSMutableArray *)getRefers:(TBXMLElement *)first
++ (NSMutableArray *)getRefers:(TBXMLElement *)first
 {
     TBXMLElement *refers = [TBXML childElementNamed:@"refers" parentElement:first];
     if (!refers) {
@@ -1445,7 +1422,7 @@
     }
     return result;
 }
-+(UIView *)getReferView:(NSMutableArray *)refers
++ (UIView *)getReferView:(NSMutableArray *)refers
 {
     if (refers == nil || refers.count == 0) {
         return nil;
@@ -1474,14 +1451,11 @@
     
     return view;
 }
-
-
-+(NSString *)getHTMLString:(NSString *)html
++ (NSString *)getHTMLString:(NSString *)html
 {
     return html;
 }
-
-+(void)showHUD:(NSString *)text andView:(UIView *)view andHUD:(MBProgressHUD *)hud
++ (void)showHUD:(NSString *)text andView:(UIView *)view andHUD:(MBProgressHUD *)hud
 {
     [view addSubview:hud];
     hud.labelText = text;
@@ -1489,12 +1463,11 @@
     hud.square = YES;
     [hud show:YES];
 }
-
-+(int)isListOver:(ASIHTTPRequest *)request
++ (int)isListOver:(ASIHTTPRequest *)request
 {
     return [Tool isListOver2:request.responseString];
 }
-+(int)isListOver2:(NSString *)response
++ (int)isListOver2:(NSString *)response
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
     TBXMLElement *root = xml.rootXMLElement;
@@ -1502,8 +1475,7 @@
     int size = [[TBXML textForElement:pageSize] intValue];
     return size;
 }
-
-+(void)doWithFavorite:(BOOL)addFavorite andUID:(int)uid andObjID:(int)objID andType:(int)type andDelegate:(UIViewController *)viewController andRequest:(ASIFormDataRequest *)request
++ (void)doWithFavorite:(BOOL)addFavorite andUID:(int)uid andObjID:(int)objID andType:(int)type andDelegate:(UIViewController *)viewController andRequest:(ASIFormDataRequest *)request
 {
     request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:addFavorite ? api_favorite_add : api_favorite_delete]];
     request.attachment = addFavorite ? @"add" : @"delete";
@@ -1518,8 +1490,7 @@
     request.hud = [[MBProgressHUD alloc] initWithView:viewController.view];
     [Tool showHUD:addFavorite ? @"正在添加收藏":@"正在删除收藏" andView:viewController.view andHUD:request.hud];
 }
-
-+(UIImage *)scale:(UIImage *)sourceImg toSize:(CGSize)size
++ (UIImage *)scale:(UIImage *)sourceImg toSize:(CGSize)size
 {
     UIGraphicsBeginImageContext(size);
     [sourceImg drawInRect:CGRectMake(0, 0, size.width, size.height)];
@@ -1527,8 +1498,7 @@
     UIGraphicsEndImageContext();
     return scaledImage;
 }
-
-+(CGSize)scaleSize:(CGSize)sourceSize
++ (CGSize)scaleSize:(CGSize)sourceSize
 {
     float width = sourceSize.width;
     float height = sourceSize.height;
@@ -1540,28 +1510,24 @@
         return CGSizeMake(800 * width / height, 800);
     }
 }
-
-+(NSString *)getOSVersion
++ (NSString *)getOSVersion
 {
     return [NSString stringWithFormat:@"OSChina.NET/%@/%@/%@/%@",AppVersion,[UIDevice currentDevice].systemName,[UIDevice currentDevice].systemVersion, [UIDevice currentDevice].model];
 }
-
-+(void)ToastNotification:(NSString *)text andView:(UIView *)view andLoading:(BOOL)isLoading andIsBottom:(BOOL)isBottom
++ (void)ToastNotification:(NSString *)text andView:(UIView *)view andLoading:(BOOL)isLoading andIsBottom:(BOOL)isBottom
 {
     GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:text showActivity:isLoading inPresentationMode:isBottom?GCDiscreetNotificationViewPresentationModeBottom:GCDiscreetNotificationViewPresentationModeTop inView:view];
     [notificationView show:YES];
     [notificationView hideAnimatedAfter:2.6];
 }
-
-+(void)CancelRequest:(ASIHTTPRequest *)request
++ (void)CancelRequest:(ASIHTTPRequest *)request
 {
     if (request != nil) {
         [request cancel];
         [request clearDelegatesAndCancel];
     }
 }
-
-+(NSDate *)NSStringDateToNSDate:(NSString *)string
++ (NSDate *)NSStringDateToNSDate:(NSString *)string
 {
     NSDateFormatter *f = [NSDateFormatter new];
     [f setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
@@ -1569,8 +1535,7 @@
     NSDate * d = [f dateFromString:string];
     return d;
 }
-
-+(NSString *)GenerateTags:(NSMutableArray *)tags
++ (NSString *)GenerateTags:(NSMutableArray *)tags
 {
     if (tags == nil || tags.count == 0) {
         return @"";

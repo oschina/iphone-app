@@ -30,7 +30,7 @@
 @synthesize commentType;
 @synthesize parentAuthorUID;
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     //订阅评论数获取后的通知事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAttachmentCommentCount:) name:Notification_DetailCommentCount object:nil];
@@ -51,7 +51,7 @@
     [self viewDidUnload];
 }
 #pragma mark - View lifecycle
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.parentViewController.title = @"评论列表";
     self.parentViewController.navigationItem.title = catalog == 2 ? @"回帖列表" : @"评论列表";
@@ -72,7 +72,7 @@
         self.navigationItem.title = self.headTitle;
     }
 }
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if (self.imageDownloadsInProgress != nil) {
         NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
@@ -116,7 +116,7 @@
     attachment = nil;
     [super viewDidUnload];
 }
--(void)getAttachmentCommentCount:(NSNotification *)notification
+- (void)getAttachmentCommentCount:(NSNotification *)notification
 {
     if (notification.object) 
     {
@@ -132,7 +132,7 @@
     }
 }
 //点击弹出发表评论页
--(void)clickPubComment:(id)sender
+- (void)clickPubComment:(id)sender
 {
     //判断是否应该登入  当类型不是新闻的话则强制登录才能评论
     if (self.catalog != 1 && [Config Instance].isLogin == NO) {
@@ -159,11 +159,11 @@
         [self.navigationController pushViewController:self.pubComments animated:YES];
     }
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.parentViewController.navigationController andParent:self];
 }
--(void)reload:(BOOL)noRefresh
+- (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) {
         return;
@@ -275,7 +275,7 @@
     isLoading = YES;
     [self.tableComments reloadData];
 }
--(void)clear
+- (void)clear
 {
     allCount = 0;
     isLoadOver = NO;
@@ -283,7 +283,7 @@
     [imageDownloadsInProgress removeAllObjects];
     [tableComments reloadData];
 }
--(void)addCommentByLocal:(Comment *)newComment
+- (void)addCommentByLocal:(Comment *)newComment
 {
     //如果评论不属于此评论列表 则不考虑添加
     if (newComment.catalog != self.catalog) {
@@ -458,7 +458,7 @@
     }
 } 
 #pragma TableView处理
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isLoadOver) {
         return comments.count == 0 ? 1 : comments.count;
@@ -466,7 +466,7 @@
     else
         return comments.count + 1;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = [indexPath row];
     if (row < [comments count]) {
@@ -479,11 +479,11 @@
         return 62;
     }
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [Tool getColorForCell:indexPath.row];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int commentCount = [comments count];
     int row = [indexPath row];
@@ -618,7 +618,7 @@
         }
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.catalog == 4 && self.isDisableHit) {
@@ -656,7 +656,7 @@
         [self.navigationController pushViewController:reply animated:YES];
     }
 }
--(void)clickImg:(id)sender
+- (void)clickImg:(id)sender
 {
     UITap *tap = (UITap *)sender;
     if (tap) {
@@ -665,43 +665,43 @@
 }
 
 #pragma 下提刷新
--(void)reloadTableViewDataSource
+- (void)reloadTableViewDataSource
 {
     _reloading = YES;
 }
--(void)doneLoadingTableViewData
+- (void)doneLoadingTableViewData
 {
     _reloading = NO;
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableComments];
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
 }
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
--(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
 {
     [self reloadTableViewDataSource];
     [self refresh];
 }
--(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
 {
     return _reloading;
 }
--(NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
+- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
 {
     return [NSDate date];
 }
--(void)refresh
+- (void)refresh
 {
     isLoadOver = NO;
     [self reload:NO];
 }
 //下载图片
--(void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
 {
     NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:key];
@@ -714,7 +714,7 @@
         [iconDownloader startDownload];
     }
 }
--(void)appImageDidLoad:(NSString *)index
+- (void)appImageDidLoad:(NSString *)index
 {
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:index];
     if (iconDownloader) 

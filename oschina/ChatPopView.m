@@ -46,14 +46,14 @@
     return self;
 }
 
--(void)setText:(NSString *)str
+- (void)setText:(NSString *)str
 {
     contentLabel.text = str;
     [contentLabel sizeToFit];
     [self setNeedsLayout];
 }
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, contentLabel.frame.size.width+30, contentLabel.frame.size.height + 15);

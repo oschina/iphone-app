@@ -13,7 +13,7 @@
 @synthesize softwareName;
 
 #pragma mark - View lifecycle
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
@@ -71,7 +71,7 @@
     }
 }
 
--(void)clickFavorite:(id)sender
+- (void)clickFavorite:(id)sender
 {
     UIBarButtonItem * btn = (UIBarButtonItem *)sender;
     BOOL isFav = [btn.title isEqualToString:@"收藏此软件"];
@@ -121,7 +121,7 @@
     [super viewDidUnload];
 }
 
--(void)loadData:(Software *)s
+- (void)loadData:(Software *)s
 {
     objid = s._id;
     [self refreshFavorite:s];
@@ -136,12 +136,12 @@
     NSString *result = [Tool getHTMLString:html];
     [self.webView loadHTMLString:result baseURL:nil];
 }
--(void)refreshFavorite:(Software *)s
+- (void)refreshFavorite:(Software *)s
 {
     btnFavorite = [[UIBarButtonItem alloc] initWithTitle:s.favorite ? @"取消收藏" : @"收藏此软件" style:UIBarButtonItemStyleBordered target:self action:@selector(clickFavorite:)];
     self.navigationItem.rightBarButtonItem = btnFavorite;
 }
--(NSString *)getButtonString:(NSString *)homePage andDocument:(NSString *)document andDownload:(NSString *)download
+- (NSString *)getButtonString:(NSString *)homePage andDocument:(NSString *)document andDownload:(NSString *)download
 {
     NSString *strHomePage = @"";
     NSString *strDocument = @"";
@@ -159,7 +159,7 @@
 }
 
 #pragma 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [Tool analysis:[request.URL absoluteString] andNavController:self.navigationController];
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 

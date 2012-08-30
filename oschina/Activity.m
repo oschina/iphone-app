@@ -30,7 +30,22 @@
 @synthesize imgTweet;
 @synthesize url;
 
-- (id)initWithParameters:(int)newid andImg:(NSString *)nimg andAuthor:(NSString *)nauthor andAuthorID:(int)nauthorid andCatalog:(int)ncatalog andObjectid:(int)nobjectid andMessage:(NSString *)nmsg andPubDate:(NSString *)pubDate andCommentCount:(int)ncommentCount andObjectType:(int)nobjectType andObjectCatalog:(int)nobjectCatalog andObjectTitle:(NSString *)nObjectTitle andForUserView:(BOOL)isUserView andReply:(ObjectReply *)nreply andImgTweet:(NSString *)nimgTweet andUrl:(NSString *)nurl
+- (id)initWithParameters:(int)newid 
+                  andImg:(NSString *)nimg 
+                  andAuthor:(NSString *)nauthor 
+                  andAuthorID:(int)nauthorid
+                  andCatalog:(int)ncatalog
+                  andObjectid:(int)nobjectid
+                  andMessage:(NSString *)nmsg
+                  andPubDate:(NSString *)pubDate
+                  andCommentCount:(int)ncommentCount
+                  andObjectType:(int)nobjectType 
+                  andObjectCatalog:(int)nobjectCatalog 
+                  andObjectTitle:(NSString *)nObjectTitle 
+                  andForUserView:(BOOL)isUserView 
+                  andReply:(ObjectReply *)nreply 
+                  andImgTweet:(NSString *)nimgTweet 
+                  andUrl:(NSString *)nurl
 {
     Activity *a = [[Activity alloc] init];
     a._id = newid;

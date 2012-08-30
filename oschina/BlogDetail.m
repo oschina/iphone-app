@@ -14,7 +14,7 @@
 @synthesize singleBlog;
 
 #pragma mark - View lifecycle
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
@@ -71,7 +71,7 @@
         }
     }
 }
--(void)clickFavorite:(id)sender
+- (void)clickFavorite:(id)sender
 {
     UIBarButtonItem * btn = (UIBarButtonItem *)sender;
     BOOL isFav = [btn.title isEqualToString:@"收藏此博客"];
@@ -121,13 +121,13 @@
     [self setWebView:nil];
     [super viewDidUnload];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     if (self.singleBlog) {
         [self refreshFavorite:self.singleBlog];
     }
 }
--(void)loadData:(Blog *)b
+- (void)loadData:(Blog *)b
 {
     self.singleBlog = b;
     [self refreshFavorite:b];
@@ -145,14 +145,14 @@
     
     [Config Instance].shareObject = [[ShareObject alloc] initWithParameters:b.title andUrl:b.url];
 }
--(void)refreshFavorite:(Blog *)b
+- (void)refreshFavorite:(Blog *)b
 {
     btnFavorite = [[UIBarButtonItem alloc] initWithTitle:b.favorite ? @"取消收藏" : @"收藏此博客" style:UIBarButtonItemStyleBordered target:self action:@selector(clickFavorite:)];
     self.parentViewController.navigationItem.rightBarButtonItem = btnFavorite;
 }
 
 #pragma 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [Tool analysis:[request.URL absoluteString] andNavController:self.navigationController];
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 

@@ -10,8 +10,8 @@
 
 @interface ShareObject : NSObject
 
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * url;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * url;
 
 - (id)initWithParameters:(NSString *)ntitle andUrl:(NSString *)nurl;
 

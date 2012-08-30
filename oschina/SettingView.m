@@ -53,7 +53,7 @@
     [self.settingsInSection setObject:third forKey:@"关于"];
     self.settings = [[NSArray alloc] initWithObjects:@"帐号",@"反馈",@"关于",nil];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"login" object:[Config Instance].isCookie ? @"1" : @"0"];
     [self refresh];
@@ -63,7 +63,7 @@
     [self setTableSettings:nil];
     [super viewDidUnload];
 }
--(void)refresh
+- (void)refresh
 {
     NSArray *first = [self.settingsInSection objectForKey:@"帐号"];
     SettingModel *firstLogin = [first objectAtIndex:0];
@@ -71,7 +71,7 @@
     [self.tableSettings reloadData];
 }
 #pragma TableView的处理
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSUInteger section = [indexPath section];
@@ -164,21 +164,21 @@
             break;
     }
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [settings count];
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSString *key = [settings objectAtIndex:section];
     NSArray *set = [settingsInSection objectForKey:key];
     return [set count];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
@@ -198,14 +198,15 @@
 
 #pragma 按钮点击后的API方法
 
--(void)checkVersionNeedUpdate
+- (void)checkVersionNeedUpdate
 {
     [[AFOSCClient sharedClient] getPath:@"http://www.oschina.net/MobileAppVersion.xml" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         @try {
+            NSLog(operation.responseString);
             TBXML *xml = [[TBXML alloc] initWithXMLString:operation.responseString error:nil];
             TBXMLElement *root = xml.rootXMLElement;
-            if (root != nil) {
+            if (root == nil) {
                 [Tool ToastNotification:@"获取版本信息错误" andView:self.view andLoading:NO andIsBottom:NO];
                 return;
             }
@@ -239,7 +240,7 @@
     }];
     
 }
-+(int)getVersionNumber:(NSString *)version
++ (int)getVersionNumber:(NSString *)version
 {
     NSArray * arr = [version componentsSeparatedByString:@"."];
     if (arr.count >= 3) {
@@ -251,7 +252,7 @@
     else
         return 0;
 }
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
         //下载

@@ -11,7 +11,7 @@
 @interface ApiError : NSObject
 
 @property int errorCode;
-@property (retain,nonatomic) NSString * errorMessage;
+@property (copy,nonatomic) NSString * errorMessage;
 
 - (id)initWithParameters:(int)nerrorCode andMessage:(NSString *)nerrorMessage;
 

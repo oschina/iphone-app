@@ -15,7 +15,7 @@
 @synthesize newsID;
 @synthesize isNextPage;
 
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
@@ -23,14 +23,14 @@
 }
 
 #pragma mark - View lifecycle
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.parentViewController.navigationItem.title = @"资讯详情";
     if (self.singleNews) {
         [self refreshFavorite:self.singleNews];
     }
 }
--(void)clickFavorite:(id)sender
+- (void)clickFavorite:(id)sender
 {
     UIBarButtonItem * btn = (UIBarButtonItem *)sender;
     BOOL isFav = [btn.title isEqualToString:@"收藏此文"];
@@ -74,7 +74,7 @@
         [Tool ToastNotification:@"添加收藏失败" andView:self.view andLoading:NO andIsBottom:NO];
     }];
 }
--(void)clickToHome:(id)sender
+- (void)clickToHome:(id)sender
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -144,7 +144,7 @@
     singleNews = nil;
     [super viewDidUnload];
 }
--(void)loadData:(SingleNews *)n
+- (void)loadData:(SingleNews *)n
 {
     [self refreshFavorite:n];
     //通知去修改新闻评论数
@@ -164,7 +164,7 @@
     NSString *result = [Tool getHTMLString:html];
     [self.webView loadHTMLString:result baseURL:nil];
 }
--(void)refreshFavorite:(SingleNews *)n
+- (void)refreshFavorite:(SingleNews *)n
 {
     if (self.isNextPage) 
     {
@@ -186,7 +186,7 @@
 }
 
 #pragma 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [Tool analysis:[request.URL absoluteString] andNavController:self.parentViewController.navigationController];
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 

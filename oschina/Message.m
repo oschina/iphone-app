@@ -22,7 +22,15 @@
 @synthesize isEnableDel;
 @synthesize height;
 
-- (id)initWithParameter:(int)newID andSender:(NSString *)nsender andSenderID:(int)nsenderID andContent:(NSString *)newContent andFromNowOn:(NSString *)time andImg:(NSString *)nImg andFriendid:(int)nfriendid andFriendName:(NSString *)nfriendName andCount:(int)nCount
+- (id)initWithParameter:(int)newID 
+              andSender:(NSString *)nsender 
+              andSenderID:(int)nsenderID 
+              andContent:(NSString *)newContent 
+              andFromNowOn:(NSString *)time 
+              andImg:(NSString *)nImg 
+              andFriendid:(int)nfriendid 
+              andFriendName:(NSString *)nfriendName 
+              andCount:(int)nCount
 {
     Message *m = [Message new];
     m._id = newID;

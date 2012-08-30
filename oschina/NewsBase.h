@@ -15,7 +15,7 @@
 @property (strong,nonatomic) UISegmentedControl * segment_title;
 @property (strong,nonatomic) NewsView * newsView;
 
--(NSString *)getSegmentTitle;
--(void)myInit;
+- (NSString *)getSegmentTitle;
+- (void)myInit;
 
 @end

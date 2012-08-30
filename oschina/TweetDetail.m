@@ -16,21 +16,21 @@
 @synthesize singleTweet;
 
 #pragma mark - 生命周期
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.parentViewController.navigationItem.title = @"动弹详情";
     UIBarButtonItem *btnComment = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleBordered target:self action:@selector(clickComment:)];
     self.parentViewController.navigationItem.rightBarButtonItem = btnComment;
     self.view.backgroundColor = [Tool getBackgroundColor];
 }
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
     [self viewDidUnload];
 }
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     [Tool roundTextView:self.txtComment];
@@ -106,7 +106,7 @@
         [Tool ToastNotification:@"加载失败" andView:self.view andLoading:NO andIsBottom:NO];
     }];
 }
--(void)clickComment:(id)sender
+- (void)clickComment:(id)sender
 {
     if ([Config Instance].isCookie == NO) {
         [self.txtComment resignFirstResponder];
@@ -162,7 +162,7 @@
         
     }];
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.parentViewController.navigationController andParent:self];
 }
@@ -177,7 +177,7 @@
 }
 
 #pragma mark - 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([request.URL.absoluteString isEqualToString:@"http://wangjuntom/"]) 
     {
@@ -199,7 +199,7 @@
     }
 }
 #pragma mark - 调整输入框与关闭键盘
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -207,7 +207,7 @@
     [UIView commitAnimations];
     return YES;
 }
--(BOOL)textViewShouldEndEditing:(UITextView *)textView
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];

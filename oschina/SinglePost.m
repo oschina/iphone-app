@@ -13,14 +13,14 @@
 @synthesize postID;
 @synthesize singlePost;
 
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
     [self viewDidUnload];
 }
 #pragma mark - View lifecycle
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.parentViewController.navigationItem.title = @"问答详情";
     if (self.singlePost) {
@@ -28,7 +28,7 @@
     }
 }
 
--(void)clickFavorite:(id)sender
+- (void)clickFavorite:(id)sender
 {
     UIBarButtonItem * btn = (UIBarButtonItem *)sender;
     BOOL isFav = [btn.title isEqualToString:@"收藏此帖"];
@@ -75,7 +75,7 @@
     
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.parentViewController.navigationController andParent:self];
 }
@@ -131,7 +131,7 @@
         }
     }
 }
--(void)loadData:(SinglePostDetail *)p
+- (void)loadData:(SinglePostDetail *)p
 {
     [self refreshFavorite:p];
     //通知已经获取了帖子回复数 
@@ -147,7 +147,7 @@
     NSString *result = [Tool getHTMLString:html];
     [self.webView loadHTMLString:result baseURL:nil];
 }
--(void)refreshFavorite:(SinglePostDetail *)p
+- (void)refreshFavorite:(SinglePostDetail *)p
 {
     btnFavorite = [[UIBarButtonItem alloc] initWithTitle:p.favorite ? @"取消收藏" : @"收藏此帖" style:UIBarButtonItemStyleBordered target:self action:@selector(clickFavorite:)];
     self.parentViewController.navigationItem.rightBarButtonItem = btnFavorite;
@@ -160,7 +160,7 @@
     [super viewDidUnload];
 }
 #pragma 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [Tool analysis:[request.URL absoluteString] andNavController:self.parentViewController.navigationController];
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 

@@ -23,7 +23,15 @@
 @synthesize softwarename;
 @synthesize favorite;
 
-- (id)initWithParameters:(int)newid andTitle:(NSString *)ntitle andUrl:(NSString *)newUrl andBody:(NSString *)newBody andAuthor:(NSString *)newAuthor andAuthorID:(int)nauthorID andPubDate:(NSString *)nPubDate andCommentCount:(int)nCommentCount andFavorite:(BOOL)nfavorite
+- (id)initWithParameters:(int)newid 
+                andTitle:(NSString *)ntitle 
+                andUrl:(NSString *)newUrl 
+                andBody:(NSString *)newBody 
+                andAuthor:(NSString *)newAuthor 
+                andAuthorID:(int)nauthorID 
+                andPubDate:(NSString *)nPubDate 
+                andCommentCount:(int)nCommentCount 
+                andFavorite:(BOOL)nfavorite
 {
     SingleNews *news = [[SingleNews alloc] init];
     news._id = newid;

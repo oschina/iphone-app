@@ -26,10 +26,10 @@
 @property (retain,nonatomic) NSArray * settings;
 @property (retain,nonatomic) NSMutableDictionary * settingsInSection;
 
--(void)refresh;
+- (void)refresh;
 
--(void)checkVersionNeedUpdate;
+- (void)checkVersionNeedUpdate;
 
-+(int)getVersionNumber:(NSString *)version;
++ (int)getVersionNumber:(NSString *)version;
 
 @end

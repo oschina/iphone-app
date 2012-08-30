@@ -26,7 +26,7 @@
 @property int newsID;
 @property (retain,nonatomic) SingleNews * singleNews;
 
--(void)loadData:(SingleNews *)n;
--(void)refreshFavorite:(SingleNews *)n;
+- (void)loadData:(SingleNews *)n;
+- (void)refreshFavorite:(SingleNews *)n;
 
 @end

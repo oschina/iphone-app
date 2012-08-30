@@ -13,7 +13,7 @@
 @synthesize imgTweet;
 @synthesize rtLabel;
 
--(void)initialize
+- (void)initialize
 {
     self.rtLabel = [RTActiveCell textLabel];
     [self.rtLabel setLineSpacing:18];

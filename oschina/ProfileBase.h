@@ -26,12 +26,12 @@
 @property (strong, nonatomic) ActivesView * activesView;
 @property (retain, nonatomic) NSArray * titles;
 
--(NSString *)getSegmentTitle;
+- (NSString *)getSegmentTitle;
 
 @property BOOL isLoginJustNow;
 
--(void)myInit;
--(void)clearOSCNotice:(int)type;
--(void)segmentAction:(id)sender;
+- (void)myInit;
+- (void)clearOSCNotice:(int)type;
+- (void)segmentAction:(id)sender;
 
 @end

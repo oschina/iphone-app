@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ImgRecord : NSObject
-{
-    NSString *url;
-    UIImage *img;
-}
 
-@property (nonatomic,retain) NSString *url;
+@property (nonatomic,copy) NSString *url;
 @property (nonatomic,retain) UIImage *img;
 
 @end

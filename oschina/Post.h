@@ -13,14 +13,21 @@
 @property int _id;
 @property int answerCount;
 @property int viewCount;
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * author;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * author;
 @property int authorid;
-@property (retain,nonatomic) NSString * fromNowOn;
-@property (retain,nonatomic) NSString * img;
+@property (copy,nonatomic) NSString * fromNowOn;
+@property (copy,nonatomic) NSString * img;
 @property (retain,nonatomic) UIImage * imgData;
 @property BOOL favorite;
 
-- (id)initWithParameters:(int)newID andTitle:(NSString *)nTitle andAnswer:(int)newAnswerCount andView:(int)newViewCount andAuthor:(NSString *)nauthor andAuthorID:(int)nAuthorID andFromNowOn:(NSString *)nfromNowOn andImg:(NSString *)nimg;
+- (id)initWithParameters:(int)newID 
+                andTitle:(NSString *)nTitle 
+                andAnswer:(int)newAnswerCount 
+                andView:(int)newViewCount 
+                andAuthor:(NSString *)nauthor 
+                andAuthorID:(int)nAuthorID 
+                andFromNowOn:(NSString *)nfromNowOn 
+                andImg:(NSString *)nimg;
 
 @end

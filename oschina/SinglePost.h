@@ -18,10 +18,10 @@
 }
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 
--(void)loadData:(SinglePostDetail *)p;
+- (void)loadData:(SinglePostDetail *)p;
 
 //帖子id
 @property int postID;
 @property (retain,nonatomic) SinglePostDetail * singlePost;
--(void)refreshFavorite:(SinglePostDetail *)p;
+- (void)refreshFavorite:(SinglePostDetail *)p;
 @end

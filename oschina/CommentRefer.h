@@ -10,8 +10,8 @@
 
 @interface CommentRefer : NSObject
 
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * body;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * body;
 
 - (id)initWithParamters:(NSString *)ntitle andBody:(NSString *)nbody;
 

@@ -11,16 +11,22 @@
 @interface News : NSObject
 
 @property int _id;
-@property (nonatomic,retain) NSString * title;
-@property (nonatomic,retain) NSString * url;
-@property (nonatomic,retain) NSString * author;
+@property (nonatomic,copy) NSString * title;
+@property (nonatomic,copy) NSString * url;
+@property (nonatomic,copy) NSString * author;
 @property int authorid;
-@property (nonatomic,retain) NSString * pubDate;
+@property (nonatomic,copy) NSString * pubDate;
 @property int commentCount;
 @property int newsType;
-@property (nonatomic,retain) NSString * attachment;
+@property (nonatomic,copy) NSString * attachment;
 @property int authoruid2;
 
-- (id)initWithParameters:(int)newID andTitle:(NSString *)newTitle andUrl:(NSString *)newUrl andAuthor:(NSString *)nAuthor andAuthorID:(int)authorID andPubDate:(NSString *)nPubDate andCommentCount:(int)nCommentCount;
+- (id)initWithParameters:(int)newID 
+                andTitle:(NSString *)newTitle 
+                andUrl:(NSString *)newUrl 
+                andAuthor:(NSString *)nAuthor 
+                andAuthorID:(int)authorID 
+                andPubDate:(NSString *)nPubDate 
+                andCommentCount:(int)nCommentCount;
 
 @end

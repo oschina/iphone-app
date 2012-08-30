@@ -24,7 +24,16 @@
 @synthesize appClient;
 @synthesize height;
 
-- (id)initWidthParameters:(int)newid andAuthor:(NSString *)newAuthor andAuthorID:(int)newAuthorID andTweet:(NSString *)newTweet andFromNowOn:(NSString *)newFromNowOn andImg:(NSString *)newImg andCommentCount:(int)newCommentCount andImgTweet:(NSString *)nimgTweet andImgBig:(NSString *)nimgBig andAppClient:(int)nappClient
+- (id)initWidthParameters:(int)newid 
+                andAuthor:(NSString *)newAuthor 
+                andAuthorID:(int)newAuthorID 
+                andTweet:(NSString *)newTweet 
+                andFromNowOn:(NSString *)newFromNowOn 
+                andImg:(NSString *)newImg 
+                andCommentCount:(int)newCommentCount 
+                andImgTweet:(NSString *)nimgTweet 
+                andImgBig:(NSString *)nimgBig 
+                andAppClient:(int)nappClient
 {
     Tweet *t = [[Tweet alloc] init];
     t._id = newid;

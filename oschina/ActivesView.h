@@ -34,19 +34,19 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableActivies;
 
--(void)reloadType:(int)ncatalog;
+- (void)reloadType:(int)ncatalog;
 @property int catalog;
--(void)reload:(BOOL)noRefresh;
+- (void)reload:(BOOL)noRefresh;
 
 //异步加载图片专用
 @property (nonatomic, retain) NSMutableDictionary *imageDownloadsInProgress;
 @property (nonatomic, retain) NSMutableDictionary *tweetDownloadsInProgress;
--(void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
--(void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
--(void)clear;
+- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
+- (void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
+- (void)clear;
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

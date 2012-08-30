@@ -24,7 +24,7 @@
 
 @interface OSAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 {
-    int lastTabIndex;
+    int m_lastTabIndex;
 }
 
 @property (strong, nonatomic) UIWindow *window;

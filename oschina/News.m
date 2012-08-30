@@ -21,7 +21,13 @@
 @synthesize attachment;
 @synthesize authoruid2;
 
-- (id)initWithParameters:(int)newID andTitle:(NSString *)newTitle andUrl:(NSString *)newUrl andAuthor:(NSString *)nAuthor andAuthorID:(int)nauthorID andPubDate:(NSString *)nPubDate andCommentCount:(int)nCommentCount
+- (id)initWithParameters:(int)newID 
+                andTitle:(NSString *)newTitle 
+                andUrl:(NSString *)newUrl 
+                andAuthor:(NSString *)nAuthor 
+                andAuthorID:(int)nauthorID 
+                andPubDate:(NSString *)nPubDate 
+                andCommentCount:(int)nCommentCount
 {
     News *n = [[News alloc] init];
     n._id = newID;

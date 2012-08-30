@@ -10,8 +10,8 @@
 
 @interface ObjectReply : NSObject
 
-@property (retain,nonatomic) NSString * objectname;
-@property (retain,nonatomic) NSString * objectbody;
+@property (copy,nonatomic) NSString * objectname;
+@property (copy,nonatomic) NSString * objectbody;
 
 - (id)initWithParameter:(NSString *)nobjectname andBody:(NSString *)nobjectbody;
 

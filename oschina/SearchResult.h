@@ -12,11 +12,16 @@
 
 @property int objid;
 @property int type;
-@property (nonatomic,retain) NSString * title;
-@property (nonatomic,retain) NSString * url;
-@property (retain,nonatomic) NSString * pubDate;
-@property (retain,nonatomic) NSString * author;
+@property (nonatomic,copy) NSString * title;
+@property (nonatomic,copy) NSString * url;
+@property (copy,nonatomic) NSString * pubDate;
+@property (copy,nonatomic) NSString * author;
 
-- (id)initWithParameters:(int)nobjid andType:(int)ntype andTitle:(NSString *)ntitle andUrl:(NSString *)nurl andPubDate:(NSString *)nPubDate andAuthor:(NSString *)nauthor;
+- (id)initWithParameters:(int)nobjid 
+                 andType:(int)ntype 
+                 andTitle:(NSString *)ntitle 
+                 andUrl:(NSString *)nurl 
+                 andPubDate:(NSString *)nPubDate 
+                 andAuthor:(NSString *)nauthor;
 
 @end

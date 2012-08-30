@@ -26,8 +26,15 @@
 @synthesize appClient;
 @synthesize width_bubble;
 
-- (id)initWithParameters:(int)nid andImg:(NSString *)nimg andAuthor:(NSString *)nauthor andAuthorID:(int)nauthorid andContent:(NSString *)nContent andPubDate:(NSString *)nPubDate andReplies:(NSMutableArray *)array andRefers:(NSMutableArray *)nrefers
-     andAppClient:(int)nappclient
+- (id)initWithParameters:(int)nid 
+                  andImg:(NSString *)nimg 
+                  andAuthor:(NSString *)nauthor 
+                  andAuthorID:(int)nauthorid 
+                  andContent:(NSString *)nContent 
+                  andPubDate:(NSString *)nPubDate 
+                  andReplies:(NSMutableArray *)array 
+                  andRefers:(NSMutableArray *)nrefers
+                  andAppClient:(int)nappclient
 {
     Comment *c = [[Comment alloc] init];
     c._id = nid;

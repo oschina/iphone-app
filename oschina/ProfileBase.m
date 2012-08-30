@@ -23,7 +23,7 @@
     }
     return self;
 }
--(void)myInit
+- (void)myInit
 {
     self.tabBarItem.image = [UIImage imageNamed:@"active"];
     self.tabBarItem.title = @"我的";
@@ -52,14 +52,14 @@
     [self.view addSubview:self.activesView.view];
     [self.view addSubview:self.msgView.view];
 }
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     nextTabIndexByNotice = -1;
     [super viewDidLoad];
     //消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noticeUpdateHandler:) name:Notification_NoticeUpdate object:nil];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     //改变 tabIndex
     if (nextTabIndexByNotice != -1) {
@@ -115,7 +115,7 @@
         }
     }
    }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:@"登录"]) {
@@ -128,7 +128,7 @@
     }
 }
 
--(void)noticeUpdateHandler:(NSNotification *)notification
+- (void)noticeUpdateHandler:(NSNotification *)notification
 {
     OSCNotice *notice = (OSCNotice *)[notification object];
     if (notice) {
@@ -163,7 +163,7 @@
         self.tabBarItem.badgeValue = nil;
     }
 }
--(void)segmentAction:(id)sender
+- (void)segmentAction:(id)sender
 {
     if ([Config Instance].isCookie == NO) {
         return;
@@ -207,7 +207,7 @@
 
         [self clearOSCNotice:noticeClearType];
 }
--(void)clearOSCNotice:(int)type
+- (void)clearOSCNotice:(int)type
 {
     //写入Notice_Clear
     NSString *url = [NSString stringWithFormat:@"%@?uid=%d&type=%d", api_notice_clear, [Config Instance].getUID, type];
@@ -220,7 +220,7 @@
                                     
                                 }];
 }
--(NSString *)getSegmentTitle
+- (NSString *)getSegmentTitle
 {
     switch (self.segment_Title.selectedSegmentIndex) {
         case 0:

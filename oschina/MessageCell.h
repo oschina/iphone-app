@@ -17,6 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
 //长按删除元素用
 @property (nonatomic,assign) id delegate;
--(void)initGR;
+- (void)initGR;
 
 @end

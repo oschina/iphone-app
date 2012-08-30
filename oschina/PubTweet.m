@@ -59,13 +59,13 @@
     [self setLblStringlength:nil];
     [super viewDidUnload];
 }
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if ([Config Instance].tweetCachePic) {
         self.img.image = [Config Instance].tweetCachePic;
     }
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     if (self.isSourceUser) {
         return;
@@ -84,7 +84,7 @@
     }
 
 }
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     [self viewDidUnload];
@@ -173,7 +173,7 @@
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择图片来源" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"返回" otherButtonTitles:@"图库",@"拍照", nil];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //获取点击按钮的标题
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
@@ -192,7 +192,7 @@
         [self presentModalViewController:imgPicker animated:YES];
     }
 }
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:YES];
     //添加到集合中
@@ -202,7 +202,7 @@
     [self clickBackground:nil];
 }
 //用户取消选择某张图片
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -213,12 +213,12 @@
 }
 
 #pragma mark - TextView输入
--(void)textViewDidChange:(UITextView *)textView
+- (void)textViewDidChange:(UITextView *)textView
 {
     [Config Instance].tweet = textView.text;
     self.lblStringlength.text = [NSString stringWithFormat:@"%d", 160 - textView.text.length];
 }
--(void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (scroll.superview == self.view) {
         [scroll removeFromSuperview];

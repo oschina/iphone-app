@@ -21,7 +21,14 @@
 @synthesize imgData;
 @synthesize favorite;
 
-- (id)initWithParameters:(int)newID andTitle:(NSString *)nTitle andAnswer:(int)newAnswerCount andView:(int)newViewCount andAuthor:(NSString *)nauthor andAuthorID:(int)nAuthorID andFromNowOn:(NSString *)nfromNowOn andImg:(NSString *)nimg
+- (id)initWithParameters:(int)newID 
+                andTitle:(NSString *)nTitle 
+                andAnswer:(int)newAnswerCount 
+                andView:(int)newViewCount 
+                andAuthor:(NSString *)nauthor 
+                andAuthorID:(int)nAuthorID 
+                andFromNowOn:(NSString *)nfromNowOn 
+                andImg:(NSString *)nimg
 {
     Post *p = [[Post alloc] init];
     p._id = newID;

@@ -22,7 +22,6 @@
 #pragma mark 程序生命周期
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
-    lastTabIndex = 0;
     //设置 UserAgent
     [ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:@"%@/%@", [Tool getOSVersion], [Config Instance].getIOSGuid]];
     
@@ -125,16 +124,16 @@
 }
 
 #pragma mark UITab双击事件
--(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     int newTabIndex = self.tabBarController.selectedIndex;
-    if (newTabIndex == lastTabIndex) {
+    if (newTabIndex == m_lastTabIndex) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TabClick object:[NSString stringWithFormat:@"%d", newTabIndex]];
     }
     else
     {
-        lastTabIndex = newTabIndex;
+        m_lastTabIndex = newTabIndex;
     }
 }
 

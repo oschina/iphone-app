@@ -35,7 +35,7 @@
     [self setTxtContent:nil];
     [super viewDidUnload];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     NSString *msg = [[Config Instance] getMsgCache:self.receiverid];
     if (msg != nil) {
@@ -116,7 +116,7 @@
     [self clickPubMessage:nil];
 }
 
--(void)textViewDidChange:(UITextView *)textView
+- (void)textViewDidChange:(UITextView *)textView
 {
     [[Config Instance] saveMsgCache:textView.text andUID:self.receiverid];
 }

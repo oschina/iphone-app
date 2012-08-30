@@ -24,7 +24,7 @@
     
     self.navigationItem.title = @"关于我们";
 }
--(void)clickWeb:(id)sender
+- (void)clickWeb:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://m.oschina.net"]];
 }

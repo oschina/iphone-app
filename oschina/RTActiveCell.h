@@ -16,6 +16,6 @@
 @property (retain, nonatomic) RTLabel * rtLabel;
 
 + (RTLabel*)textLabel;
--(void)initialize;
+- (void)initialize;
 
 @end

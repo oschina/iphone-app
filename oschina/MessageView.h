@@ -28,7 +28,7 @@
     BOOL _reloading;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableMsgs;
--(void)reload:(BOOL)noRefresh;
+- (void)reload:(BOOL)noRefresh;
 
 @property BOOL isLoginJustNow;
 
@@ -36,10 +36,10 @@
 @property (nonatomic, retain) NSMutableDictionary *imageDownloadsInProgress;
 - (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
 
--(void)clear;
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)clear;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

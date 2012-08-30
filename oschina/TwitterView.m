@@ -41,7 +41,7 @@
     //开始加载
 //    [self reload:YES];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     if (isInitialize == NO) {
         [self reload:YES];
@@ -54,7 +54,7 @@
         [Config Instance].isNeedReloadTweets = NO;
     }
 }
--(void)refreshed:(NSNotification *)notification
+- (void)refreshed:(NSNotification *)notification
 {
     if (notification.object) {
         if ([(NSString *)notification.object isEqualToString:@"2"]) {
@@ -63,12 +63,12 @@
         }
     }
 }
--(void)doneManualRefresh
+- (void)doneManualRefresh
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:self.tableTweets];
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:self.tableTweets];
 }
--(void)didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
     [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
@@ -90,14 +90,14 @@
     imageDownloadsInProgress = tweetDownloadsInProgress = nil;
     [super viewDidUnload];
 }
--(void)reloadUID:(int)newUID
+- (void)reloadUID:(int)newUID
 {
     self._uid = newUID;
     [self clear];
     [self.tableTweets reloadData];
     [self reload:NO];
 }
--(void)clear
+- (void)clear
 {
     allCount = 0;
     [tweets removeAllObjects];
@@ -105,7 +105,7 @@
     [tweetDownloadsInProgress removeAllObjects];
     isLoadOver = NO;
 }
--(void)reload:(BOOL)noRefresh
+- (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) 
     {
@@ -223,7 +223,7 @@
     [self.tableTweets reloadData];
 }
 
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if (self.imageDownloadsInProgress != nil) {
         NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
@@ -237,7 +237,7 @@
 }
 
 #pragma TableView的处理
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isLoadOver) {
         return tweets.count == 0 ?  1: tweets.count;
@@ -245,7 +245,7 @@
     else 
         return tweets.count + 1;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath row] < [tweets count]) {
         Tweet *t = [tweets objectAtIndex:[indexPath row]];
@@ -254,11 +254,11 @@
     else
         return 62;
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [Tool getCellBackgroundColor];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([tweets count] > 0) 
     {
@@ -376,7 +376,7 @@
     }
 }
 //点击头像进入用户专页
--(void)clickImg:(id)sender
+- (void)clickImg:(id)sender
 {
     UITap *tap = (UITap *)sender;
     if (tap) {
@@ -384,14 +384,14 @@
     }
 }
 //点击动弹图片事件
--(void)clickTweet:(id)sender
+- (void)clickTweet:(id)sender
 {
     UITap *tap = (UITap *)sender;
     if (tap) {
         [Tool pushTweetImgDetail:tap.tagString andParent:self];
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int row = [indexPath row];
@@ -481,42 +481,42 @@
 }
 
 #pragma mark - 下提刷新
--(void)reloadTableViewDataSource
+- (void)reloadTableViewDataSource
 {
     _reloading = YES;
 }
--(void)doneLoadingTableViewData
+- (void)doneLoadingTableViewData
 {
     _reloading = NO;
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableTweets];
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
 }
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
--(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view
 {
     [self reloadTableViewDataSource];
     [self refresh];
 }
--(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view
 {
     return _reloading;
 }
--(NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
+- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view
 {
     return [NSDate date];
 }
--(void)refresh
+- (void)refresh
 {
     isLoadOver = NO;
     [self reload:NO];
 }
--(void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
 {
     NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:key];
@@ -529,7 +529,7 @@
         [iconDownloader startDownload];
     }
 }
--(void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+- (void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
 {
     NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
     IconDownloader *iconDownloader = [tweetDownloadsInProgress objectForKey:key];
@@ -542,7 +542,7 @@
         [iconDownloader startDownload];
     }
 }
--(void)appImageDidLoad:(NSString *)index
+- (void)appImageDidLoad:(NSString *)index
 {
     int _index = [index intValue];
     if (_index >= [tweets count]) {

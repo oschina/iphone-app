@@ -14,7 +14,7 @@
 @synthesize url;
 @synthesize content;
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self.tabBarItem.title = @"分享";
     self.tabBarItem.image = [UIImage imageNamed:@"share"];
@@ -24,7 +24,7 @@
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     self.parentViewController.navigationItem.title = @"分享到微博";
     

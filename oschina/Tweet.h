@@ -12,19 +12,28 @@
 @interface Tweet : NSObject
 
 @property int _id;
-@property (nonatomic,retain) NSString * author;
+@property (nonatomic,copy) NSString * author;
 @property int authorID;
-@property (nonatomic,retain) NSString * tweet;
-@property (nonatomic,retain) NSString * fromNowOn;
-@property (nonatomic,retain) NSString * img;
+@property (nonatomic,copy) NSString * tweet;
+@property (nonatomic,copy) NSString * fromNowOn;
+@property (nonatomic,copy) NSString * img;
 @property (nonatomic,retain) UIImage * imgData;
 @property int commentCount;
-@property (nonatomic,retain) NSString * imgTweet;
+@property (nonatomic,copy) NSString * imgTweet;
 @property (nonatomic,retain) UIImage * imgTweetData;
-@property (nonatomic,retain) NSString * imgBig;
+@property (nonatomic,copy) NSString * imgBig;
 @property int appClient;
 @property int height;
 
-- (id)initWidthParameters:(int)newid andAuthor:(NSString *)newAuhtor andAuthorID:(int)newAuthorID andTweet:(NSString *)newTweet andFromNowOn:(NSString *)newFromNowOn andImg:(NSString *)img andCommentCount:(int)newCommentCount andImgTweet:(NSString *)nimgTweet andImgBig:(NSString *)nimgBig andAppClient:(int)nappClient;
+- (id)initWidthParameters:(int)newid 
+                andAuthor:(NSString *)newAuhtor 
+                andAuthorID:(int)newAuthorID 
+                andTweet:(NSString *)newTweet 
+                andFromNowOn:(NSString *)newFromNowOn 
+                andImg:(NSString *)img
+                andCommentCount:(int)newCommentCount 
+                andImgTweet:(NSString *)nimgTweet 
+                andImgBig:(NSString *)nimgBig 
+                andAppClient:(int)nappClient;
 
 @end

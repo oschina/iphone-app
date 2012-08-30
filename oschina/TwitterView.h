@@ -39,21 +39,21 @@
 //异步加载图片
 @property (nonatomic, retain) NSMutableDictionary *imageDownloadsInProgress;
 @property (nonatomic, retain) NSMutableDictionary *tweetDownloadsInProgress;
--(void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
--(void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
+- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
+- (void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
 
 //加载不同类型的动弹列表 最新/热门/我的
 //如果为0 则加载所有人最新的动弹 否则加载指定uid 的最新动弹
 @property int _uid;
--(void)reloadUID:(int)newUID;
--(void)reload:(BOOL)noRefresh;
+- (void)reloadUID:(int)newUID;
+- (void)reload:(BOOL)noRefresh;
 
 //清空列表
--(void)clear;
+- (void)clear;
 
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

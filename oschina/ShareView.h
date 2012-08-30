@@ -34,8 +34,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgSina;
 @property (strong, nonatomic) IBOutlet UIImageView *imgQQ;
 
-@property (retain,nonatomic) NSString * url;
-@property (retain,nonatomic) NSString * content;
+@property (copy,nonatomic) NSString * url;
+@property (copy,nonatomic) NSString * content;
 
 - (IBAction)click_qqshare:(id)sender;
 - (IBAction)click_weibo:(id)sender;

@@ -24,8 +24,19 @@
 @synthesize recordTime;
 @synthesize favorite;
 
-- (id)initWithParemters:(int)nid andTitle:(NSString *)ntitle andExtension:(NSString *)nExtensionTitle andLicense:(NSString *)nlicense andBody:(NSString *)nbody andHomepage:(NSString *)nhomepage andDocument:(NSString *)ndocument andDownload:(NSString *)ndownload andLogo:(NSString *)nlogo andLanguage:(NSString *)nlanguage andOS:(NSString *)nos andRecordTime:(NSString *)nrecordTime
-    andFavorite:(BOOL)nfavorite
+- (id)initWithParemters:(int)nid 
+               andTitle:(NSString *)ntitle 
+               andExtension:(NSString *)nExtensionTitle 
+               andLicense:(NSString *)nlicense 
+               andBody:(NSString *)nbody 
+               andHomepage:(NSString *)nhomepage 
+               andDocument:(NSString *)ndocument 
+               andDownload:(NSString *)ndownload 
+               andLogo:(NSString *)nlogo 
+               andLanguage:(NSString *)nlanguage 
+               andOS:(NSString *)nos 
+               andRecordTime:(NSString *)nrecordTime
+               andFavorite:(BOOL)nfavorite
 {
     Software *s = [[Software alloc] init];
     s._id = nid;

@@ -12,7 +12,7 @@
 @interface TweetImgDetail : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong,nonatomic) NSString * imgHref;
+@property (copy,nonatomic) NSString * imgHref;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 
 - (IBAction)clickCloseThis:(id)sender;

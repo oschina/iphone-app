@@ -10,7 +10,7 @@
 
 @interface SoftwareCatalog : NSObject
 
-@property (nonatomic,retain) NSString * name;
+@property (nonatomic,copy) NSString * name;
 @property int tag;
 
 - (id)initWithParameters:(NSString *)newName andTag:(int)nTag;

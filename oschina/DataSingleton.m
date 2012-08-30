@@ -11,7 +11,11 @@
 
 @implementation DataSingleton
 
-- (UITableViewCell *)getLoadMoreCell:(UITableView *)tableView andIsLoadOver:(BOOL)isLoadOver andLoadOverString:(NSString *)loadOverString andLoadingString:(NSString *)loadingString andIsLoading:(BOOL)isLoading
+- (UITableViewCell *)getLoadMoreCell:(UITableView *)tableView 
+                       andIsLoadOver:(BOOL)isLoadOver 
+                       andLoadOverString:(NSString *)loadOverString 
+                       andLoadingString:(NSString *)loadingString 
+                       andIsLoading:(BOOL)isLoading
 {
     LoadingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"loadingCell"];
     if (!cell) {

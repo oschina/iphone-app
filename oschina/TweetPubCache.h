@@ -10,10 +10,10 @@
 
 @interface TweetPubCache : NSObject
 
-@property (retain,nonatomic) NSString * tweetText;
+@property (copy,nonatomic) NSString * tweetText;
 @property (retain,nonatomic) NSData * tweetImg;
 @property BOOL isFirstTime;
-@property (retain,nonatomic) NSString * key;
+@property (copy,nonatomic) NSString * key;
 
 + (TweetPubCache *)getTweetPubCacheByKey:(NSString *)nkey andArray:(NSArray *)datas;
 

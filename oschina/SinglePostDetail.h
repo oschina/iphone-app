@@ -11,18 +11,29 @@
 @interface SinglePostDetail : NSObject
 
 @property int _id;
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * url;
-@property (retain,nonatomic) NSString * portrait;
-@property (retain,nonatomic) NSString * body;
-@property (retain,nonatomic) NSString * author;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * url;
+@property (copy,nonatomic) NSString * portrait;
+@property (copy,nonatomic) NSString * body;
+@property (copy,nonatomic) NSString * author;
 @property int authorid;
-@property (retain,nonatomic) NSString * pubDate;
+@property (copy,nonatomic) NSString * pubDate;
 @property int answerCount;
 @property int viewCount;
 @property BOOL favorite;
 @property (retain,nonatomic) NSMutableArray * tags;
 
-- (id)initWithParameters:(int)newid andTitle:(NSString *)ntitle andUrl:(NSString *)nUrl andPortrait:(NSString *)nportrait andBody:(NSString *)nbody andAuthor:(NSString *)nauthor andAuthorID:(int)nauthorid andPubDate:(NSString *)nPubDate andAnswer:(int)nanswerCount andView:(int)nviewCount andFavorite:(BOOL)nfavorite andTags:(NSMutableArray *)_tags;
+- (id)initWithParameters:(int)newid 
+                andTitle:(NSString *)ntitle 
+                andUrl:(NSString *)nUrl 
+                andPortrait:(NSString *)nportrait 
+                andBody:(NSString *)nbody 
+                andAuthor:(NSString *)nauthor 
+                andAuthorID:(int)nauthorid 
+                andPubDate:(NSString *)nPubDate 
+                andAnswer:(int)nanswerCount 
+                andView:(int)nviewCount 
+                andFavorite:(BOOL)nfavorite 
+                andTags:(NSMutableArray *)_tags;
 
 @end

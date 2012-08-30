@@ -10,9 +10,9 @@
 
 @interface SettingModel : NSObject
 
-@property (retain,nonatomic) NSString * img;
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * title2;
+@property (copy,nonatomic) NSString * img;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * title2;
 @property NSUInteger tag;
 
 - (id)initWith:(NSString *)_title andImg:(NSString *)_img andTag:(NSUInteger)_tag andTitle2:(NSString *)_title2;

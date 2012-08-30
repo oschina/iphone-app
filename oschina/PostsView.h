@@ -35,15 +35,16 @@
 @property (nonatomic, retain) NSMutableDictionary *imageDownloadsInProgress;
 - (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
 
--(void)reloadType:(int)ncatalog;
--(void)reload:(BOOL)noRefresh;
+//重新加载
+- (void)reloadType:(int)ncatalog;
+- (void)reload:(BOOL)noRefresh;
 @property int catalog;
-@property (retain, nonatomic) NSString * tag;
+@property (copy, nonatomic) NSString * tag;
 
--(void)clear;
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)clear;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end

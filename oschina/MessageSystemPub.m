@@ -51,7 +51,7 @@
     [txtContent becomeFirstResponder];
     self.txtContent.delegate = self;
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     NSString *value = [[Config Instance] getCommentCache:self.parentID];
     if (value != nil) {

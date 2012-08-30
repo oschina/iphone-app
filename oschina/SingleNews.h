@@ -11,18 +11,26 @@
 @interface SingleNews : NSObject
 
 @property int _id;
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * url;
-@property (retain,nonatomic) NSString * body;
-@property (retain,nonatomic) NSString * author;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * url;
+@property (copy,nonatomic) NSString * body;
+@property (copy,nonatomic) NSString * author;
 @property int authorid;
-@property (retain,nonatomic) NSString * pubDate;
+@property (copy,nonatomic) NSString * pubDate;
 @property int commentCount;
 @property (retain,nonatomic) NSArray * relativies;
-@property (retain,nonatomic) NSString * softwarelink;
-@property (retain,nonatomic) NSString * softwarename;
+@property (copy,nonatomic) NSString * softwarelink;
+@property (copy,nonatomic) NSString * softwarename;
 @property BOOL favorite;
 
-- (id)initWithParameters:(int)newid andTitle:(NSString *)ntitle andUrl:(NSString *)newUrl andBody:(NSString *)newBody andAuthor:(NSString *)newAuthor andAuthorID:(int)nauthorID andPubDate:(NSString *)nPubDate andCommentCount:(int)nCommentCount andFavorite:(BOOL)nfavorite;
+- (id)initWithParameters:(int)newid 
+                andTitle:(NSString *)ntitle 
+                andUrl:(NSString *)newUrl 
+                andBody:(NSString *)newBody 
+                andAuthor:(NSString *)newAuthor 
+                andAuthorID:(int)nauthorID 
+                andPubDate:(NSString *)nPubDate 
+                andCommentCount:(int)nCommentCount 
+                andFavorite:(BOOL)nfavorite;
 
 @end

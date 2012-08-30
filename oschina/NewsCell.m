@@ -25,11 +25,11 @@
     [super setSelected:selected animated:animated];
 }
 
--(BOOL)canBecomeFirstResponder
+- (BOOL)canBecomeFirstResponder
 {
     return YES;
 }
--(void)handleLongPress:(UILongPressGestureRecognizer *)recognizer
+- (void)handleLongPress:(UILongPressGestureRecognizer *)recognizer
 {
     if([self isHighlighted])
     {
@@ -40,29 +40,8 @@
 {  
     [[self delegate]  performSelector:@selector(deleteRow:) withObject:self];
 } 
--(BOOL)canPerformAction:(SEL)action withSender:(id)sender
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    //    if (action == @selector(cut:))
-    //    {  
-    //        return NO;  
-    //    }   
-    //    else if(action == @selector(copy:))
-    //    {  
-    //        return NO;  
-    //    }   
-    //    else if(action == @selector(paste:))
-    //    {  
-    //        return NO;  
-    //    }   
-    //    else if(action == @selector(select:))
-    //    {  
-    //        return NO;  
-    //    }   
-    //    else if(action == @selector(selectAll:))
-    //    {  
-    //        return NO;  
-    //    } 
-    //    else 
     if(action == @selector(delete:))
     {  
         return YES;  

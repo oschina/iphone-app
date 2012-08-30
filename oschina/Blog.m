@@ -22,7 +22,17 @@
 @synthesize url;
 @synthesize commentCount;
 
-- (id)initWithParameters:(int)nid andTitle:(NSString *)ntitle andWhere:(NSString *)nwhere andBody:(NSString *)nbody andAuthor:(NSString *)nauthor andAuthorid:(int)nauthorid andDocumentType:(int)nDocumentType andPubDate:(NSString *)nPubDate andFavorite:(BOOL)nfavorite andUrl:(NSString *)nurl andCommentCount:(int)ncommentCount
+- (id)initWithParameters:(int)nid 
+                andTitle:(NSString *)ntitle 
+                andWhere:(NSString *)nwhere 
+                andBody:(NSString *)nbody 
+                andAuthor:(NSString *)nauthor 
+                andAuthorid:(int)nauthorid 
+                andDocumentType:(int)nDocumentType 
+                andPubDate:(NSString *)nPubDate 
+                andFavorite:(BOOL)nfavorite 
+                andUrl:(NSString *)nurl 
+                andCommentCount:(int)ncommentCount
 {
     Blog * b = [[Blog alloc] init];
     b._id = nid;

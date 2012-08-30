@@ -54,28 +54,27 @@
 @property int parentAuthorUID;
 
 //四个公开属性
-@property (retain,nonatomic) NSString * headTitle;
-@property (retain,nonatomic) NSString * tabTitle;
-@property (retain,nonatomic) NSString * pubTitle;
-@property (retain,nonatomic) NSString * pubButtonTitle;
-@property (retain,nonatomic) NSString * replyLabelTitle;
-@property (retain,nonatomic) NSString * replyButtonTitle;
+@property (copy,nonatomic) NSString * headTitle;
+@property (copy,nonatomic) NSString * tabTitle;
+@property (copy,nonatomic) NSString * pubTitle;
+@property (copy,nonatomic) NSString * pubButtonTitle;
+@property (copy,nonatomic) NSString * replyLabelTitle;
+@property (copy,nonatomic) NSString * replyButtonTitle;
 //仅仅用于消息中心点击某人后 需要重新给该用户留言的时候专用
 @property int receiverid;
-@property (retain,nonatomic) NSString * receiver;
+@property (copy,nonatomic) NSString * receiver;
 
 //加载
--(void)reload:(BOOL)noRefresh;
-
--(void)addCommentByLocal:(Comment *)newComment;
+- (void)reload:(BOOL)noRefresh;
+- (void)addCommentByLocal:(Comment *)newComment;
 
 //异步加载图片专用
 @property (nonatomic, retain) NSMutableDictionary *imageDownloadsInProgress;
 - (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath;
 
--(void)clear;
+- (void)clear;
 //下拉刷新
--(void)refresh;
--(void)reloadTableViewDataSource;
--(void)doneLoadingTableViewData;
+- (void)refresh;
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 @end

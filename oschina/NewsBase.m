@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)myInit
+- (void)myInit
 {
     self.tabBarItem.image = [UIImage imageNamed:@"info"];
     self.tabBarItem.title = @"综合";
@@ -51,17 +51,17 @@
     [btnSearch setAction:@selector(clickSearch:)];
     self.navigationItem.rightBarButtonItem = btnSearch;
 }
--(void)clickSearch:(id)sender
+- (void)clickSearch:(id)sender
 {
     SearchView * sView = [[SearchView alloc] init];
     sView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:sView animated:YES];
 }
--(void)segmentAction:(id)sender
+- (void)segmentAction:(id)sender
 {
     [self.newsView reloadType:self.segment_title.selectedSegmentIndex+1];
 }
--(NSString *)getSegmentTitle
+- (NSString *)getSegmentTitle
 {
     switch (self.segment_title.selectedSegmentIndex) {
         case 0:
@@ -86,7 +86,7 @@
     [super didReceiveMemoryWarning];
     [self viewDidUnload];
 }
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     if (self.newsView == nil || self.segment_title == nil) 
     {

@@ -19,8 +19,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableBubbles;
 @property int friendID;
-@property (retain,nonatomic) NSString * friendName;
+@property (copy,nonatomic) NSString * friendName;
 
--(void)reload;
+- (void)reload;
 
 @end

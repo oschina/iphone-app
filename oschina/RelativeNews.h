@@ -10,8 +10,8 @@
 
 @interface RelativeNews : NSObject
 
-@property (nonatomic,retain) NSString * url;
-@property (nonatomic,retain) NSString * title;
+@property (nonatomic,copy) NSString * url;
+@property (nonatomic,copy) NSString * title;
 
 - (id)initWithParameters:(NSString *)nurl andTitle:(NSString *)ntitle;
 

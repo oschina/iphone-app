@@ -22,11 +22,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *txt_Pwd;
 @property (strong, nonatomic) IBOutlet UISwitch *switch_Remember;
 @property BOOL isPopupByNotice;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+
 - (IBAction)click_Login:(id)sender;
 - (IBAction)textEnd:(id)sender;
 - (IBAction)backgrondTouch:(id)sender;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-
--(void)analyseUserInfo:(NSString *)xml;
+- (void)analyseUserInfo:(NSString *)xml;
 
 @end

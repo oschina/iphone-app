@@ -16,7 +16,7 @@
 @property (strong,nonatomic) UISegmentedControl * segment_title;
 @property (strong,nonatomic) PostsView * postsView;
 
--(NSString *)getSegmentTitle;
--(void)myInit;
+- (NSString *)getSegmentTitle;
+- (void)myInit;
 
 @end

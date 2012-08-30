@@ -11,19 +11,31 @@
 @interface Software : NSObject
 
 @property int _id;
-@property (retain,nonatomic) NSString * title;
-@property (retain,nonatomic) NSString * extensionTitle;
-@property (retain,nonatomic) NSString * license;
-@property (retain,nonatomic) NSString * body;
-@property (retain,nonatomic) NSString * homePage;
-@property (retain,nonatomic) NSString * document;
-@property (retain,nonatomic) NSString * download;
-@property (retain,nonatomic) NSString * logo;
-@property (retain,nonatomic) NSString * language;
-@property (retain,nonatomic) NSString * os;
-@property (retain,nonatomic) NSString * recordTime;
+@property (copy,nonatomic) NSString * title;
+@property (copy,nonatomic) NSString * extensionTitle;
+@property (copy,nonatomic) NSString * license;
+@property (copy,nonatomic) NSString * body;
+@property (copy,nonatomic) NSString * homePage;
+@property (copy,nonatomic) NSString * document;
+@property (copy,nonatomic) NSString * download;
+@property (copy,nonatomic) NSString * logo;
+@property (copy,nonatomic) NSString * language;
+@property (copy,nonatomic) NSString * os;
+@property (copy,nonatomic) NSString * recordTime;
 @property BOOL favorite;
 
-- (id)initWithParemters:(int)nid andTitle:(NSString *)ntitle andExtension:(NSString *)nExtensionTitle andLicense:(NSString *)nlicense andBody:(NSString *)nbody andHomepage:(NSString *)nhomepage andDocument:(NSString *)ndocument andDownload:(NSString *)ndownload andLogo:(NSString *)nlogo andLanguage:(NSString *)nlanguage andOS:(NSString *)nos andRecordTime:(NSString *)nrecordTime andFavorite:(BOOL)nfavorite;
+- (id)initWithParemters:(int)nid 
+               andTitle:(NSString *)ntitle 
+               andExtension:(NSString *)nExtensionTitle 
+               andLicense:(NSString *)nlicense 
+               andBody:(NSString *)nbody 
+               andHomepage:(NSString *)nhomepage 
+               andDocument:(NSString *)ndocument 
+               andDownload:(NSString *)ndownload 
+               andLogo:(NSString *)nlogo 
+               andLanguage:(NSString *)nlanguage 
+               andOS:(NSString *)nos 
+               andRecordTime:(NSString *)nrecordTime 
+               andFavorite:(BOOL)nfavorite;
 
 @end

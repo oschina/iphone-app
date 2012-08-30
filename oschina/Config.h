@@ -26,7 +26,7 @@
 @property BOOL isLogin;
 
 @property (retain, nonatomic) UIViewController * viewBeforeLogin;
-@property (retain, nonatomic) NSString * viewNameBeforeLogin;
+@property (copy, nonatomic) NSString * viewNameBeforeLogin;
 
 //是否具备网络链接
 @property BOOL isNetworkRunning;
@@ -35,10 +35,10 @@
 
 //动弹缓存
 @property (retain, nonatomic) UIImage * tweetCachePic;
-@property (retain, nonatomic) NSString * tweet;
+@property (copy, nonatomic) NSString * tweet;
 //问答缓存
-@property (retain,nonatomic) NSString * questionTitle;
-@property (retain,nonatomic) NSString * questionContent;
+@property (copy,nonatomic) NSString * questionTitle;
+@property (copy,nonatomic) NSString * questionContent;
 @property int questionIndex;
 //留言缓存
 @property (retain,nonatomic) NSMutableDictionary * msgs;

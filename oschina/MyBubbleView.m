@@ -26,7 +26,7 @@
     [self reload];
 }
 
--(void)clickPubMessage:(id)sender
+- (void)clickPubMessage:(id)sender
 {
     PubMessage *pubMessage = [[PubMessage alloc] init];
     pubMessage.receiverid = self.friendID;
@@ -40,7 +40,7 @@
     [super viewDidUnload];
 }
 
--(void)reload
+- (void)reload
 {
     if (isLoading || isLoadOver) {
         return;
@@ -155,7 +155,7 @@
 }
 
 #pragma mark UITableView
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isLoadOver) {
         return comments.count == 0 ? 1 :comments.count;
@@ -163,7 +163,7 @@
     else
         return comments.count + 1;
 }
--(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int index = indexPath.row;
     if (index < comments.count) {
@@ -176,7 +176,7 @@
     else
         return 62;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //如果有数据
     if (comments.count > 0) {
@@ -233,7 +233,7 @@
         }
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int row = [indexPath row];

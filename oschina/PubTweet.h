@@ -29,14 +29,14 @@
 @property (strong, nonatomic) IBOutlet UIImageView *img;
 @property (strong, nonatomic) TwitterView * parent;
 @property (strong, nonatomic) IBOutlet UILabel *lblHeadTip;
-- (IBAction)txtDidOnExit:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextView *txtContent;
 @property BOOL isSourceUser;
 @property (strong, nonatomic) IBOutlet UILabel *lblStringlength;
-@property (retain, nonatomic) NSString * atSomebody;
+@property (copy, nonatomic) NSString * atSomebody;
 
 - (IBAction)click_PubTweet:(id)sender;
 - (IBAction)clickBackground:(id)sender;
+- (IBAction)txtDidOnExit:(id)sender;
 - (IBAction)clickImgs:(id)sender;
 - (IBAction)clickFace:(id)sender;
 

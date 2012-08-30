@@ -57,19 +57,19 @@
 @interface IconDownloader : NSObject
 
 @property (nonatomic, retain) ImgRecord * imgRecord;
-@property (nonatomic, retain) NSString * index;
+@property (nonatomic, copy) NSString * index;
 @property (nonatomic, assign) id<IconDownloaderDelegate> delegate;
 @property (nonatomic, retain) NSMutableData * activeDownload;
 @property (nonatomic, retain) NSURLConnection * imageConnection;
 @property BOOL isFree;
 
--(void)startDownload;
--(void)cancelDownload;
+- (void)startDownload;
+- (void)cancelDownload;
 
 @end
 
 @protocol IconDownloaderDelegate 
 
--(void)appImageDidLoad:(NSString *)index;
+- (void)appImageDidLoad:(NSString *)index;
 
 @end

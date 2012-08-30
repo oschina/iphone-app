@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (retain, nonatomic) Blog * singleBlog;
 @property int blogID;
--(void)loadData:(Blog *)b;
--(void)refreshFavorite:(Blog *)b;
+
+- (void)loadData:(Blog *)b;
+- (void)refreshFavorite:(Blog *)b;
 @end

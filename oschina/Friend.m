@@ -17,7 +17,11 @@
 @synthesize isMale;
 @synthesize imgData;
 
-- (id)initWithParameters:(NSString *)newName andUID:(int)newUID andPortrait:(NSString *)nportrait andExpertise:(NSString *)nexpertise andMale:(BOOL)nisMale
+- (id)initWithParameters:(NSString *)newName 
+                  andUID:(int)newUID 
+                  andPortrait:(NSString *)nportrait 
+                  andExpertise:(NSString *)nexpertise 
+                  andMale:(BOOL)nisMale
 {
     Friend * f = [[Friend alloc] init];
     f.name = newName;

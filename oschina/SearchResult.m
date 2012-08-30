@@ -17,7 +17,12 @@
 @synthesize pubDate;
 @synthesize author;
 
-- (id)initWithParameters:(int)nobjid andType:(int)ntype andTitle:(NSString *)ntitle andUrl:(NSString *)nurl andPubDate:(NSString *)nPubDate andAuthor:(NSString *)nauthor
+- (id)initWithParameters:(int)nobjid 
+                 andType:(int)ntype 
+                 andTitle:(NSString *)ntitle 
+                 andUrl:(NSString *)nurl 
+                 andPubDate:(NSString *)nPubDate 
+                 andAuthor:(NSString *)nauthor
 {
     SearchResult * result = [[SearchResult alloc] init];
     result.objid = nobjid;

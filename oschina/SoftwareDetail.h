@@ -23,10 +23,10 @@
 }
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 
-@property (retain,nonatomic) NSString * softwareName;
+@property (copy,nonatomic) NSString * softwareName;
 
--(NSString *)getButtonString:(NSString *)homePage andDocument:(NSString *)document andDownload:(NSString *)download;
+- (NSString *)getButtonString:(NSString *)homePage andDocument:(NSString *)document andDownload:(NSString *)download;
 
--(void)loadData:(Software *)s;
--(void)refreshFavorite:(Software *)s;
+- (void)loadData:(Software *)s;
+- (void)refreshFavorite:(Software *)s;
 @end

@@ -57,7 +57,7 @@
     [Tool CancelRequest:request];
     [super viewDidUnload];
 }
--(void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     [Tool CancelRequest:request];
 }
@@ -78,13 +78,13 @@
     request.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [Tool showHUD:@"正在登录" andView:self.view andHUD:request.hud];
 }
--(void)requestFailed:(ASIHTTPRequest *)request
+- (void)requestFailed:(ASIHTTPRequest *)request
 {
     if (request.hud) {
         [request.hud hide:YES];
     }
 }
--(void)requestLogin:(ASIHTTPRequest *)request
+- (void)requestLogin:(ASIHTTPRequest *)request
 {
     if (request.hud) {
         [request.hud hide:YES];
@@ -157,7 +157,7 @@
 }
 
 
--(void)analyseUserInfo:(NSString *)xml
+- (void)analyseUserInfo:(NSString *)xml
 {
     @try {
         TBXML *_xml = [[TBXML alloc] initWithXMLString:xml error:nil];
@@ -177,7 +177,7 @@
 }
 
 #pragma 浏览器链接处理
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [[UIApplication sharedApplication] openURL:request.URL];
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 
