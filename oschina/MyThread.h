@@ -20,9 +20,10 @@
     
     BOOL isRunning;
 }
--(void)startNotice;
 
--(void)startPubTweet:(NSString *)msg andImg:(NSData *)imgData;
+- (void)startNotice;
+- (void)startPubTweet:(NSString *)msg andImg:(NSData *)imgData;
+- (void)startUpdatePortrait:(NSData *)imgData;
 
 @property (strong, nonatomic) UIView * mainView;
 

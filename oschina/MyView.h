@@ -12,8 +12,9 @@
 #import "FriendsView.h"
 #import "MyInfoCell.h"
 #import "MyPortraitCell.h"
+#import "SSPhotoCropperViewController.h"
 
-@interface MyView : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MyView : UIViewController<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,SSPhotoCropperDelegate>
 {
     NSArray * first;
     NSArray * second;
@@ -24,6 +25,7 @@
 }
 
 @property (strong,nonatomic) EGOImageView * egoImgView;
+- (IBAction)clickUpdatePortrait:(id)sender;
 
 -(void)reload;
 @property (strong, nonatomic) IBOutlet UIImageView *imgGender;

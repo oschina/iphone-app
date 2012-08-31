@@ -75,6 +75,7 @@
 //#define api_userblog_delete @"http://192.168.1.213/action/api/userblog_delete"
 //#define api_userblog_list @"http://192.168.1.213/action/api/userblog_list"
 //#define api_blog_list @"http://192.168.1.213/action/api/blog_list"
+//#define api_userinfo_update @"http://192.168.1.213/action/api/portrait_update"
 
 
 #define api_news_list @"http://www.oschina.net/action/api/news_list"
@@ -117,6 +118,7 @@
 #define api_userblog_delete @"http://www.oschina.net/action/api/userblog_delete"
 #define api_userblog_list @"http://www.oschina.net/action/api/userblog_list"
 #define api_blog_list @"http://www.oschina.net/action/api/blog_list"
+#define api_userinfo_update @"http://www.oschina.net/action/api/portrait_update"
 
 //宏定义 新闻
 #define TweetCellIdentifier @"TweetCellIdentifier"

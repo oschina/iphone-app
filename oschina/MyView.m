@@ -49,6 +49,63 @@
     [self.settingsInSection setObject:third forKey:@"收藏"];
     self.settings = [[NSArray alloc] initWithObjects:@"信息",@"好友",@"收藏",nil];
 }
+#pragma mark 更新头像
+- (IBAction)clickUpdatePortrait:(id)sender {
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择图片来源" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"返回" otherButtonTitles:@"图库",@"拍照", nil];
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //获取点击按钮的标题
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"拍照"])
+    {
+        UIImagePickerController *imgPicker = [UIImagePickerController new];
+        imgPicker.delegate = self;
+        imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentModalViewController:imgPicker animated:YES];
+    }
+    else if([buttonTitle isEqualToString:@"图库"])
+    {
+        UIImagePickerController *imgPicker = [UIImagePickerController new];
+        imgPicker.delegate = self;
+        imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentModalViewController:imgPicker animated:YES];
+    }
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //添加到集合中
+    UIImage * imgData = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage * photo = [info objectForKey:UIImagePickerControllerOriginalImage];
+    SSPhotoCropperViewController *photoCropper =
+    [[SSPhotoCropperViewController alloc] initWithPhoto:photo
+                                               delegate:self
+                                                 uiMode:SSPCUIModePresentedAsModalViewController
+                                        showsInfoButton:NO];
+    [photoCropper setMinZoomScale:0.25f];
+    [photoCropper setMaxZoomScale:4.0f];
+    [self.navigationController pushViewController:photoCropper animated:YES];
+}
+- (void) photoCropper:(SSPhotoCropperViewController *)photoCropper
+         didCropPhoto:(UIImage *)photo
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    //对photo进行处理
+    [[MyThread Instance] startUpdatePortrait:UIImageJPEGRepresentation(photo, 0.75f)];
+    [Tool ToastNotification:@"正在上传您的头像" andView:self.view andLoading:YES andIsBottom:NO];
+}
+
+- (void) photoCropperDidCancel:(SSPhotoCropperViewController *)photoCropper
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
 -(void)reload
 {
     NSString * url = [NSString stringWithFormat:@"%@?uid=%d",api_my_information,[Config Instance].getUID];

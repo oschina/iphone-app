@@ -64,6 +64,14 @@
 		DA7CAF74155A6FEB007FD375 /* FavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7CAF72155A6FEB007FD375 /* FavoritesView.m */; };
 		DA7CAF75155A6FEB007FD375 /* FavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7CAF73155A6FEB007FD375 /* FavoritesView.xib */; };
 		DA7CEFF6154BAC5D002A8725 /* commentlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7CEFF5154BAC5D002A8725 /* commentlist@2x.png */; };
+		DA81A47715F06273007CB958 /* photo_cropper_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A46E15F06273007CB958 /* photo_cropper_bg.png */; };
+		DA81A47815F06273007CB958 /* photo_cropper_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A46F15F06273007CB958 /* photo_cropper_bg@2x.png */; };
+		DA81A47915F06273007CB958 /* photo_cropper_rect.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A47015F06273007CB958 /* photo_cropper_rect.png */; };
+		DA81A47A15F06273007CB958 /* photo_cropper_rect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A47115F06273007CB958 /* photo_cropper_rect@2x.png */; };
+		DA81A47B15F06273007CB958 /* photo_cropper_rect_on.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A47215F06273007CB958 /* photo_cropper_rect_on.png */; };
+		DA81A47C15F06273007CB958 /* photo_cropper_rect_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA81A47315F06273007CB958 /* photo_cropper_rect_on@2x.png */; };
+		DA81A47D15F06273007CB958 /* SSPhotoCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA81A47515F06273007CB958 /* SSPhotoCropperViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DA81A47E15F06273007CB958 /* SSPhotoCropperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA81A47615F06273007CB958 /* SSPhotoCropperViewController.xib */; };
 		DA820639150DA2E20065AB7E /* ProfileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DA820637150DA2E10065AB7E /* ProfileBase.m */; };
 		DA82063A150DA2E20065AB7E /* ProfileBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA820638150DA2E10065AB7E /* ProfileBase.xib */; };
 		DA820647150DBCA90065AB7E /* NewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = DA820645150DBCA90065AB7E /* NewsDetail.m */; };
@@ -432,6 +440,15 @@
 		DA7CAF72155A6FEB007FD375 /* FavoritesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesView.m; sourceTree = "<group>"; };
 		DA7CAF73155A6FEB007FD375 /* FavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesView.xib; sourceTree = "<group>"; };
 		DA7CEFF5154BAC5D002A8725 /* commentlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commentlist@2x.png"; sourceTree = "<group>"; };
+		DA81A46E15F06273007CB958 /* photo_cropper_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_cropper_bg.png; sourceTree = "<group>"; };
+		DA81A46F15F06273007CB958 /* photo_cropper_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_cropper_bg@2x.png"; sourceTree = "<group>"; };
+		DA81A47015F06273007CB958 /* photo_cropper_rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_cropper_rect.png; sourceTree = "<group>"; };
+		DA81A47115F06273007CB958 /* photo_cropper_rect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_cropper_rect@2x.png"; sourceTree = "<group>"; };
+		DA81A47215F06273007CB958 /* photo_cropper_rect_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_cropper_rect_on.png; sourceTree = "<group>"; };
+		DA81A47315F06273007CB958 /* photo_cropper_rect_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_cropper_rect_on@2x.png"; sourceTree = "<group>"; };
+		DA81A47415F06273007CB958 /* SSPhotoCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhotoCropperViewController.h; sourceTree = "<group>"; };
+		DA81A47515F06273007CB958 /* SSPhotoCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhotoCropperViewController.m; sourceTree = "<group>"; };
+		DA81A47615F06273007CB958 /* SSPhotoCropperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSPhotoCropperViewController.xib; sourceTree = "<group>"; };
 		DA820636150DA2E10065AB7E /* ProfileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileBase.h; sourceTree = "<group>"; };
 		DA820637150DA2E10065AB7E /* ProfileBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileBase.m; sourceTree = "<group>"; };
 		DA820638150DA2E10065AB7E /* ProfileBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBase.xib; sourceTree = "<group>"; };
@@ -846,6 +863,7 @@
 		DA16A7461562109A00A14D9D /* My */ = {
 			isa = PBXGroup;
 			children = (
+				DA81A46C15F06273007CB958 /* SSPhotoCropper */,
 				DAF4396915623DA200B7BAFA /* MyInfoCell.h */,
 				DAF4396A15623DA200B7BAFA /* MyInfoCell.m */,
 				DAF4396B15623DA200B7BAFA /* MyInfoCell.xib */,
@@ -935,6 +953,30 @@
 				DA525D761561F79200953B2F /* FavoriteCell.xib */,
 			);
 			name = Favorite;
+			sourceTree = "<group>";
+		};
+		DA81A46C15F06273007CB958 /* SSPhotoCropper */ = {
+			isa = PBXGroup;
+			children = (
+				DA81A46D15F06273007CB958 /* Graphics */,
+				DA81A47415F06273007CB958 /* SSPhotoCropperViewController.h */,
+				DA81A47515F06273007CB958 /* SSPhotoCropperViewController.m */,
+				DA81A47615F06273007CB958 /* SSPhotoCropperViewController.xib */,
+			);
+			path = SSPhotoCropper;
+			sourceTree = "<group>";
+		};
+		DA81A46D15F06273007CB958 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				DA81A46E15F06273007CB958 /* photo_cropper_bg.png */,
+				DA81A46F15F06273007CB958 /* photo_cropper_bg@2x.png */,
+				DA81A47015F06273007CB958 /* photo_cropper_rect.png */,
+				DA81A47115F06273007CB958 /* photo_cropper_rect@2x.png */,
+				DA81A47215F06273007CB958 /* photo_cropper_rect_on.png */,
+				DA81A47315F06273007CB958 /* photo_cropper_rect_on@2x.png */,
+			);
+			path = Graphics;
 			sourceTree = "<group>";
 		};
 		DAB06C8B15DA367B007311E4 /* AFNetwork */ = {
@@ -1923,6 +1965,13 @@
 				DAB7F45215E1EF47008F4C85 /* bubbleSomeone.png in Resources */,
 				DAB7F45315E1EF47008F4C85 /* bubbleSomeone@2x.png in Resources */,
 				DACA288D15EC6A0500874570 /* MyBubbleView.xib in Resources */,
+				DA81A47715F06273007CB958 /* photo_cropper_bg.png in Resources */,
+				DA81A47815F06273007CB958 /* photo_cropper_bg@2x.png in Resources */,
+				DA81A47915F06273007CB958 /* photo_cropper_rect.png in Resources */,
+				DA81A47A15F06273007CB958 /* photo_cropper_rect@2x.png in Resources */,
+				DA81A47B15F06273007CB958 /* photo_cropper_rect_on.png in Resources */,
+				DA81A47C15F06273007CB958 /* photo_cropper_rect_on@2x.png in Resources */,
+				DA81A47E15F06273007CB958 /* SSPhotoCropperViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2054,6 +2103,7 @@
 				DA28E3CA15E721FE003FF524 /* RegexKitLite.m in Sources */,
 				DACA288815EC633800874570 /* ChatPopView.m in Sources */,
 				DACA288C15EC6A0500874570 /* MyBubbleView.m in Sources */,
+				DA81A47D15F06273007CB958 /* SSPhotoCropperViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2139,7 +2189,7 @@
 		DACC68A314FF8049006F7B6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "oschina/oschina-Prefix.pch";
 				INFOPLIST_FILE = "oschina/oschina-Info.plist";
@@ -2159,7 +2209,7 @@
 		DACC68A414FF8049006F7B6A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "oschina/oschina-Prefix.pch";
 				INFOPLIST_FILE = "oschina/oschina-Info.plist";

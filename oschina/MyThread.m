@@ -34,6 +34,18 @@
     [request setDidFinishSelector:@selector(requestPub:)];
     [request startAsynchronous];
 }
+- (void)startUpdatePortrait:(NSData *)imgData
+{
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:api_userinfo_update]];
+    [request setUseCookiePersistence:[Config Instance].isCookie];
+    [request setPostValue:[NSString stringWithFormat:@"%d",[Config Instance].getUID] forKey:@"uid"];
+    [request addData:imgData withFileName:@"img.jpg" andContentType:@"image/jpeg" forKey:@"portrait"];
+    request.delegate = self;
+    request.tag = 11;
+    [request setDidFailSelector:@selector(requestFailed:)];
+    [request setDidFinishSelector:@selector(requestPortrait:)];
+    [request startAsynchronous];
+}
 
 -(void)timerUpdate
 {
@@ -50,14 +62,14 @@
 }
 
 
--(void)requestFailed:(ASIHTTPRequest *)request
+- (void)requestFailed:(ASIHTTPRequest *)request
 {
     //如果发送tweet失败
     if (request.tag == 10) {
         NSLog(@"后台发送动弹图片  网络失败");
     }
 }
--(void)requestPub:(ASIHTTPRequest *)request
+- (void)requestPub:(ASIHTTPRequest *)request
 {
     [Tool getOSCNotice:request];
     if (request.hud) {
@@ -83,6 +95,32 @@
             break;
     }
 }
+- (void)requestPortrait:(ASIHTTPRequest *)request
+{
+    [Tool getOSCNotice:request];
+    if (request.hud) {
+        [request.hud hide:YES];
+    }
+    ApiError *error = [Tool getApiError:request];
+    switch (error.errorCode) {
+        case 1:
+        {
+            NSLog(@"更新头像成功");
+            UIView *v = [UIApplication sharedApplication].keyWindow;
+            [Tool ToastNotification:@"成功更新您的头像" andView:v andLoading:NO andIsBottom:YES];
+            //重新获取自我头像
+        }
+            break;
+        case 0:
+        case -2:
+        case -1:
+        {
+            NSLog(@"后台发送动弹图片  失败  %@ %d",error.errorMessage, error.errorCode);
+        }
+            break;
+    }
+}
+
 
 static MyThread * instance = nil;
 +(MyThread *) Instance
