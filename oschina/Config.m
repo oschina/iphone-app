@@ -149,7 +149,7 @@
     else
     {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-        NSString * uuidString = (__bridge NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        NSString * uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
         CFRelease(uuid);
         [settings setObject:uuidString forKey:@"guid"];
         [settings synchronize];
