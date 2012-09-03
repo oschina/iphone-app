@@ -16,13 +16,6 @@
 
 @end
 
-#ifdef DEBUG
-#define debugLog(...) NSLog(__VA_ARGS__)
-#define debugMethod() NSLog(@"%s", __func__)
-#else
-#define debugLog(...)
-#define debugMethod()
-#endif
 #define PATH_OF_TEMP        [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"]
 
 @implementation TQImageCache;
