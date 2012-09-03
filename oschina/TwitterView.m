@@ -77,7 +77,6 @@
     [allTweetsimg makeObjectsPerformSelector:@selector(cancelDownload)];
     
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 - (void)viewDidUnload
 {

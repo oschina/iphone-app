@@ -17,7 +17,6 @@
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
-    [self viewDidUnload];
 }
 #pragma mark - View lifecycle
 - (void)viewDidAppear:(BOOL)animated

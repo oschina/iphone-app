@@ -84,7 +84,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 - (void)viewDidAppear:(BOOL)animated
 {

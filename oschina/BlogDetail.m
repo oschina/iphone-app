@@ -18,7 +18,6 @@
 {
     [super didReceiveMemoryWarning];
     [self.webView stopLoading];
-    [self viewDidUnload];
 }
 - (void)viewDidLoad
 {

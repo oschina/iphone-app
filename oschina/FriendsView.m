@@ -27,7 +27,6 @@
         f.imgData = nil;
     }
     [friends removeAllObjects];
-    [self viewDidUnload];
 }
 
 #pragma mark - View lifecycle

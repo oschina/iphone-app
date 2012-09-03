@@ -50,7 +50,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 
 - (IBAction)clickPub:(id)sender {

@@ -70,7 +70,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 
 - (void)segmentAction:(id)sender

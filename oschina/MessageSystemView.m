@@ -47,8 +47,6 @@
     for (Comment *c in comments) {
         c.imgData = nil;
     }
-    
-    [self viewDidUnload];
 }
 #pragma mark - View lifecycle
 - (void)viewDidAppear:(BOOL)animated

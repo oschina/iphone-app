@@ -25,7 +25,6 @@
     for (Activity *a in activies) {
         a.imgData = nil;
     }
-    [self viewDidUnload];
 }
 
 #pragma mark - View lifecycle

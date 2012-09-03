@@ -87,7 +87,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 
 #pragma mark - 发表动弹

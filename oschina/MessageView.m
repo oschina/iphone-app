@@ -83,8 +83,6 @@
     for (Message *m in msgs) {
         m.imgData = nil;
     }
-    
-    [self viewDidUnload];
 }
 - (void)reload:(BOOL)noRefresh
 {

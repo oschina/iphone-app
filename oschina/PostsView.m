@@ -95,7 +95,6 @@
     for (Post *p in posts) {
         p.imgData = nil;
     }
-    [self viewDidUnload];
 }
 - (void)reloadType:(int)ncatalog
 {

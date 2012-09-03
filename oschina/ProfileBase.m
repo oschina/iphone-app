@@ -239,7 +239,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self viewDidUnload];
 }
 
 #pragma mark - View lifecycle
