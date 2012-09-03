@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45F10B6215F4F5A70058E253 /* TQImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F10B6115F4F5A70058E253 /* TQImageCache.m */; };
 		DA1763F4157C6AA400C7AE95 /* RTActiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1763F2157C6AA400C7AE95 /* RTActiveCell.m */; };
 		DA1763F5157C6AA400C7AE95 /* RTActiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA1763F3157C6AA400C7AE95 /* RTActiveCell.xib */; };
 		DA1763F9157C6BCF00C7AE95 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1763F8157C6BCF00C7AE95 /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -356,6 +357,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45F10B6015F4F5A70058E253 /* TQImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQImageCache.h; sourceTree = "<group>"; };
+		45F10B6115F4F5A70058E253 /* TQImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQImageCache.m; sourceTree = "<group>"; };
 		DA1763F1157C6AA400C7AE95 /* RTActiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTActiveCell.h; sourceTree = "<group>"; };
 		DA1763F2157C6AA400C7AE95 /* RTActiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTActiveCell.m; sourceTree = "<group>"; };
 		DA1763F3157C6AA400C7AE95 /* RTActiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RTActiveCell.xib; sourceTree = "<group>"; };
@@ -860,6 +863,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45F10B6415F4F5AF0058E253 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				45F10B6015F4F5A70058E253 /* TQImageCache.h */,
+				45F10B6115F4F5A70058E253 /* TQImageCache.m */,
+			);
+			name = cache;
+			sourceTree = "<group>";
+		};
 		DA16A7461562109A00A14D9D /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -1565,6 +1577,7 @@
 		DACC68A614FF8470006F7B6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				45F10B6415F4F5AF0058E253 /* cache */,
 				DABA75CC15046C8A00521596 /* AppModel */,
 				DA33587B150745B800F6671E /* Tweet.h */,
 				DA33587C150745B800F6671E /* Tweet.m */,
@@ -2104,6 +2117,7 @@
 				DACA288815EC633800874570 /* ChatPopView.m in Sources */,
 				DACA288C15EC6A0500874570 /* MyBubbleView.m in Sources */,
 				DA81A47D15F06273007CB958 /* SSPhotoCropperViewController.m in Sources */,
+				45F10B6215F4F5A70058E253 /* TQImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

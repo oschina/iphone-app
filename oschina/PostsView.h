@@ -16,6 +16,7 @@
 #import "ShareView.h"
 
 #import "UITap.h"
+#import "TQImageCache.h"
 
 @interface PostsView : UIViewController<UITableViewDelegate,UITableViewDataSource,IconDownloaderDelegate,EGORefreshTableHeaderDelegate>
 {
@@ -29,6 +30,7 @@
     BOOL _reloading;
 
     BOOL isInitialize;
+    TQImageCache * _iconCache;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tablePosts;
 //异步加载图片专用
