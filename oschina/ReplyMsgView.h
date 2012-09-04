@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Tool.h"
 #import "MessageSystemView.h"
-@class MessageSystemView;
 #import "Comment.h"
-@class Comment;
+@class MessageSystemView;
 
 @interface ReplyMsgView : UIViewController<UIActionSheetDelegate,UIWebViewDelegate,UITextViewDelegate>
 {

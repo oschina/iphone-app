@@ -11,17 +11,13 @@
 #import "DataSingleton.h"
 #import "CheckNetwork.h"
 #import "PostBase.h"
-@class PostBase;
 #import "ProfileBase.h"
-@class ProfileBase;
 #import "NewsBase.h"
-@class NewsBase;
 #import "TweetBase2.h"
-@class TweetBase2;
 #import "SettingView.h"
-@class SettingView;
 #import "NdUncaughtExceptionHandler.h"
 
+@class ProfileBase;
 @interface OSAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 {
     int m_lastTabIndex;

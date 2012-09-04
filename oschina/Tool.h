@@ -13,7 +13,6 @@
 #import "News.h"
 #import "Post.h"
 #import "Activity.h"
-@class Activity;
 #import "ActivesView.h"
 #import "SinglePost.h"
 #import "NewsDetail.h"
@@ -21,9 +20,7 @@
 #import "ShareView.h"
 #import "Message.h"
 #import "Comment.h"
-@class Comment;
 #import "Tweet.h"
-@class Tweet;
 #import "TweetDetail.h"
 #import "TweetBase2.h"
 #import "OSCNotice.h"

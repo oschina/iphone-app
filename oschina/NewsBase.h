@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsView.h"
-@class NewsView;
 
 @interface NewsBase : UIViewController
 

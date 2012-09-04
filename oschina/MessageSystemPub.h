@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ApiError.h"
 #import "MessageSystemView.h"
-@class MessageSystemView;
 
 @interface MessageSystemPub : UIViewController<UIActionSheetDelegate,UITextViewDelegate>
 {

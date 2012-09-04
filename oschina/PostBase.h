@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PostPubView.h"
 #import "PostsView.h"
-@class PostsView;
 
 @interface PostBase : UIViewController<UIActionSheetDelegate>
 

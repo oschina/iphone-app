@@ -10,7 +10,6 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "PostBase.h"
-@class PostBase;
 #import "SinglePost.h"
 #import "MessageSystemView.h"
 #import "ShareView.h"
