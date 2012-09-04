@@ -8,7 +8,9 @@
 
 #import "PostsView.h"
 
+
 @implementation PostsView
+
 @synthesize tablePosts;
 @synthesize imageDownloadsInProgress;
 @synthesize catalog;
@@ -44,6 +46,7 @@
         //这种情况下 没有Tab
         self.navigationItem.rightBarButtonItem = btnHome;
     }
+    _iconCache = [[TQImageCache alloc] initWithCachePath:@"icons" andMaxMemoryCacheNumber:50];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,6 +87,7 @@
     [posts removeAllObjects];
     [imageDownloadsInProgress removeAllObjects];
     posts = nil;
+    _iconCache = nil;
     [super viewDidUnload];
 }
 - (void)didReceiveMemoryWarning
@@ -268,11 +272,18 @@
                 }
                 else
                 {
-                    IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
-                    if (downloader == nil) {
-                        ImgRecord *record = [ImgRecord new];
-                        record.url = p.img;
-                        [self startIconDownload:record forIndexPath:indexPath];
+                    NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:p.img]];
+                    if (imageData) {
+                        NSLog(@"load image from cache");
+                        p.imgData = [UIImage imageWithData:imageData];
+                        cell.img.image = p.imgData;
+                    } else {
+                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
+                        if (downloader == nil) {
+                            ImgRecord *record = [ImgRecord new];
+                            record.url = p.img;
+                            [self startIconDownload:record forIndexPath:indexPath];
+                        }
                     }
                 }
             }
@@ -407,6 +418,9 @@
         Post *p = [posts objectAtIndex:[index intValue]];
         if (p) {
             p.imgData = iconDownloader.imgRecord.img;
+            // cache it
+            NSData * imageData = UIImagePNGRepresentation(p.imgData);
+            [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:p.img]];
             [self.tablePosts reloadData];
         }
     }
