@@ -12,7 +12,6 @@
 #import "MessageSystemView.h"
 #import "NewsCell.h"
 #import "NewsBase.h"
-@class NewsBase;
 #import "ASIProgressDelegate.h"
 #import "MBProgressHUD.h"
 #import "BlogUnit.h"

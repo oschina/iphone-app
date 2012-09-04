@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Tool.h"
-@class Tool;
+
 
 @interface Comment : NSObject
 

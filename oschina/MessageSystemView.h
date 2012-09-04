@@ -13,15 +13,14 @@
 #import "ReplyMsgView.h"
 #import "MsgCell.h"
 #import "MessageSystemPub.h"
-
 #import "Notification_CommentCount.h"
-@class MessageSystemPub;
 #import "IconDownloader.h"
 #import "EGORefreshTableHeaderView.h"
 #import "CommentRefer.h"
 
 #define FetchCount 10;
 
+@class MessageSystemPub;
 @interface MessageSystemView : UIViewController<UITableViewDataSource, UITableViewDelegate,IconDownloaderDelegate,EGORefreshTableHeaderDelegate,UIActionSheetDelegate>
 {
     BOOL isLoading;

@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MessageView.h"
 #import "ActivesView.h"
-@class ActivesView;
 #import "PubMessage.h"
-@class MessageView;
 #import "OSAppDelegate.h"
-@class OSAppDelegate;
 #import "OSCNotice.h"
 
 @interface ProfileBase : UIViewController<UIActionSheetDelegate>

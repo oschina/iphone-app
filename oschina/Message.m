@@ -7,6 +7,7 @@
 //
 
 #import "Message.h"
+#import "Tool.h"
 
 @implementation Message
 @synthesize _id;

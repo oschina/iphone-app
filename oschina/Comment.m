@@ -7,6 +7,7 @@
 //
 
 #import "Comment.h"
+#import "Tool.h"
 
 @implementation Comment
 
