@@ -250,7 +250,7 @@
                 [cell.img addGestureRecognizer:singleTap];
             }
             cell.img.image = [UIImage imageNamed:@"avatar_loading.jpg"];
-            Post *p = [posts objectAtIndex:[indexPath row]];
+            Post *p = [posts objectAtIndex:indexPath.row];
             if ([cell.img.gestureRecognizers count] > 0) {
                 UITap *tap = (UITap *)[cell.img.gestureRecognizers objectAtIndex:0];
                 if (tap) {
@@ -274,10 +274,11 @@
                 {
                     NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:p.img]];
                     if (imageData) {
-                        NSLog(@"load image from cache");
                         p.imgData = [UIImage imageWithData:imageData];
                         cell.img.image = p.imgData;
-                    } else {
+                    } 
+                    else 
+                    {
                         IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
                         if (downloader == nil) {
                             ImgRecord *record = [ImgRecord new];

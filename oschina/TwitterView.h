@@ -18,6 +18,7 @@
 #import "EGOImageView.h"
 #import "EGORefreshTableHeaderView.h"
 #import "IconDownloader.h"
+#import "TQImageCache.h"
 
 @interface TwitterView : UIViewController<UITableViewDataSource,UITableViewDelegate,IconDownloaderDelegate,EGORefreshTableHeaderDelegate>
 {
@@ -31,6 +32,7 @@
     BOOL _reloading;
     
     BOOL isInitialize;
+    TQImageCache * _iconCache;
 }
 
 //TableView

@@ -40,6 +40,7 @@
     
     //开始加载
 //    [self reload:YES];
+    _iconCache = [[TQImageCache alloc] initWithCachePath:@"icons" andMaxMemoryCacheNumber:50];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -87,6 +88,7 @@
     tweets = nil;
     _refreshHeaderView = nil;
     imageDownloadsInProgress = tweetDownloadsInProgress = nil;
+    _iconCache = nil;
     [super viewDidUnload];
 }
 - (void)reloadUID:(int)newUID
@@ -328,12 +330,20 @@
                     }
                     else
                     {
-                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
-                        if (downloader == nil) {
-                            ImgRecord *record = [ImgRecord new];
-                            record.url = t.img;
-                            [self startIconDownload:record forIndexPath:indexPath];
+                        NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:t.img]];
+                        if (imageData) {
+                            //                        NSLog(@"load image from cache");
+                            t.imgData = [UIImage imageWithData:imageData];
+                            cell.img.image = t.imgData;
+                        } else {
+                            IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
+                            if (downloader == nil) {
+                                ImgRecord *record = [ImgRecord new];
+                                record.url = t.img;
+                                [self startIconDownload:record forIndexPath:indexPath];
+                            }
                         }
+
                     }
                 }
                 else
@@ -558,6 +568,9 @@
         if (iconTweet) {
             t.imgTweetData = iconTweet.imgRecord.img;
         }
+        // cache it
+        NSData * imageData = UIImagePNGRepresentation(t.imgData);
+        [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:t.img]];
         [tableTweets reloadData];
     }
 }

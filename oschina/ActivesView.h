@@ -20,6 +20,7 @@
 #import "IconDownloader.h"
 #import "ObjectReply.h"
 #import "RTActiveCell.h"
+#import "TQImageCache.h"
 
 @interface ActivesView : UIViewController<UITableViewDataSource,UITableViewDelegate,IconDownloaderDelegate,EGORefreshTableHeaderDelegate,UIAlertViewDelegate>
 {
@@ -31,6 +32,8 @@
     //下拉刷新
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
+    
+    TQImageCache * _iconCache;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableActivies;
 

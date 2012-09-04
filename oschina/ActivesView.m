@@ -44,6 +44,8 @@
     self.tableActivies.backgroundColor = [Tool getBackgroundColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
+    
+    _iconCache = [[TQImageCache alloc] initWithCachePath:@"icons" andMaxMemoryCacheNumber:50];
 }
 - (void)refreshed:(NSNotification *)notification
 {
@@ -87,6 +89,7 @@
     _refreshHeaderView = nil;
     imageDownloadsInProgress = nil;
     tweetDownloadsInProgress = nil;
+    _iconCache = nil;
     [super viewDidUnload];
 }
 - (void)reloadType:(int)ncatalog
@@ -344,11 +347,19 @@
                 }
                 else
                 {
-                    IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
-                    if (downloader == nil) {
-                        ImgRecord *record = [ImgRecord new];
-                        record.url = a.img;
-                        [self startIconDownload:record forIndexPath:indexPath];
+                    NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:a.img]];
+                    if (imageData) {
+                        a.imgData = [UIImage imageWithData:imageData];
+                        cell.imgPortrait = a.imgData;
+                    } 
+                    else 
+                    {
+                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+                        if (downloader == nil) {
+                            ImgRecord *record = [ImgRecord new];
+                            record.url = a.img;
+                            [self startIconDownload:record forIndexPath:indexPath];
+                        }
                     }
                 }
             }
@@ -576,6 +587,10 @@
         if (iconTweet) {
             a.imgTweetData = iconTweet.imgRecord.img;
         }
+        // cache it
+        NSData * imageData = UIImagePNGRepresentation(a.imgData);
+        [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:a.img]];
+        
         [tableActivies reloadData];
     }
 }
