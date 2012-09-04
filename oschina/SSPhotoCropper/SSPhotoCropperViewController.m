@@ -69,7 +69,7 @@
     self.infoMessageTitle = @"In order to crop the photo";
     self.infoMessageBody = @"Use two of your fingers to zoom in and out the photo and drag the"
                            @" green window to crop any part of the photo you would like to use.";
-    self.photoCropperTitle = @"Crop Photo";
+    self.photoCropperTitle = @"头像裁减";
 
     return self;
 }
