@@ -2203,7 +2203,7 @@
 		DACC68A314FF8049006F7B6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "oschina/oschina-Prefix.pch";
 				INFOPLIST_FILE = "oschina/oschina-Info.plist";
@@ -2223,7 +2223,7 @@
 		DACC68A414FF8049006F7B6A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "oschina/oschina-Prefix.pch";
 				INFOPLIST_FILE = "oschina/oschina-Info.plist";

@@ -20,6 +20,13 @@
 
 @implementation TQImageCache;
 
+@synthesize fileManager;
+@synthesize memoryCache;
+@synthesize memoryCacheKeys;
+@synthesize maxMemoryCacheNumber;
+@synthesize lastCacheKitStatus;
+@synthesize cachePath;
+
 static BOOL debugMode = NO;
 
 - (id) init {
@@ -29,36 +36,36 @@ static BOOL debugMode = NO;
 - (id) initWithCachePath:(NSString*)path andMaxMemoryCacheNumber:(NSInteger)maxNumber {
     NSString * tmpDir = PATH_OF_TEMP;
     if ([path hasPrefix:tmpDir]) {
-        _cachePath = path;
+        cachePath = path;
     } else {
         if ([path length] != 0) {
-            _cachePath = [tmpDir stringByAppendingPathComponent:path];
+            cachePath = [tmpDir stringByAppendingPathComponent:path];
         } else {
             return nil;
         }
     }
-    _maxMemoryCacheNumber = maxNumber;
+    maxMemoryCacheNumber = maxNumber;
 
     if (self = [super init]) {
-        _fileManager = [NSFileManager defaultManager];
-        if ([_fileManager fileExistsAtPath:_cachePath isDirectory:nil] == NO) {
+        fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:cachePath isDirectory:nil] == NO) {
             // create the directory
-            BOOL res = [_fileManager createDirectoryAtPath:_cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+            BOOL res = [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
             if (!res) {
                 debugLog(@"file cache directory create failed! The path is %@", _cachePath);
                 return nil;
             }
         }
-        _memoryCache = [[NSMutableDictionary alloc] initWithCapacity:_maxMemoryCacheNumber + 1];
-        _memoryCacheKeys = [[NSMutableArray alloc] initWithCapacity:_maxMemoryCacheNumber + 1];
+        memoryCache = [[NSMutableDictionary alloc] initWithCapacity:maxMemoryCacheNumber + 1];
+        memoryCacheKeys = [[NSMutableArray alloc] initWithCapacity:maxMemoryCacheNumber + 1];
         return self;
     }
     return nil;
 }
 
 - (void)clear {
-    _memoryCache = [[NSMutableDictionary alloc] initWithCapacity:_maxMemoryCacheNumber + 1];
-    _memoryCacheKeys = [[NSMutableArray alloc] initWithCapacity:_maxMemoryCacheNumber + 1];
+    memoryCache = [[NSMutableDictionary alloc] initWithCapacity:maxMemoryCacheNumber + 1];
+    memoryCacheKeys = [[NSMutableArray alloc] initWithCapacity:maxMemoryCacheNumber + 1];
 
     // remove all the file in temporary
     NSArray * files = [self.fileManager contentsOfDirectoryAtPath:self.cachePath error:nil];
@@ -71,7 +78,7 @@ static BOOL debugMode = NO;
 }
 
 - (void) checkCacheSize {
-    if ([self.memoryCache count] > _maxMemoryCacheNumber) {
+    if ([self.memoryCache count] > maxMemoryCacheNumber) {
         NSString * key = [self.memoryCacheKeys objectAtIndex:0];
         [self.memoryCache removeObjectForKey:key];
         [self.memoryCacheKeys removeObjectAtIndex:0];
