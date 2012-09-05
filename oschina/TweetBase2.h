@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TwitterView.h"
 #import "PubTweet.h"
-@class TwitterView;
 
 @interface TweetBase2 : UIViewController<UIActionSheetDelegate>
 

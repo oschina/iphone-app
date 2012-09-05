@@ -13,7 +13,6 @@
 #import "MessageSystemView.h"
 #import "Tool.h"
 #import "TweetBase2.h"
-@class TweetBase2;
 #import "UITap.h"
 #import "EGOImageView.h"
 #import "EGORefreshTableHeaderView.h"

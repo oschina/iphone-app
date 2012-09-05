@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TwitterView.h"
 #import "MyThread.h"
-@class TwitterView;
 #import "MBProgressHUD.h"
 #import "TSEmojiView.h"
 
