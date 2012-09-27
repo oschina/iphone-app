@@ -353,6 +353,10 @@
 		DAF2CF0615D111180048B521 /* k.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF2CF0515D111180048B521 /* k.png */; };
 		DAF4396C15623DA200B7BAFA /* MyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4396A15623DA200B7BAFA /* MyInfoCell.m */; };
 		DAF4396D15623DA200B7BAFA /* MyInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4396B15623DA200B7BAFA /* MyInfoCell.xib */; };
+		DAF7AB2F1614183D005D464C /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF7AB281614183D005D464C /* AESCrypt.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DAF7AB301614183D005D464C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF7AB2A1614183D005D464C /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DAF7AB311614183D005D464C /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF7AB2C1614183D005D464C /* NSData+CommonCrypto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DAF7AB321614183D005D464C /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF7AB2E1614183D005D464C /* NSString+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DAFBAF2C15C690FF002FC9FE /* NdUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFBAF2B15C690FF002FC9FE /* NdUncaughtExceptionHandler.m */; };
 /* End PBXBuildFile section */
 
@@ -834,6 +838,14 @@
 		DAF4396915623DA200B7BAFA /* MyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoCell.h; sourceTree = "<group>"; };
 		DAF4396A15623DA200B7BAFA /* MyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoCell.m; sourceTree = "<group>"; };
 		DAF4396B15623DA200B7BAFA /* MyInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoCell.xib; sourceTree = "<group>"; };
+		DAF7AB271614183D005D464C /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
+		DAF7AB281614183D005D464C /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
+		DAF7AB291614183D005D464C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		DAF7AB2A1614183D005D464C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		DAF7AB2B1614183D005D464C /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		DAF7AB2C1614183D005D464C /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		DAF7AB2D1614183D005D464C /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		DAF7AB2E1614183D005D464C /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		DAFBAF2A15C690FF002FC9FE /* NdUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NdUncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		DAFBAF2B15C690FF002FC9FE /* NdUncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NdUncaughtExceptionHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1481,6 +1493,7 @@
 		DACC688014FF8049006F7B6A /* oschina */ = {
 			isa = PBXGroup;
 			children = (
+				DAF7AB251614180C005D464C /* AES */,
 				DAB06C8B15DA367B007311E4 /* AFNetwork */,
 				DAB6CDCE15BD267400B483B2 /* GCDiscreetNotificationView */,
 				DA1B4971156255AC0094BE26 /* Thread */,
@@ -1723,6 +1736,21 @@
 				DAD6B7DA15231843007E2760 /* MBProgressHUD.m */,
 			);
 			name = MBHud;
+			sourceTree = "<group>";
+		};
+		DAF7AB251614180C005D464C /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				DAF7AB271614183D005D464C /* AESCrypt.h */,
+				DAF7AB281614183D005D464C /* AESCrypt.m */,
+				DAF7AB291614183D005D464C /* NSData+Base64.h */,
+				DAF7AB2A1614183D005D464C /* NSData+Base64.m */,
+				DAF7AB2B1614183D005D464C /* NSData+CommonCrypto.h */,
+				DAF7AB2C1614183D005D464C /* NSData+CommonCrypto.m */,
+				DAF7AB2D1614183D005D464C /* NSString+Base64.h */,
+				DAF7AB2E1614183D005D464C /* NSString+Base64.m */,
+			);
+			name = AES;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2118,6 +2146,10 @@
 				DACA288C15EC6A0500874570 /* MyBubbleView.m in Sources */,
 				DA81A47D15F06273007CB958 /* SSPhotoCropperViewController.m in Sources */,
 				45F10B6215F4F5A70058E253 /* TQImageCache.m in Sources */,
+				DAF7AB2F1614183D005D464C /* AESCrypt.m in Sources */,
+				DAF7AB301614183D005D464C /* NSData+Base64.m in Sources */,
+				DAF7AB311614183D005D464C /* NSData+CommonCrypto.m in Sources */,
+				DAF7AB321614183D005D464C /* NSString+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

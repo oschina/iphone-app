@@ -47,6 +47,7 @@
 #import "BlogUnit.h"
 #import "UserView2.h"
 #import "PostsView.h"
+#import <CommonCrypto/CommonCryptor.h>
 
 @interface Tool : NSObject
 
@@ -177,4 +178,5 @@
 + (NSDate *)NSStringDateToNSDate:(NSString *)string;
 
 + (NSString *)GenerateTags:(NSMutableArray *)tags;
+
 @end

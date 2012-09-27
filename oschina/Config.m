@@ -7,6 +7,7 @@
 //
 
 #import "Config.h"
+#import "AESCrypt.h"
 
 @implementation Config
 @synthesize shareObject;
@@ -32,6 +33,9 @@
     [settings removeObjectForKey:@"UserName"];
     [settings removeObjectForKey:@"Password"];
     [settings setObject:userName forKey:@"UserName"];
+    
+    pwd = [AESCrypt encrypt:pwd password:@"pwd"];
+    
     [settings setObject:pwd forKey:@"Password"];
     [settings synchronize];
 }
@@ -43,7 +47,8 @@
 -(NSString *)getPwd
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
-    return [settings objectForKey:@"Password"];
+    NSString * temp = [settings objectForKey:@"Password"];
+    return [AESCrypt decrypt:temp password:@"pwd"];
 }
 -(void)saveUID:(int)uid
 {
@@ -223,7 +228,7 @@
     }
     else
         return @"";
-}
+}    
 
 static Config * instance = nil;
 +(Config *) Instance
