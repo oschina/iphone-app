@@ -243,7 +243,7 @@
     int row = indexPath.row;
     if (row >= favorites.count) {
         if (!isLoading && !isLoadOver) {
-            [self performSelector:@selector(reload:)];
+            [self reload:YES];
         }
     }
     else

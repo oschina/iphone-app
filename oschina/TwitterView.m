@@ -407,7 +407,7 @@
     if (row >= [tweets count]) {
         //启动刷新
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self reload:YES];
         }
     }
     else {

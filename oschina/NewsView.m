@@ -231,7 +231,7 @@
     int row = [indexPath row];
     if (row >= [news count]) {
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self reload:YES];
         }
     }
     else {

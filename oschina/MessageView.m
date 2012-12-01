@@ -390,7 +390,7 @@
         else
         {
             if (!isLoading) {
-                [self performSelector:@selector(reload:)];
+                [self reload:YES];
             }
         }
     }

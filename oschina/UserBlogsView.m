@@ -180,7 +180,7 @@
     int row = [indexPath row];
     if (row >= [blogs count]) {
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self reload:YES];
         }
     }
     else {

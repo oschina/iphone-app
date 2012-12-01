@@ -422,7 +422,7 @@
 
         if ([Config Instance].isCookie) {
             if (!isLoading) {
-                [self performSelector:@selector(reload:)];
+                [self reload:YES];
             }
         }
         else {
