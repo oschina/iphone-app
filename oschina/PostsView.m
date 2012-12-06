@@ -121,6 +121,11 @@
         [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     }
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 - (void)reload:(BOOL)noRefresh
 {
     if ([Config Instance].isNetworkRunning) {
@@ -314,7 +319,7 @@
     if (row >= [posts count]) {
         if (!isLoading) 
         {
-            [self reload:YES];
+            [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
         }
     }
     else 

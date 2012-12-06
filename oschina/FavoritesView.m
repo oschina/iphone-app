@@ -50,6 +50,11 @@
     [favorites removeAllObjects];
     isLoadOver = NO;
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 -(void)reload:(BOOL)noRefresh
 {
     //如果有网络连接
@@ -243,7 +248,7 @@
     int row = indexPath.row;
     if (row >= favorites.count) {
         if (!isLoading && !isLoadOver) {
-            [self reload:YES];
+            [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
         }
     }
     else
