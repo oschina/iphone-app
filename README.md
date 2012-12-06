@@ -3,7 +3,7 @@ iphone-app
 
 # **开源中国社区 iPhone 客户端项目简析** #
 
-*注：本文假设你已经有xcode4或以上的开发环境*
+*注：本文假设你已经有xcode4或以上的开发环境 (建议 Xcode 4.3)*
 
 直接用双击 oschina.xcodeproj 文件启动 xcode 即可
 
