@@ -44,9 +44,10 @@
     txtContent.delegate = self;
     
     //表情
-    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 216, 320, 216)];
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 216, 320, IS_IPHONE_5 ? 304 : 216)];
+//    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.he÷Ωight - ( IS_IPHONE_5 ? 304 : 216), 320, 216)];
     scroll.backgroundColor = [UIColor clearColor];
-    scroll.contentSize = CGSizeMake(320.0, 410.0);
+    scroll.contentSize = CGSizeMake(320.0, IS_IPHONE_5 ? 498 : 410.0);
     _emojiView = [[TSEmojiView alloc] initWithFrame:CGRectMake(-3, 0, 323, 520)];
     _emojiView.delegate = self;
     [scroll addSubview:_emojiView];

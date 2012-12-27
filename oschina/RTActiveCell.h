@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RTLabel.h"
+#import "EGOImageView.h"
 
 @interface RTActiveCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UIImageView *imgPortrait;
-@property (strong, nonatomic) IBOutlet UIImageView *imgTweet;
+@property (strong, nonatomic) IBOutlet EGOImageView *imgPortrait;
+@property (strong, nonatomic) IBOutlet EGOImageView *imgTweet;
 @property (retain, nonatomic) RTLabel * rtLabel;
 
 + (RTLabel*)textLabel;

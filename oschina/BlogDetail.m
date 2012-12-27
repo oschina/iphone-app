@@ -27,6 +27,8 @@
     self.webView.delegate = self;
     [self.webView loadHTMLString:@"" baseURL:nil];
     
+    self.webView.frame = CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 44 - 20);
+    
     //如果有网络
     if ([Config Instance].isNetworkRunning) {
 

@@ -50,6 +50,11 @@
     [imgQQ addGestureRecognizer:tapQQ];
     
     self.view.backgroundColor = [Tool getBackgroundColor];
+    
+    if (IS_IPHONE_5) {
+        self.imgSina.frame = CGRectMake(40, 137, 240, 44);
+        self.imgQQ.frame = CGRectMake(40, 260, 240, 44);
+    }
 }
 
 - (void)viewDidUnload

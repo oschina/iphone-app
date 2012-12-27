@@ -4,17 +4,17 @@
 
 @implementation ActivesView
 @synthesize tableActivies;
-@synthesize imageDownloadsInProgress;
+//@synthesize imageDownloadsInProgress;
 @synthesize catalog;
-@synthesize tweetDownloadsInProgress;
+//@synthesize tweetDownloadsInProgress;
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
-    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
-    NSArray *allTweetImgs = [self.tweetDownloadsInProgress allValues];
-    [allTweetImgs makeObjectsPerformSelector:@selector(cancelDownload)];
+//    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+//    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+//    NSArray *allTweetImgs = [self.tweetDownloadsInProgress allValues];
+//    [allTweetImgs makeObjectsPerformSelector:@selector(cancelDownload)];
     //清空
     for (Activity *a in activies) {
         a.imgData = nil;
@@ -28,8 +28,8 @@
     allCount = 0;
     [super viewDidLoad];
 
-    self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
-    self.tweetDownloadsInProgress = [NSMutableDictionary dictionary];
+//    self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
+//    self.tweetDownloadsInProgress = [NSMutableDictionary dictionary];
     
     activies = [[NSMutableArray alloc] initWithCapacity:20];
     //下拉刷新
@@ -69,26 +69,26 @@
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
-    if (self.imageDownloadsInProgress != nil) {
-        NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
-        [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
-    }
-    if(self.tweetDownloadsInProgress != nil)
-    {
-        NSArray *allTweetsimg = [self.tweetDownloadsInProgress allValues];
-        [allTweetsimg makeObjectsPerformSelector:@selector(cancelDownload)];
-    }
+//    if (self.imageDownloadsInProgress != nil) {
+//        NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+//        [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+//    }
+//    if(self.tweetDownloadsInProgress != nil)
+//    {
+//        NSArray *allTweetsimg = [self.tweetDownloadsInProgress allValues];
+//        [allTweetsimg makeObjectsPerformSelector:@selector(cancelDownload)];
+//    }
 }
 - (void)viewDidUnload
 {
     [self setTableActivies:nil];
-    [imageDownloadsInProgress removeAllObjects];
-    [tweetDownloadsInProgress removeAllObjects];
+//    [imageDownloadsInProgress removeAllObjects];
+//    [tweetDownloadsInProgress removeAllObjects];
     [activies removeAllObjects];
     activies = nil;
     _refreshHeaderView = nil;
-    imageDownloadsInProgress = nil;
-    tweetDownloadsInProgress = nil;
+//    imageDownloadsInProgress = nil;
+//    tweetDownloadsInProgress = nil;
     _iconCache = nil;
     [super viewDidUnload];
 }
@@ -104,8 +104,8 @@
     allCount = 0;
     isLoadOver = NO;
     [activies removeAllObjects];
-    [imageDownloadsInProgress removeAllObjects];
-    [tweetDownloadsInProgress removeAllObjects];
+//    [imageDownloadsInProgress removeAllObjects];
+//    [tweetDownloadsInProgress removeAllObjects];
 }
 - (void)reload:(BOOL)noRefresh
 {
@@ -319,9 +319,28 @@
                 [cell.imgPortrait addGestureRecognizer:singleTap];
             //初始化
             [cell initialize];
-            
-            cell.imgPortrait.image = [UIImage imageNamed:@"avatar_loading.jpg"];
             Activity *a = [activies objectAtIndex:indexPath.row];
+//            cell.imgPortrait.image = [UIImage imageNamed:@"avatar_loading.jpg"];
+//            cell.imgPortrait.placeholderImage = [UIImage imageNamed:@"avatar_loading.jpg"];
+//            cell.imgPortrait.imageURL = [NSURL URLWithString:a.img];
+            if (a.img && ![a.img isEqualToString:@""]) {
+                cell.imgPortrait.imageURL = [NSURL URLWithString:a.img];
+            }
+            else
+            {
+                cell.imgPortrait.image = [UIImage imageNamed:@"avatar_noimg.jpg"];
+            }
+//            cell.imgPortrait.placeholderImage = [UIImage imageNamed:@"tweetloading.jpg"];
+            if (a.imgTweet && ![a.imgTweet isEqualToString:@""]) {
+                cell.imgTweet.imageURL = [NSURL URLWithString:a.imgTweet];
+                cell.imgTweet.hidden = NO;
+                cell.imgTweet.frame = CGRectMake(49, a.height+15, 68, 68);
+            }
+            else
+            {
+                cell.imgTweet.hidden = YES;
+            }
+            
             if ([cell.imgPortrait.gestureRecognizers count] > 0) {
                 UITap *tap = (UITap *)[cell.imgPortrait.gestureRecognizers objectAtIndex:0];
                 if (tap) {
@@ -337,54 +356,54 @@
             {
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
-            if (a.imgData) {
-                cell.imgPortrait.image = a.imgData;
-            }
-            //加入下载队列
-            else
-            {
-                if ([a.img isEqualToString:@""]) {
-                    a.imgData = [UIImage imageNamed:@"avatar_noimg.jpg"];
-                }
-                else
-                {
-                    NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:a.img]];
-                    if (imageData) {
-                        a.imgData = [UIImage imageWithData:imageData];
-                        cell.imgPortrait = a.imgData;
-                    } 
-                    else 
-                    {
-                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
-                        if (downloader == nil) {
-                            ImgRecord *record = [ImgRecord new];
-                            record.url = a.img;
-                            [self startIconDownload:record forIndexPath:indexPath];
-                        }
-                    }
-                }
-            }
-            //动弹图片
-            if ([a.imgTweet isEqualToString:@""] == NO) {
-                cell.imgTweet.hidden = NO;
-                cell.imgTweet.frame = CGRectMake(49, a.height+15, 68, 68);
-                if (a.imgTweetData == nil) {
-                    IconDownloader *td = [tweetDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
-                    if (td == nil) {
-                        ImgRecord *tr = [ImgRecord new];
-                        tr.url = a.imgTweet;
-                        [self startIconDownload2:tr forIndexPath:indexPath];
-                    }
-                }
-                else
-                {
-                    cell.imgTweet.image = a.imgTweetData;
-                }
-            }
-            else
-            {
-                cell.imgTweet.hidden = YES;
-            }
+//            if (a.imgData) {
+//                cell.imgPortrait.image = a.imgData;
+//            }
+//            //加入下载队列
+//            else
+//            {
+//                if ([a.img isEqualToString:@""]) {
+//                    a.imgData = [UIImage imageNamed:@"avatar_noimg.jpg"];
+//                }
+//                else
+//                {
+//                    NSData * imageData = [_iconCache getImage:[TQImageCache parseUrlForCacheName:a.img]];
+//                    if (imageData) {
+//                        a.imgData = [UIImage imageWithData:imageData];
+//                        cell.imgPortrait = a.imgData;
+//                    } 
+//                    else 
+//                    {
+////                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+////                        if (downloader == nil) {
+////                            ImgRecord *record = [ImgRecord new];
+////                            record.url = a.img;
+////                            [self startIconDownload:record forIndexPath:indexPath];
+////                        }
+//                    }
+//                }
+//            }
+//            //动弹图片
+//            if ([a.imgTweet isEqualToString:@""] == NO) {
+//                cell.imgTweet.hidden = NO;
+//                cell.imgTweet.frame = CGRectMake(49, a.height+15, 68, 68);
+//                if (a.imgTweetData == nil) {
+////                    IconDownloader *td = [tweetDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
+////                    if (td == nil) {
+////                        ImgRecord *tr = [ImgRecord new];
+////                        tr.url = a.imgTweet;
+////                        [self startIconDownload2:tr forIndexPath:indexPath];
+////                    }
+//                }
+//                else
+//                {
+//                    cell.imgTweet.image = a.imgTweetData;
+//                }
+//            }
+//            else
+//            {
+//                cell.imgTweet.hidden = YES;
+//            }
             return cell;
         }
         else
@@ -545,55 +564,55 @@
 
 #pragma 异步下载图片处理
 //下载图片
-- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
-    IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:key];
-    if (iconDownloader == nil) {
-        iconDownloader = [[IconDownloader alloc] init];
-        iconDownloader.imgRecord = imgRecord;
-        iconDownloader.index = key;
-        iconDownloader.delegate = self;
-        [imageDownloadsInProgress setObject:iconDownloader forKey:key];
-        [iconDownloader startDownload];
-    }
-}
-- (void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
-    IconDownloader *iconDownloader = [tweetDownloadsInProgress objectForKey:key];
-    if (iconDownloader == nil) {
-        iconDownloader = [[IconDownloader alloc] init];
-        iconDownloader.imgRecord = imgRecord;
-        iconDownloader.index = key;
-        iconDownloader.delegate = self;
-        [tweetDownloadsInProgress setObject:iconDownloader forKey:key];
-        [iconDownloader startDownload];
-    }
-}
-- (void)appImageDidLoad:(NSString *)index
-{
-    int _index = [index intValue];
-    if (_index >= [activies count]) {
-        return;
-    }
-    Activity *a = [activies objectAtIndex:[index intValue]];
-    if (a) {
-        IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:index];
-        if (iconDownloader) {
-            a.imgData = iconDownloader.imgRecord.img;
-        }
-        
-        IconDownloader *iconTweet = [tweetDownloadsInProgress objectForKey:index];
-        if (iconTweet) {
-            a.imgTweetData = iconTweet.imgRecord.img;
-        }
-        // cache it
-        NSData * imageData = UIImagePNGRepresentation(a.imgData);
-        [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:a.img]];
-        
-        [tableActivies reloadData];
-    }
-}
+//- (void)startIconDownload:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
+//    IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:key];
+//    if (iconDownloader == nil) {
+//        iconDownloader = [[IconDownloader alloc] init];
+//        iconDownloader.imgRecord = imgRecord;
+//        iconDownloader.index = key;
+//        iconDownloader.delegate = self;
+//        [imageDownloadsInProgress setObject:iconDownloader forKey:key];
+//        [iconDownloader startDownload];
+//    }
+//}
+//- (void)startIconDownload2:(ImgRecord *)imgRecord forIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSString *key = [NSString stringWithFormat:@"%d",[indexPath row]];
+//    IconDownloader *iconDownloader = [tweetDownloadsInProgress objectForKey:key];
+//    if (iconDownloader == nil) {
+//        iconDownloader = [[IconDownloader alloc] init];
+//        iconDownloader.imgRecord = imgRecord;
+//        iconDownloader.index = key;
+//        iconDownloader.delegate = self;
+//        [tweetDownloadsInProgress setObject:iconDownloader forKey:key];
+//        [iconDownloader startDownload];
+//    }
+//}
+//- (void)appImageDidLoad:(NSString *)index
+//{
+//    int _index = [index intValue];
+//    if (_index >= [activies count]) {
+//        return;
+//    }
+//    Activity *a = [activies objectAtIndex:[index intValue]];
+//    if (a) {
+//        IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:index];
+//        if (iconDownloader) {
+//            a.imgData = iconDownloader.imgRecord.img;
+//        }
+//        
+//        IconDownloader *iconTweet = [tweetDownloadsInProgress objectForKey:index];
+//        if (iconTweet) {
+//            a.imgTweetData = iconTweet.imgRecord.img;
+//        }
+//        // cache it
+//        NSData * imageData = UIImagePNGRepresentation(a.imgData);
+//        [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:a.img]];
+//        
+//        [tableActivies reloadData];
+//    }
+//}
 
 @end

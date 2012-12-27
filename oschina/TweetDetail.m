@@ -37,6 +37,10 @@
     //决定开关
     [self.switchToZone setOn:[Config Instance].getIsPostToMyZone];
     
+    if (IS_IPHONE_5) {
+        self.txtComment.frame = CGRectMake(10, 365, 300, 50);
+    }
+    
     self.title = @"动弹详情";
     self.tabBarItem.title = @"动弹详情";
     self.tabBarItem.image = [UIImage imageNamed:@"tweet"];

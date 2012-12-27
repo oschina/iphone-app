@@ -37,7 +37,6 @@
     
     //设定Tab双击刷新事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
-    
     //开始加载
 //    [self reload:YES];
     _iconCache = [[TQImageCache alloc] initWithCachePath:@"icons" andMaxMemoryCacheNumber:50];

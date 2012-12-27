@@ -23,6 +23,13 @@
     self.lblVersion.text = [NSString stringWithFormat:@"版本: %@", AppVersion];
     
     self.navigationItem.title = @"关于我们";
+    
+    if (IS_IPHONE_5) {
+        self.lblVersion.center = CGPointMake(self.lblVersion.center.x, self.lblVersion.center.y + 88);
+        self.lblOSC.center = CGPointMake(self.lblOSC.center.x, self.lblOSC.center.y + 88);
+        self.lblCopyright.center = CGPointMake(self.lblCopyright.center.x, self.lblCopyright.center.y + 88);
+        self.img.image = [UIImage imageNamed:@"aboutbg1136.jpg"];
+    }
 }
 - (void)clickWeb:(id)sender
 {
@@ -31,6 +38,10 @@
 - (void)viewDidUnload
 {
     [self setLblVersion:nil];
+    [self setLblOSC:nil];
+    [self setLblVersion:nil];
+    [self setLblCopyright:nil];
+    [self setImg:nil];
     [super viewDidUnload];
 }
 

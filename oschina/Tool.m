@@ -1459,7 +1459,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 {
     [view addSubview:hud];
     hud.labelText = text;
-    hud.dimBackground = YES;
+//    hud.dimBackground = YES;
     hud.square = YES;
     [hud show:YES];
 }

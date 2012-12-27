@@ -37,6 +37,11 @@
     }
     
     self.view.backgroundColor = [Tool getBackgroundColor];
+    
+    if (IS_IPHONE_5) {
+        self.webViewReply.frame = CGRectMake(0, 0, 320, 323+88);
+        self.txtReply.frame = CGRectMake(8, 332+88, 305, 46);
+    }
 }
 - (void)viewDidAppear:(BOOL)animated
 {

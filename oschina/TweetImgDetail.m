@@ -22,6 +22,10 @@
     
     NSString *img = [NSString stringWithFormat:@"<div style='margin:auto;width:640px;'><img width='640' style='vertical-align:middle' src='%@'/></div>", self.imgHref];
     [self.webView loadHTMLString:img baseURL:nil];
+    
+    if (IS_IPHONE_5) {
+        self.toolBar.frame = CGRectMake(0, -88, 320, 44);
+    }
 }
 - (void)clickCloseThis:(id)sender
 {

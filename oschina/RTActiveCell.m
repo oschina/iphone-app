@@ -19,6 +19,8 @@
     [self.rtLabel setLineSpacing:18];
     [self.contentView addSubview:self.rtLabel];
     [self.rtLabel setBackgroundColor:[UIColor clearColor]];
+    self.imgPortrait.placeholderImage = [UIImage imageNamed:@"avatar_loading.jpg"];
+    self.imgTweet.placeholderImage = [UIImage imageNamed:@"tweetloading.jpg"];
 }
 - (void)layoutSubviews
 {

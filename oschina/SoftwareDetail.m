@@ -24,6 +24,8 @@
     self.title = @"软件详情";
     [Tool clearWebViewBackground:webView];
     self.webView.delegate = self;
+
+    self.webView.frame = CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 44 - 20);
     
     //如果没有网络
     if ([Config Instance].isNetworkRunning) {

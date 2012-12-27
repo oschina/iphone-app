@@ -24,8 +24,7 @@
     
     self.tableInfo.hidden = YES;
     self.navigationItem.title = self.hisName;
-    
-    
+
     self.btnRelation = [[UIBarButtonItem alloc] initWithTitle:@"关注Ta" style:UIBarButtonItemStyleBordered target:self action:@selector(clickRelation:)];
     self.navigationItem.rightBarButtonItem = self.btnRelation;
     
@@ -46,6 +45,7 @@
     //加载
     [self getUserInfo];
 }
+
 
 -(void)getUserInfo
 {
