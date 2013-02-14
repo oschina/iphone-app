@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QuadCurveMenu.h"
-#import "QuadCurveMenuItem.h"
 #import "UserActiveView.h"
 #import "UserBlogsView.h"
 #import "EGOImageView.h"

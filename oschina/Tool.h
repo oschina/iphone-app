@@ -30,7 +30,6 @@
 #import "LoginView.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "RelativeNews.h"
-#import "FTCoreTextView.h"
 //#import "FTCoreTextStyle.h"
 #import "Software.h"
 #import "Blog.h"

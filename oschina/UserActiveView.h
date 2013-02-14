@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
-#import "QuadCurveMenu.h"
-#import "QuadCurveMenuItem.h"
 #import "UserView2.h"
-#import "UserInfoView.h"
 
 @interface UserActiveView : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,IconDownloaderDelegate,EGORefreshTableHeaderDelegate>
 {
