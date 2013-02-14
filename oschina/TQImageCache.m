@@ -46,7 +46,7 @@ static BOOL debugMode = NO;
     }
     maxMemoryCacheNumber = maxNumber;
 
-    if (self = [super init]) {
+    if ((self = [super init])) {
         fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:cachePath isDirectory:nil] == NO) {
             // create the directory
