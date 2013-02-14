@@ -132,6 +132,8 @@
 		8D10B6BE16CD3D2F000ACC2B /* 105@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D10B65716CD3D2F000ACC2B /* 105@2x.png */; };
 		8D10B6C116CD3D91000ACC2B /* faceIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D10B6BF16CD3D91000ACC2B /* faceIcon.png */; };
 		8D10B6C216CD3D91000ACC2B /* k.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D10B6C016CD3D91000ACC2B /* k.png */; };
+		8D10B6C716CD3ED2000ACC2B /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D10B6C416CD3ED2000ACC2B /* IconDownloader.m */; };
+		8D10B6C816CD3ED2000ACC2B /* ImgRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D10B6C616CD3ED2000ACC2B /* ImgRecord.m */; };
 		DA1763F4157C6AA400C7AE95 /* RTActiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1763F2157C6AA400C7AE95 /* RTActiveCell.m */; };
 		DA1763F5157C6AA400C7AE95 /* RTActiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA1763F3157C6AA400C7AE95 /* RTActiveCell.xib */; };
 		DA1763F9157C6BCF00C7AE95 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1763F8157C6BCF00C7AE95 /* RTLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -232,8 +234,6 @@
 		DAB2C90715084C1800DA5B94 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C90615084C1800DA5B94 /* Post.m */; };
 		DAB2C914150858AD00DA5B94 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C912150858AD00DA5B94 /* PostCell.m */; };
 		DAB2C915150858AD00DA5B94 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB2C913150858AD00DA5B94 /* PostCell.xib */; };
-		DAB2C919150868C300DA5B94 /* ImgRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C918150868C300DA5B94 /* ImgRecord.m */; };
-		DAB2C91C150878F600DA5B94 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C91A150878F600DA5B94 /* IconDownloader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DAB2C9511508970500DA5B94 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C94F1508970500DA5B94 /* LoginView.m */; };
 		DAB2C9521508970500DA5B94 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB2C9501508970500DA5B94 /* LoginView.xib */; };
 		DAB2C95615089F2400DA5B94 /* ActivesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C95415089F2400DA5B94 /* ActivesView.m */; };
@@ -511,6 +511,10 @@
 		8D10B65716CD3D2F000ACC2B /* 105@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "105@2x.png"; path = "Images/faces/105@2x.png"; sourceTree = "<group>"; };
 		8D10B6BF16CD3D91000ACC2B /* faceIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = faceIcon.png; path = Images/faces/faceIcon.png; sourceTree = "<group>"; };
 		8D10B6C016CD3D91000ACC2B /* k.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = k.png; path = Images/faces/k.png; sourceTree = "<group>"; };
+		8D10B6C316CD3ED2000ACC2B /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconDownloader.h; path = Vendors/AsyncImg/IconDownloader.h; sourceTree = "<group>"; };
+		8D10B6C416CD3ED2000ACC2B /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IconDownloader.m; path = Vendors/AsyncImg/IconDownloader.m; sourceTree = "<group>"; };
+		8D10B6C516CD3ED2000ACC2B /* ImgRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImgRecord.h; path = Vendors/AsyncImg/ImgRecord.h; sourceTree = "<group>"; };
+		8D10B6C616CD3ED2000ACC2B /* ImgRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImgRecord.m; path = Vendors/AsyncImg/ImgRecord.m; sourceTree = "<group>"; };
 		DA1763F1157C6AA400C7AE95 /* RTActiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTActiveCell.h; sourceTree = "<group>"; };
 		DA1763F2157C6AA400C7AE95 /* RTActiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTActiveCell.m; sourceTree = "<group>"; };
 		DA1763F3157C6AA400C7AE95 /* RTActiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RTActiveCell.xib; sourceTree = "<group>"; };
@@ -655,10 +659,6 @@
 		DAB2C911150858AD00DA5B94 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		DAB2C912150858AD00DA5B94 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		DAB2C913150858AD00DA5B94 /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
-		DAB2C917150868C300DA5B94 /* ImgRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgRecord.h; sourceTree = "<group>"; };
-		DAB2C918150868C300DA5B94 /* ImgRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgRecord.m; sourceTree = "<group>"; };
-		DAB2C91A150878F600DA5B94 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
-		DAB2C91B150878F600DA5B94 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		DAB2C94E1508970500DA5B94 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		DAB2C94F1508970500DA5B94 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		DAB2C9501508970500DA5B94 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -923,6 +923,12 @@
 		8D10B5F016CD3C6B000ACC2B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				DAB2C9161508684800DA5B94 /* AsyncImg */,
+				DA5F8637153E4DDE009714C7 /* FTColor */,
+				DA7B75FD1553E4A400461B45 /* Regex */,
+				DAD6B7D8152317EA007E2760 /* MBHud */,
+				DAC7AE66152004000017491E /* EGOImageLoading */,
+				DACC68AC14FF84EF006F7B6A /* ASIHttp */,
 				DACC68DF14FF879F006F7B6A /* TBXML */,
 				DAF7AB251614180C005D464C /* AES */,
 				DAB06C8B15DA367B007311E4 /* AFNetwork */,
@@ -1083,10 +1089,10 @@
 		DAB2C9161508684800DA5B94 /* AsyncImg */ = {
 			isa = PBXGroup;
 			children = (
-				DAB2C91A150878F600DA5B94 /* IconDownloader.m */,
-				DAB2C91B150878F600DA5B94 /* IconDownloader.h */,
-				DAB2C917150868C300DA5B94 /* ImgRecord.h */,
-				DAB2C918150868C300DA5B94 /* ImgRecord.m */,
+				8D10B6C316CD3ED2000ACC2B /* IconDownloader.h */,
+				8D10B6C416CD3ED2000ACC2B /* IconDownloader.m */,
+				8D10B6C516CD3ED2000ACC2B /* ImgRecord.h */,
+				8D10B6C616CD3ED2000ACC2B /* ImgRecord.m */,
 			);
 			name = AsyncImg;
 			sourceTree = "<group>";
@@ -1545,23 +1551,15 @@
 				DA282A89155CD26B002D773A /* Friends */,
 				DAC73613155B6ED400D8B5E6 /* Search */,
 				DA7CAF70155A6FC4007FD375 /* Favorite */,
-				DA7B75FD1553E4A400461B45 /* Regex */,
-				DA5F8637153E4DDE009714C7 /* FTColor */,
-				DAD6B7D8152317EA007E2760 /* MBHud */,
-				DAC7AE66152004000017491E /* EGOImageLoading */,
 				DA66191D1512DFCC004AFAA1 /* User */,
 				DACEB0B0150EF4BC001D4A24 /* Comment */,
-				DAB2C9161508684800DA5B94 /* AsyncImg */,
 				DAC69BE31505CFDE00C2FCEC /* Setting */,
 				DAC69BD81505BCC000C2FCEC /* Profile */,
 				DAC69BCC1505B95700C2FCEC /* News */,
 				DACA4EC71504C18F00EAC504 /* Tweet */,
 				DABA75BB15045B4400521596 /* Helper */,
-				DACC68AC14FF84EF006F7B6A /* ASIHttp */,
 				DACC68A614FF8470006F7B6A /* Model */,
 				8D10B5F016CD3C6B000ACC2B /* Vendors */,
-				DACC688914FF8049006F7B6A /* OSAppDelegate.h */,
-				DACC688A14FF8049006F7B6A /* OSAppDelegate.m */,
 				DACC68A514FF8101006F7B6A /* Resource */,
 				DACC688114FF8049006F7B6A /* Supporting Files */,
 			);
@@ -1571,6 +1569,8 @@
 		DACC688114FF8049006F7B6A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DACC688914FF8049006F7B6A /* OSAppDelegate.h */,
+				DACC688A14FF8049006F7B6A /* OSAppDelegate.m */,
 				DA582FF6168458FA006F3BF8 /* Default-568h@2x.png */,
 				DA61F7B415C27506003305E5 /* Icon.png */,
 				DA61F7B515C27506003305E5 /* Icon@2x.png */,
@@ -2067,8 +2067,6 @@
 				DA335880150765C600F6671E /* News.m in Sources */,
 				DAB2C90715084C1800DA5B94 /* Post.m in Sources */,
 				DAB2C914150858AD00DA5B94 /* PostCell.m in Sources */,
-				DAB2C919150868C300DA5B94 /* ImgRecord.m in Sources */,
-				DAB2C91C150878F600DA5B94 /* IconDownloader.m in Sources */,
 				DAB2C9511508970500DA5B94 /* LoginView.m in Sources */,
 				DAB2C95615089F2400DA5B94 /* ActivesView.m in Sources */,
 				DAB2C95B1508A16E00DA5B94 /* MessageView.m in Sources */,
@@ -2169,6 +2167,8 @@
 				8D10B5EB16CD3B36000ACC2B /* TBXML+HTTP.m in Sources */,
 				8D10B5EC16CD3B36000ACC2B /* TBXML.m in Sources */,
 				8D10B5EF16CD3C62000ACC2B /* GCDiscreetNotificationView.m in Sources */,
+				8D10B6C716CD3ED2000ACC2B /* IconDownloader.m in Sources */,
+				8D10B6C816CD3ED2000ACC2B /* ImgRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
