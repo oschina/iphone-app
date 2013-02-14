@@ -22,19 +22,19 @@
     [super viewDidLoad];
     [Tool roundTextView:txtContent];
     [txtContent setDelegate:self];
-    
+
     self.navigationItem.title = @"我要提问";
-    
+
     //切换
     [self.switchNotice setOn:[[Config Instance] isPostPubNoticeMe]];
-    
+
     UIBarButtonItem *btnPub = [[UIBarButtonItem alloc] initWithTitle:@"发表问题" style:UIBarButtonItemStyleBordered target:self action:@selector(clickPub:)];
     self.navigationItem.rightBarButtonItem = btnPub;
-    
+
     self.segmentCatalog.selectedSegmentIndex = [[Config Instance] getPubPostCatalog];
-    
+
     self.view.backgroundColor = [Tool getBackgroundColor];
-    
+
     [txtTitle becomeFirstResponder];
 }
 
@@ -68,10 +68,10 @@
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
     [Tool showHUD:@"正在发表" andView:self.view andHUD:hud];
     [[AFOSCClient sharedClient] postPath:api_post_pub parameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",[Config Instance].getUID],@"uid",title,@"title",[NSString stringWithFormat:@"%d", self.segmentCatalog.selectedSegmentIndex+1],@"catalog",content,@"content",self.switchNotice.isOn ? @"1":@"0",@"isNoticeMe", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+
         [hud hide:YES];
         [Tool getOSCNotice2:operation.responseString];
-        
+
         ApiError *error = [Tool getApiError2:operation.responseString];
         if (error == nil) {
             [Tool ToastNotification:operation.responseString andView:self.view andLoading:NO andIsBottom:NO];
@@ -82,7 +82,7 @@
             {
                 [Config Instance].questionIndex = 0;
                 [Config Instance].questionContent = nil;
-                [Config Instance].questionTitle = Nil;
+                [Config Instance].questionTitle = nil;
                 [self.navigationController popViewControllerAnimated:YES];
             }
                 break;
@@ -94,14 +94,14 @@
             }
                 break;
         }
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+
         [hud hide:YES];
         [Tool ToastNotification:@"发布问题失败" andView:self.view andLoading:NO andIsBottom:NO];
-        
+
     }];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated

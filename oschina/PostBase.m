@@ -24,7 +24,7 @@
 {
     self.tabBarItem.image = [UIImage imageNamed:@"answer"];
     self.tabBarItem.title = @"问答";
-    
+
     NSArray *segmentTextContent = [NSArray arrayWithObjects:
                                    @"问答",
                                    @"分享",
@@ -42,9 +42,10 @@
     //子页面初始化
     self.postsView = [[PostsView alloc] init];
     self.postsView.catalog = 1;
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.postsView];
     [self.view addSubview:self.postsView.view];
-    
+
     //添加发布动弹的按钮
     UIBarButtonItem *btnPubPost = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:nil];
     btnPubPost.title = @"";
@@ -58,7 +59,7 @@
         [Tool noticeLogin:self.view andDelegate:self andTitle:@"请先登录后再发表问答"];
         return;
     }
-    
+
     PostPubView *pub = [[PostPubView alloc] init];
     pub.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pub animated:YES];

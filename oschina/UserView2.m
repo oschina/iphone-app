@@ -200,6 +200,7 @@
                                         case -2:
                                         case -1:
                                         {
+                                            // FIXME self is no BOOL type
                                             [Tool ToastNotification:@"操作失败" andView:self.view  andLoading:self andIsBottom:NO];
                                             return;
                                         }

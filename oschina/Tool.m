@@ -539,7 +539,9 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 + (void)doSound:(id)sender
 {
     NSError *err;
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"soundeffect" ofType:@"wav"]] error:&err];
+    // FIXME: soundeffect.wav not found
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"soundeffect" ofType:@"wav"]];
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&err];
     player.volume = 1;
     player.numberOfLoops = 1;
     [player prepareToPlay];
@@ -1485,6 +1487,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     [request setPostValue:[NSString stringWithFormat:@"%d", type] forKey:@"type"];
     [request setDelegate:viewController];
     [request setDidFailSelector:@selector(requestFailed:)];
+    // FIXME: requestFavoriteAction: method not found
     [request setDidFinishSelector:@selector(requestFavoriteAction:)];
     [request startAsynchronous];
     request.hud = [[MBProgressHUD alloc] initWithView:viewController.view];

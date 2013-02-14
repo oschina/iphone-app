@@ -26,18 +26,18 @@
     [super viewDidLoad];
     [txtReply setDelegate:self];
     [Tool roundTextView:self.txtReply];
-    
+
     UIBarButtonItem *_btnPub = [[UIBarButtonItem alloc] initWithTitle:@"回复" style:UIBarButtonItemStyleBordered target:self action:@selector(clickReply:)];
     self.navigationItem.rightBarButtonItem = _btnPub;
-    
-    if (self.parentComment) 
+
+    if (self.parentComment)
     {
         [self.webViewReply loadHTMLString:[Tool generateCommentDetail:self.parentComment] baseURL:nil];
         [Tool clearWebViewBackground:self.webViewReply];
     }
-    
+
     self.view.backgroundColor = [Tool getBackgroundColor];
-    
+
     if (IS_IPHONE_5) {
         self.webViewReply.frame = CGRectMake(0, 0, 320, 323+88);
         self.txtReply.frame = CGRectMake(8, 332+88, 305, 46);
@@ -49,7 +49,7 @@
     if (value != nil) {
         self.txtReply.text = value;
     }
-    
+
     if (commentBeforeLogin) {
         txtReply.text = commentBeforeLogin;
         commentBeforeLogin = nil;
@@ -66,14 +66,14 @@
     [super viewDidUnload];
 }
 - (IBAction)clickBackground:(id)sender {
-    
+
     [txtReply resignFirstResponder];
 }
 - (IBAction)clickReply:(id)sender {
-    
+
     [self clickBackground:nil];
     NSString *message = self.txtReply.text;
-    if ([message isEqualToString:@""]) 
+    if ([message isEqualToString:@""])
     {
         [Tool ToastNotification:@"错误 回复内容不能为空" andView:self.view andLoading:NO andIsBottom:NO];
         return;
@@ -81,7 +81,7 @@
 
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
     [Tool showHUD:@"正在回复" andView:self.view andHUD:hud];
-    if (self.parent.commentType != 5) 
+    if (self.parent.commentType != 5)
     {
 
         [[AFOSCClient sharedClient] postPath:api_comment_reply
@@ -128,12 +128,12 @@
                                           }
                                               break;
                                       }
-                                      
+
                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                       [hud hide:YES];
                                       [Tool ToastNotification:@"网络连接故障" andView:self.view andLoading:NO andIsBottom:NO];
                                   }];
-        
+
     }
     else
     {
@@ -145,10 +145,10 @@
                                               [NSString stringWithFormat:@"%d",self.replyID],@"reply_id",
                                               [NSString stringWithFormat:@"%d",parentComment.authorid],@"objuid",
                                               nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                      
+
                                       [hud hide:YES];
                                       [Tool getOSCNotice2:operation.responseString];
-                                      
+
                                       ApiError * error = [Tool getApiError2:operation.responseString];
                                       if (error == nil) {
                                           [Tool ToastNotification:operation.responseString andView:self.view andLoading:NO andIsBottom:NO];
@@ -181,7 +181,7 @@
                                           }
                                               break;
                                       }
-                                      
+
                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                       [hud hide:YES];
                                       [Tool ToastNotification:@"网络连接故障" andView:self.view andLoading:NO andIsBottom:NO];
@@ -196,7 +196,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     [Tool analysis:[request.URL absoluteString] andNavController:self.parentViewController.navigationController];
-    if ([request.URL.absoluteString isEqualToString:@"about:blank"]) 
+    if ([request.URL.absoluteString isEqualToString:@"about:blank"])
     {
         return YES;
     }
@@ -214,6 +214,7 @@
     [UIView commitAnimations];
     return YES;
 }
+// FIXME: should be UITextView
 -(BOOL)textViewShouldEndEditing:(UITextField *)textField
 {
     [UIView beginAnimations:nil context:NULL];

@@ -82,7 +82,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _emojiArray = [NSArray arrayWithObjects:
+        _emojiArray = [NSMutableArray arrayWithObjects:
                        [UIImage imageNamed:@"001.png"],
                        [UIImage imageNamed:@"002.png"],
                        [UIImage imageNamed:@"003.png"],
@@ -196,7 +196,7 @@
 
                        nil];
 
-        _symbolArray = [NSArray arrayWithObjects:
+        _symbolArray = [NSMutableArray arrayWithObjects:
                         @"0",
                         @"1",
                         @"2",

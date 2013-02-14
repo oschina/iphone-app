@@ -16,9 +16,9 @@
     BOOL isLoading;
     BOOL isLoadOver;
     int relationShip;
-    
+
     int allCount;
-    
+
     //下拉刷新
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;

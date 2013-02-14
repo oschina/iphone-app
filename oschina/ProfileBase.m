@@ -41,13 +41,15 @@
     self.segment_Title.frame = CGRectMake(0, 0, 300, 30);
     [self.segment_Title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segment_Title;
-    
+
     //下属控件初始化
     self.activesView = [[ActivesView alloc] init];
     self.activesView.catalog = 1;
     self.msgView = [[MessageView alloc] init];
     self.msgView.view.hidden = YES;
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.activesView];
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.msgView];
     [self.view addSubview:self.activesView.view];
     [self.view addSubview:self.msgView.view];
@@ -71,7 +73,7 @@
         }
         [self segmentAction:nil];
     }
-    
+
     if (self.segment_Title == nil || self.activesView == nil) {
         [self myInit];
     }
@@ -88,7 +90,7 @@
         [Config Instance].viewNameBeforeLogin = nil;
         if (self.activesView) {
             //显示变化
-            switch (self.segment_Title.selectedSegmentIndex) 
+            switch (self.segment_Title.selectedSegmentIndex)
             {
                 case 0:
                 case 1:
@@ -143,7 +145,7 @@
         [self.segment_Title setTitle:notice.atmeCount ? [NSString stringWithFormat:@"@我(%d)", notice.atmeCount] : @"@我" forSegmentAtIndex:1];
         [self.segment_Title setTitle:notice.reviewCount ? [NSString stringWithFormat:@"评论(%d)", notice.reviewCount] : @"评论" forSegmentAtIndex:2];
         [self.segment_Title setTitle:notice.msgCount ? [NSString stringWithFormat:@"留言(%d)", notice.msgCount] : @"留言" forSegmentAtIndex:4];
-        
+
         //优先级获取
         if (notice.atmeCount > 0) {
             nextTabIndexByNotice = 1;
@@ -181,7 +183,7 @@
             break;
     }
     //显示变化
-    switch (self.segment_Title.selectedSegmentIndex) 
+    switch (self.segment_Title.selectedSegmentIndex)
     {
         case 0:
         case 1:
@@ -213,11 +215,11 @@
     NSString *url = [NSString stringWithFormat:@"%@?uid=%d&type=%d", api_notice_clear, [Config Instance].getUID, type];
     [[AFOSCClient sharedClient] getPath:url parameters:nil
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
+
                                     [Tool getOSCNotice2:operation.responseString];
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    
+
                                 }];
 }
 - (NSString *)getSegmentTitle
