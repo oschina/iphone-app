@@ -1618,8 +1618,8 @@
 		DACC68A514FF8101006F7B6A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				DA5FF25216844A4200444C68 /* aboutbg1136.jpg */,
 				DAC77D5515CFC92100AC22FF /* face */,
+				DA5FF25216844A4200444C68 /* aboutbg1136.jpg */,
 				DAD47B6E15A52C0600A92958 /* rating@2x.png */,
 				DAB553AE15A4321C00DC46A4 /* searchWhite@2x.png */,
 				DAC0FB251564B3FD000D7558 /* more@2x.png */,
