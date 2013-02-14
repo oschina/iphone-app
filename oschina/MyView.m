@@ -26,11 +26,11 @@
     self.egoImgView = [[EGOImageView alloc] initWithFrame:CGRectMake(18, 16, 50, 50)];
     self.egoImgView.image = [UIImage imageNamed:@"big_avatar_loading.png"];
     [self.view addSubview:self.egoImgView];
-    
+
     [self reload];
 
     self.settingsInSection = [[NSMutableDictionary alloc] initWithCapacity:3];
-    
+
     first = [[NSArray alloc] initWithObjects:
              [[SettingModel alloc] initWith:@"收藏" andImg:nil andTag:0 andTitle2:nil],
              nil];
@@ -51,7 +51,7 @@
 }
 #pragma mark 更新头像
 - (IBAction)clickUpdatePortrait:(id)sender {
-    
+
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"请选择图片来源" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"返回" otherButtonTitles:@"图库",@"拍照", nil];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -93,7 +93,7 @@
          didCropPhoto:(UIImage *)photo
 {
     [self.navigationController popViewControllerAnimated:YES];
-    
+
     //对photo进行处理
     [[MyThread Instance] startUpdatePortrait:UIImageJPEGRepresentation(photo, 0.75f)];
     [Tool ToastNotification:@"正在上传您的头像" andView:self.view andLoading:YES andIsBottom:NO];
@@ -113,9 +113,9 @@
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
     [Tool showHUD:@"正在获取信息" andView:self.view andHUD:hud];
     [[AFOSCClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+
         [hud hide:YES];
-        [Tool getOSCNotice2:operation.responseString]; 
+        [Tool getOSCNotice2:operation.responseString];
         @try {
             TBXML *xml = [[TBXML alloc] initWithXMLString:operation.responseString error:nil];
             TBXMLElement *root = xml.rootXMLElement;
@@ -138,21 +138,21 @@
             TBXMLElement *favoritecount = [TBXML childElementNamed:@"favoritecount" parentElement:user];
             TBXMLElement *fanscount = [TBXML childElementNamed:@"fanscount" parentElement:user];
             TBXMLElement *followerscount = [TBXML childElementNamed:@"followerscount" parentElement:user];
-            
+
             fansCount = [[TBXML textForElement:fanscount] intValue];
             followersCount = [[TBXML textForElement:followerscount] intValue];
-            
+
             //头像
             NSString *portrait_str = [TBXML textForElement:portrait];
-            if ([portrait_str isEqualToString:@""]) 
+            if ([portrait_str isEqualToString:@""])
             {
                 self.egoImgView.image = [UIImage imageNamed:@"big_avatar.png"];
             }
             else
             {
                 self.egoImgView.imageURL = [NSURL URLWithString:portrait_str];
-            }  
-            
+            }
+
             //性别于姓名
             self.lblName.text = [TBXML textForElement:name];
             if ([[TBXML textForElement:gender] intValue] == 1) {
@@ -185,9 +185,9 @@
             [NdUncaughtExceptionHandler TakeException:exception];
         }
         @finally {
-            
+
         }
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud hide:YES];
         [Tool ToastNotification:@"网络连接错误" andView:self.view andLoading:NO andIsBottom:NO];
@@ -275,7 +275,6 @@
             cell.tag = model.tag;
             return cell;
         }
-            break;
         case 2:
         {
             MyInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:MyInfoCellIdentifier];
@@ -295,7 +294,6 @@
             cell.tag = model.tag;
             return cell;
         }
-            break;
         default:
             return nil;
     }

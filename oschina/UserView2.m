@@ -21,17 +21,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.tableInfo.hidden = YES;
     self.navigationItem.title = self.hisName;
 
     self.btnRelation = [[UIBarButtonItem alloc] initWithTitle:@"关注Ta" style:UIBarButtonItemStyleBordered target:self action:@selector(clickRelation:)];
     self.navigationItem.rightBarButtonItem = self.btnRelation;
-    
+
     self.egoImgView = [[EGOImageView alloc] initWithFrame:CGRectMake(40, 25, 50, 50)];
     self.egoImgView.image = [UIImage imageNamed:@"big_avatar_loading.png"];
     [self.view addSubview:self.egoImgView];
-    
+
     //信息初始化
     infos = [NSArray arrayWithObjects:
               [[SettingModel alloc] initWith:@"最近登录" andImg:nil andTag:0 andTitle2:nil],
@@ -41,7 +41,7 @@
               [[SettingModel alloc] initWith:@"专长领域" andImg:nil andTag:0 andTitle2:nil],
               [[SettingModel alloc] initWith:@"开发平台" andImg:nil andTag:0 andTitle2:nil],nil];
     self.tableInfo.delegate = self;
-    
+
     //加载
     [self getUserInfo];
 }
@@ -57,14 +57,14 @@
     {
         url = [NSString stringWithFormat:@"%@?uid=%d&hisuid=%d&pageIndex=0&pageSize=1",api_user_information,[Config Instance].getUID,self.hisUID];
     }
-    
+
     [[AFOSCClient sharedClient] getPath:url
                              parameters:nil
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
+
                                     self.tableInfo.hidden = NO;
                                     [Tool getOSCNotice2:operation.responseString];
-                                    
+
                                     @try {
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:operation.responseString error:nil];
                                         TBXMLElement *root = xml.rootXMLElement;
@@ -89,28 +89,28 @@
                                         TBXMLElement *devplatform = [TBXML childElementNamed:@"devplatform" parentElement:user];
                                         TBXMLElement *expertise = [TBXML childElementNamed:@"expertise" parentElement:user];
                                         TBXMLElement *latestoneline = [TBXML childElementNamed:@"latestonline" parentElement:user];
-                                        
+
                                         SettingModel *m1 = [infos objectAtIndex:0];
                                         m1.title2 = [Tool intervalSinceNow:[TBXML textForElement:latestoneline]];
-                                        
+
                                         SettingModel *m2 = [infos objectAtIndex:1];
                                         m2.title2 = [TBXML textForElement:gender];
-                                        
+
                                         SettingModel *m3 = [infos objectAtIndex:2];
                                         m3.title2 = [TBXML textForElement:from];
-                                        
+
                                         SettingModel *m4 = [infos objectAtIndex:3];
                                         m4.title2 = [TBXML textForElement:jointime];
-                                        
+
                                         SettingModel *m5 = [infos objectAtIndex:4];
                                         m5.title2 = [TBXML textForElement:expertise];
-                                        
+
                                         SettingModel *m6 = [infos objectAtIndex:5];
                                         m6.title2 = [TBXML textForElement:devplatform];
                                         [self.tableInfo reloadData];
-                                        
+
                                         NSString *portrait_str = [TBXML textForElement:hisportrait];
-                                        if ([portrait_str isEqualToString:@""]) 
+                                        if ([portrait_str isEqualToString:@""])
                                         {
                                             self.egoImgView.image = [UIImage imageNamed:@"big_avatar.png"];
                                         }
@@ -119,7 +119,7 @@
                                             self.egoImgView.image = nil;
                                             self.egoImgView.imageURL = [NSURL URLWithString:portrait_str];
                                         }
-                                        
+
                                         relationShip = [[TBXML textForElement:relation] intValue];
                                         //更改按钮的字符
                                         switch (relationShip) {
@@ -140,14 +140,14 @@
                                             }
                                                 break;
                                         }
-                                        
+
                                     }
-                                    @catch (NSException *exception) { 
+                                    @catch (NSException *exception) {
                                         [NdUncaughtExceptionHandler TakeException:exception];
                                     }
-                                    @finally {  
+                                    @finally {
                                     }
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                     [Tool ToastNotification:@"网络连接故障" andView:self.view andLoading:NO andIsBottom:NO];
                                 }];
@@ -159,7 +159,7 @@
         [Tool noticeLogin:self.view andDelegate:self andTitle:@"请您先登录"];
         return;
     }
-    //根据现在关系决定用户能做的操作 
+    //根据现在关系决定用户能做的操作
     int newrelation = 0;
     switch (relationShip) {
         case 1:
@@ -181,7 +181,7 @@
     [Tool showHUD:@"正在载入信息" andView:self.view andHUD:hud];
     [[AFOSCClient sharedClient] getPath:url parameters:nil
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
+
                                     [hud hide:YES];
                                     //重新刷新
                                     ApiError *error = [Tool getApiError2:operation.responseString];
@@ -203,9 +203,8 @@
                                             [Tool ToastNotification:@"操作失败" andView:self.view  andLoading:self andIsBottom:NO];
                                             return;
                                         }
-                                            break;
                                     }
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                     [hud hide:YES];
                                     [Tool ToastNotification:@"网络连接故障" andView:self.view andLoading:NO andIsBottom:NO];
@@ -223,7 +222,7 @@
 }
 
 - (IBAction)click_AT:(id)sender {
-    
+
     if (hisName == nil || [hisName isEqualToString:@""]) {
         return;
     }
