@@ -43,7 +43,7 @@ static inline NSString* EGOCacheDirectory() {
 		NSString* cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 		_EGOCacheDirectory = [[[cachesDirectory stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]] stringByAppendingPathComponent:@"EGOCache"] copy];
 	}
-	
+
 	return _EGOCacheDirectory;
 }
 
@@ -71,27 +71,27 @@ static EGOCache* __instance;
 			__instance.defaultTimeoutInterval = 86400;
 		}
 	}
-	
+
 	return __instance;
 }
 
 - (id)init {
 	if((self = [super init])) {
 		NSDictionary* dict = [NSDictionary dictionaryWithContentsOfFile:cachePathForKey(@"EGOCache.plist")];
-		
+
 		if([dict isKindOfClass:[NSDictionary class]]) {
 			cacheDictionary = [dict mutableCopy];
 		} else {
 			cacheDictionary = [[NSMutableDictionary alloc] init];
 		}
-		
+
 		diskOperationQueue = [[NSOperationQueue alloc] init];
-		
-		[[NSFileManager defaultManager] createDirectoryAtPath:EGOCacheDirectory() 
-								  withIntermediateDirectories:YES 
-												   attributes:nil 
+
+		[[NSFileManager defaultManager] createDirectoryAtPath:EGOCacheDirectory()
+								  withIntermediateDirectories:YES
+												   attributes:nil
 														error:NULL];
-		
+
 		for(NSString* key in cacheDictionary) {
 			NSDate* date = [cacheDictionary objectForKey:key];
 			if([[[NSDate date] earlierDate:date] isEqualToDate:date]) {
@@ -99,7 +99,7 @@ static EGOCache* __instance;
 			}
 		}
 	}
-	
+
 	return self;
 }
 
@@ -107,12 +107,12 @@ static EGOCache* __instance;
 	for(NSString* key in [cacheDictionary allKeys]) {
 		[self removeItemFromCache:key];
 	}
-	
+
 	[self saveCacheDictionary];
 }
 
 - (void)removeCacheForKey:(NSString*)key {
-	CHECK_FOR_EGOCACHE_PLIST();
+	CHECK_FOR_EGOCACHE_PLIST()
 
 	[self removeItemFromCache:key];
 	[self saveCacheDictionary];
@@ -120,12 +120,12 @@ static EGOCache* __instance;
 
 - (void)removeItemFromCache:(NSString*)key {
 	NSString* cachePath = cachePathForKey(key);
-	
+
 	NSInvocation* deleteInvocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(deleteDataAtPath:)]];
 	[deleteInvocation setTarget:self];
 	[deleteInvocation setSelector:@selector(deleteDataAtPath:)];
 	[deleteInvocation setArgument:&cachePath atIndex:2];
-	
+
 	[self performDiskWriteOperation:deleteInvocation];
 	[cacheDictionary removeObjectForKey:key];
 }
@@ -148,7 +148,7 @@ static EGOCache* __instance;
 	[[NSFileManager defaultManager] copyItemAtPath:filePath toPath:cachePathForKey(key) error:NULL];
 	[cacheDictionary setObject:[NSDate dateWithTimeIntervalSinceNow:timeoutInterval] forKey:key];
 	[self performSelectorOnMainThread:@selector(saveAfterDelay) withObject:nil waitUntilDone:YES];
-}																												   
+}
 
 #pragma mark -
 #pragma mark Data methods
@@ -158,18 +158,18 @@ static EGOCache* __instance;
 }
 
 - (void)setData:(NSData*)data forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval {
-	CHECK_FOR_EGOCACHE_PLIST();
-	
+	CHECK_FOR_EGOCACHE_PLIST()
+
 	NSString* cachePath = cachePathForKey(key);
 	NSInvocation* writeInvocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(writeData:toPath:)]];
 	[writeInvocation setTarget:self];
 	[writeInvocation setSelector:@selector(writeData:toPath:)];
 	[writeInvocation setArgument:&data atIndex:2];
 	[writeInvocation setArgument:&cachePath atIndex:3];
-	
+
 	[self performDiskWriteOperation:writeInvocation];
 	[cacheDictionary setObject:[NSDate dateWithTimeIntervalSinceNow:timeoutInterval] forKey:key];
-	
+
 	[self performSelectorOnMainThread:@selector(saveAfterDelay) withObject:nil waitUntilDone:YES]; // Need to make sure the save delay get scheduled in the main runloop, not the current threads
 }
 
@@ -188,7 +188,7 @@ static EGOCache* __instance;
 
 - (void)writeData:(NSData*)data toPath:(NSString *)path; {
 	[data writeToFile:path atomically:YES];
-} 
+}
 
 - (void)deleteDataAtPath:(NSString *)path {
 	[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
@@ -253,9 +253,9 @@ static EGOCache* __instance;
 #pragma mark -
 #pragma mark Property List methods
 
-- (NSData*)plistForKey:(NSString*)key; {  
+- (NSData*)plistForKey:(NSString*)key; {
 	NSData* plistData = [self dataForKey:key];
-	
+
 	return [NSPropertyListSerialization propertyListFromData:plistData
 											mutabilityOption:NSPropertyListImmutable
 													  format:nil
@@ -268,10 +268,10 @@ static EGOCache* __instance;
 
 - (void)setPlist:(id)plistObject forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval; {
 	// Binary plists are used over XML for better performance
-	NSData* plistData = [NSPropertyListSerialization dataFromPropertyList:plistObject 
+	NSData* plistData = [NSPropertyListSerialization dataFromPropertyList:plistObject
 																   format:NSPropertyListBinaryFormat_v1_0
 														 errorDescription:NULL];
-	
+
 	[self setData:plistData forKey:key withTimeoutInterval:timeoutInterval];
 }
 

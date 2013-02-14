@@ -27,7 +27,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 {
     @try {
         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
-        TBXMLElement *root = xml.rootXMLElement;  
+        TBXMLElement *root = xml.rootXMLElement;
         if (root == nil) {
             return nil;
         }
@@ -80,7 +80,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 + (NSMutableArray *)getRelativeNews:(NSString *)request
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:request error:nil];
-    TBXMLElement *root = xml.rootXMLElement;    
+    TBXMLElement *root = xml.rootXMLElement;
     TBXMLElement *news = [TBXML childElementNamed:@"news" parentElement:root];
     TBXMLElement *relativies = [TBXML childElementNamed:@"relativies" parentElement:news];
     if (relativies) {
@@ -120,7 +120,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 {
     NSString *first = [NSString stringWithFormat:@"<div style='color:#0D6DA8;font-size:16px'>%@ 发表于%@</div>", comment.author, comment.pubDate];
     NSString *second = [NSString stringWithFormat:@"<div style='font-size:15px;line-height:20px'>%@</div>",comment.content];
-    
+
     NSString *three = @"";
     if ([comment.replies count]>0) {
         three = [NSString stringWithFormat:@"<br/><div style='font-size:14px;line-height:19px'>-- 共有%d条评论 --</div><div style='font-size:13px;color:#888888;'>", [comment.replies count]];
@@ -200,7 +200,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
             nDetail.newsID = news._id;
             nDetail.isNextPage = isNextPage;
             nDetail.tabBarItem.image = [UIImage imageNamed:@"detail"];
-            
+
             MessageSystemView *newsComments = [[MessageSystemView alloc] init];
             newsComments.tabBarItem.title = @"评论";
             newsComments.tabBarItem.image = [UIImage imageNamed:@"commentlist"];
@@ -209,7 +209,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
             newsComments.replyLabelTitle = @"评论此回帖";
             newsComments.catalog = 1;
             newsComments.parentID = news._id;
-            
+
             ShareView *shareView = [[ShareView alloc] init];
             shareView.tabBarItem.image = [UIImage imageNamed:@"share"];
             newsTab.viewControllers = [NSArray arrayWithObjects:nDetail,newsComments,shareView, nil];
@@ -239,11 +239,11 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
         {
             UITabBarController *blogTab = [[UITabBarController alloc] init];
             blogTab.title = @"博客详情";
-            
+
             BlogDetail *blog = [[BlogDetail alloc] init];
             blog.blogID = [news.attachment intValue];
             blog.tabBarItem.image = [UIImage imageNamed:@"detail"];
-            
+
             MessageSystemView * comments = [[MessageSystemView alloc] init];
             comments.parentAuthorUID = news.authoruid2;
             comments.tabBarItem.title = @"评论";
@@ -271,7 +271,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     singlePost.tabBarItem.title = @"问答详情";
     singlePost.tabBarItem.image = [UIImage imageNamed:@"detail"];
     singlePost.postID = post._id;
-    
+
     MessageSystemView *commentsView = [[MessageSystemView alloc] init];
     commentsView.tabBarItem.title = @"回帖";
     commentsView.tabBarItem.image = [UIImage imageNamed:@"commentlist"];
@@ -281,7 +281,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     commentsView.attachment = singlePost;
     commentsView.catalog = 2;
     commentsView.parentID = post._id;
-    
+
     ShareView *shareView = [[ShareView alloc] init];
     shareView.tabBarItem.image = [UIImage imageNamed:@"share"];
     postTab.viewControllers = [NSArray arrayWithObjects:singlePost,commentsView,shareView, nil];
@@ -294,7 +294,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TweetDetail *tweetDetail = [[TweetDetail alloc] init];
     tweetDetail.tweetID = tweet._id;
     tweetDetail.tabBarItem.image = [UIImage imageNamed:@"detail"];
-    
+
     MessageSystemView *tweetComments = [[MessageSystemView alloc] init];
     tweetComments.isDisplayRepostToMyZone = YES;
     tweetComments.tabBarItem.title = @"评论";
@@ -303,7 +303,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     tweetComments.replyLabelTitle = @"评论此回帖";
     tweetComments.catalog = 3;
     tweetComments.parentID = tweet._id;
-    
+
     tweetTab.viewControllers = [NSArray arrayWithObjects:tweetDetail,tweetComments,nil];
     tweetTab.hidesBottomBarWhenPushed = YES;
     [navController pushViewController:tweetTab animated:YES];
@@ -324,16 +324,16 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     bv.authorUID = uid;
     bv.tabBarItem.title = @"博客";
     bv.tabBarItem.image = [UIImage imageNamed:@"info"];
-    
+
     UserActiveView *av = [[UserActiveView alloc] init];
     av.hisUID = uid;
     av.tabBarItem.title = @"动态";
     av.tabBarItem.image = [UIImage imageNamed:@"active"];
-    
+
     UITabBarController *userTab = [[UITabBarController alloc] init];
     userTab.hidesBottomBarWhenPushed = YES;
     userTab.viewControllers = [NSArray arrayWithObjects:av,bv, nil];
-   
+
     [navController pushViewController:userTab animated:YES];
 }
 + (void)pushUserDetailWithName:(NSString *)name andNavController:(UINavigationController *)navController
@@ -343,22 +343,22 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 //    uv.hisName = name;
 //    uv.hidesBottomBarWhenPushed = YES;
 //    [navController pushViewController:uv animated:YES];
-    
+
     UserBlogsView *bv = [[UserBlogsView alloc] init];
     bv.authorName = name;
     bv.tabBarItem.title = @"博客";
     bv.tabBarItem.image = [UIImage imageNamed:@"info"];
-    
+
     UserActiveView *av = [[UserActiveView alloc] init];
     av.hisName = name;
     av.tabBarItem.title = @"动态";
     av.tabBarItem.image = [UIImage imageNamed:@"active"];
-    
+
     UITabBarController *userTab = [[UITabBarController alloc] init];
     userTab.title = name;
     userTab.hidesBottomBarWhenPushed = YES;
     userTab.viewControllers = [NSArray arrayWithObjects:av,bv, nil];
-    
+
     [navController pushViewController:userTab animated:YES];
 }
 + (BOOL)analysis:(NSString *)url andNavController:(UINavigationController *)navController
@@ -376,7 +376,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
         url = [url substringFromIndex:7];
         NSString *prefix = [url substringToIndex:3];
         //此情况为 博客,动弹,个人专页
-        if ([prefix isEqualToString:@"my."]) 
+        if ([prefix isEqualToString:@"my."])
         {
             NSArray *array = [url componentsSeparatedByString:@"/"];
             //个人专页 用户名形式
@@ -490,7 +490,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 + (OSCNotice *)getOSCNotice2:(NSString *)response
 {
     TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
-    TBXMLElement *root = xml.rootXMLElement;  
+    TBXMLElement *root = xml.rootXMLElement;
     if (!root) {
         return nil;
     }
@@ -666,7 +666,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     if (reply) {
         _reply = [NSString stringWithFormat:@"\n<reply>@%@: %@</reply>", reply.objectname, reply.objectbody];
     }
-    
+
     NSString *result = [NSString stringWithFormat:@"%@%@%@%@",_author,_message,_reply,_pubDate];
     return result;
 }
@@ -792,7 +792,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     if (reply) {
         _reply = [NSString stringWithFormat:@"<font size=6>\n\n</font><font size=13 color='#FF4600'>@%@: %@</font>", reply.objectname, reply.objectbody];
     }
-    
+
     NSString *result = [NSString stringWithFormat:@"%@%@%@%@",_author,_message,_reply,_pubDate];
     return result;
 }
@@ -819,19 +819,19 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     [webView setDelegate:nil];
     webView = nil;
 }
-+ (NSString *)intervalSinceNow: (NSString *) theDate 
++ (NSString *)intervalSinceNow: (NSString *) theDate
 {
     NSDateFormatter *date=[[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *d=[date dateFromString:theDate];
     NSTimeInterval late=[d timeIntervalSince1970]*1;
-    
-    
+
+
     NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval now=[dat timeIntervalSince1970]*1;
     NSString *timeString=@"";
     NSTimeInterval cha=now-late;
-    
+
     if (cha/3600<1) {
         if (cha/60<1) {
             timeString = @"1";
@@ -841,7 +841,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
             timeString = [NSString stringWithFormat:@"%f", cha/60];
             timeString = [timeString substringToIndex:timeString.length-7];
         }
-        
+
         timeString=[NSString stringWithFormat:@"%@分钟前", timeString];
     }
     else if (cha/3600>1&&cha/86400<1) {
@@ -1043,7 +1043,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *author = [TBXML childElementNamed:@"author" parentElement:news];
     TBXMLElement *authorid = [TBXML childElementNamed:@"authorid" parentElement:news];
     TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:news];
-    TBXMLElement *commentCount = [TBXML childElementNamed:@"commentCount" parentElement:news];  
+    TBXMLElement *commentCount = [TBXML childElementNamed:@"commentCount" parentElement:news];
     TBXMLElement *softwarelink = [TBXML childElementNamed:@"softwarelink" parentElement:news];
     TBXMLElement *softwarename = [TBXML childElementNamed:@"softwarename" parentElement:news];
     TBXMLElement *fav = [TBXML childElementNamed:@"favorite" parentElement:news];
@@ -1051,7 +1051,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     singleNews.relativies = [Tool getRelativeNews:str];
     singleNews.softwarelink = [TBXML textForElement:softwarelink];
     singleNews.softwarename = [TBXML textForElement:softwarename];
-    
+
     return singleNews;
 }
 + (SinglePostDetail *)readStrSinglePostDetail:(NSString *)str
@@ -1073,7 +1073,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *viewCount = [TBXML childElementNamed:@"viewCount" parentElement:post];
     TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:post];
     TBXMLElement *fav = [TBXML childElementNamed:@"favorite" parentElement:post];
-    
+
     NSMutableArray *_tags = [[NSMutableArray alloc] initWithCapacity:0];
     TBXMLElement *tags = [TBXML childElementNamed:@"tags" parentElement:post];
     if (tags != nil) {
@@ -1085,12 +1085,12 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
                 if (tag != nil) {
                     [_tags addObject:[TBXML textForElement:tag]];
                 }
-                else 
+                else
                     break;
             }
         }
     }
-    
+
     SinglePostDetail * singlePost = [[SinglePostDetail alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andUrl:[TBXML textForElement:url] andPortrait:[TBXML textForElement:portrait] andBody:[TBXML textForElement:body] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andAnswer:[[TBXML textForElement:answerCount] intValue] andView:[[TBXML textForElement:viewCount] intValue] andFavorite:[[TBXML textForElement:fav] intValue] == 1 andTags:_tags];
     return singlePost;
 }
@@ -1114,14 +1114,14 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *homePage = [TBXML childElementNamed:@"homepage" parentElement:soft];
     TBXMLElement *document = [TBXML childElementNamed:@"document" parentElement:soft];
     TBXMLElement *download = [TBXML childElementNamed:@"download" parentElement:soft];
-    
+
     TBXMLElement *logo = [TBXML childElementNamed:@"logo" parentElement:soft];
     TBXMLElement *language = [TBXML childElementNamed:@"language" parentElement:soft];
     TBXMLElement *os = [TBXML childElementNamed:@"os" parentElement:soft];
     TBXMLElement *recordTime = [TBXML childElementNamed:@"recordtime" parentElement:soft];
     TBXMLElement *fav = [TBXML childElementNamed:@"favorite" parentElement:soft];
     Software *s = [[Software alloc] initWithParemters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andExtension:[TBXML textForElement:extensionTitle] andLicense:[TBXML textForElement:license] andBody:[TBXML textForElement:body] andHomepage:[TBXML textForElement:homePage] andDocument:[TBXML textForElement:document] andDownload:[TBXML textForElement:download] andLogo:[TBXML textForElement:logo] andLanguage:[TBXML textForElement:language] andOS:[TBXML textForElement:os] andRecordTime:[TBXML textForElement:recordTime] andFavorite:[[TBXML textForElement:fav] intValue] == 1];
-    
+
     return s;
 }
 + (Blog *)readStrBlogDetail:(NSString *)str
@@ -1143,10 +1143,10 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *fav = [TBXML childElementNamed:@"favorite" parentElement:blog];
     TBXMLElement *url = [TBXML childElementNamed:@"url;" parentElement:blog];
     TBXMLElement *commentCount = [TBXML childElementNamed:@"commentCount" parentElement:blog];
-    
-    
+
+
     Blog *b = [[Blog alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andWhere:[TBXML textForElement:where] andBody:[TBXML textForElement:body] andAuthor:[TBXML textForElement:author] andAuthorid:[[TBXML textForElement:authorid] intValue] andDocumentType:[[TBXML textForElement:documentType] intValue] andPubDate:[TBXML textForElement:pubDate] andFavorite:[[TBXML textForElement:fav] intValue] == 1 andUrl:[TBXML textForElement:url] andCommentCount:[[TBXML textForElement:commentCount] intValue]];
-    
+
     return b;
 }
 + (NSMutableArray *)readStrNewsArray:(NSString *)str andOld:(NSMutableArray *)olds
@@ -1166,7 +1166,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     if (first == nil) {
         return news;
     }
-    
+
     TBXMLElement *_id = [TBXML childElementNamed:@"id" parentElement:first];
     TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:first];
     TBXMLElement *commentCount = [TBXML childElementNamed:@"commentCount" parentElement:first];
@@ -1178,7 +1178,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *type = [TBXML childElementNamed:@"type" parentElement:newsType];
     TBXMLElement *attachment = [TBXML childElementNamed:@"attachment" parentElement:newsType];
     TBXMLElement *authoruid2 = [TBXML childElementNamed:@"authoruid2" parentElement:newsType];
-    
+
     News *n = [[News alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andUrl:[TBXML textForElement:url] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorID] intValue] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andCommentCount:[[TBXML textForElement:commentCount] intValue]];
     n.newsType = [[TBXML textForElement:type] intValue];
     if (attachment) {
@@ -1204,7 +1204,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
             type = [TBXML childElementNamed:@"type" parentElement:newsType];
             attachment = [TBXML childElementNamed:@"attachment" parentElement:newsType];
             authoruid2 = [TBXML childElementNamed:@"authoruid2" parentElement:newsType];
-            
+
             n = [[News alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andTitle:[TBXML textForElement:title] andUrl:[TBXML textForElement:url] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorID] intValue] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andCommentCount:[[TBXML textForElement:commentCount] intValue]];
             n.newsType = [[TBXML textForElement:type] intValue];
             if (attachment) {
@@ -1241,7 +1241,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     if (first == nil) {
         return blogs;
     }
-    
+
     TBXMLElement *_id = [TBXML childElementNamed:@"id" parentElement:first];
     TBXMLElement *title = [TBXML childElementNamed:@"title" parentElement:first];
     TBXMLElement *commentCount = [TBXML childElementNamed:@"commentCount" parentElement:first];
@@ -1250,9 +1250,9 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:first];
     TBXMLElement *url = [TBXML childElementNamed:@"url" parentElement:first];
     TBXMLElement *documentType = [TBXML childElementNamed:@"documentType" parentElement:first];
-    
+
     BlogUnit *n = [[BlogUnit alloc] initWithParameters:[TBXML textForElement:_id].intValue andUrl:[TBXML textForElement:url] andTitle:[TBXML textForElement:title] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andAuthorName:[TBXML textForElement:author] andAuthorUID:[TBXML textForElement:authorID].intValue andCommentCount:[TBXML textForElement:commentCount].intValue andDocumentType:[TBXML textForElement:documentType].intValue];
-    
+
     if (![Tool isRepeatUserBlog:olds andBlogUnit:n]) {
         [blogs addObject:n];
     }
@@ -1267,7 +1267,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
             pubDate = [TBXML childElementNamed:@"pubDate" parentElement:first];
             url = [TBXML childElementNamed:@"url" parentElement:first];
             documentType = [TBXML childElementNamed:@"documentType" parentElement:first];
-            
+
             n = [[BlogUnit alloc] initWithParameters:[TBXML textForElement:_id].intValue andUrl:[TBXML textForElement:url] andTitle:[TBXML textForElement:title] andPubDate:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andAuthorName:[TBXML textForElement:author] andAuthorUID:[TBXML textForElement:authorID].intValue andCommentCount:[TBXML textForElement:commentCount].intValue andDocumentType:[TBXML textForElement:documentType].intValue];
 
             if (![Tool isRepeatUserBlog:olds andBlogUnit:n]) {
@@ -1303,7 +1303,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     if (![Tool isRepeatPost:olds andPost:p]) {
         [newPosts addObject:p];
     }
-    while (first != nil) 
+    while (first != nil)
     {
         first = [TBXML nextSiblingNamed:@"post" searchFromElement:first];
         if (first) {
@@ -1338,7 +1338,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     NSString *key = [NSString stringWithFormat:@"detail-%d-%d",type, _id];
-    
+
     NSString *value = [settings objectForKey:key];
     return value;
 }
@@ -1353,7 +1353,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
 {
     NSUserDefaults * settings = [NSUserDefaults standardUserDefaults];
     NSString *key = [NSString stringWithFormat:@"detail-%d-%@",3, softwareName];
-    
+
     NSString *value = [settings objectForKey:key];
     return value;
 }
@@ -1430,25 +1430,25 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(49, 23, 260, 3+36*(refers.count-1)+36)];
     view.backgroundColor = [UIColor colorWithRed:185.0/255 green:220.0/255 blue:1.0 alpha:1.0];
     for (int i=0; i<refers.count; i++) {
-        
+
         CommentRefer *cr = (CommentRefer *)[refers objectAtIndex:i];
-        
+
         UILabel *lbl_Title = [[UILabel alloc] initWithFrame:CGRectMake(3, 3+36*i, 254, 16)];
         lbl_Title.text = cr.title;
         lbl_Title.font = [UIFont boldSystemFontOfSize:12.0];
         lbl_Title.textColor = [UIColor colorWithRed:117.0/255 green:117.5/255 blue:117.0/255 alpha:1.0];
         lbl_Title.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:228.0/255 alpha:1.0];
-        
+
         UILabel *lbl_Body = [[UILabel alloc] initWithFrame:CGRectMake(3, 3+36*i+19, 254, 16)];
         lbl_Body.text = cr.body;
         lbl_Body.textColor = [UIColor darkGrayColor];
-        lbl_Body.font = [UIFont boldSystemFontOfSize:13.0];;
+        lbl_Body.font = [UIFont boldSystemFontOfSize:13.0];
         lbl_Body.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.0];
-        
+
         [view addSubview:lbl_Title];
         [view addSubview:lbl_Body];
     }
-    
+
     return view;
 }
 + (NSString *)getHTMLString:(NSString *)html
