@@ -35,13 +35,14 @@
     //头像
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
     self.tweetDownloadsInProgress = [NSMutableDictionary dictionary];
-    
+
     activies = [[NSMutableArray alloc] initWithCapacity:20];
-    
+
     //添加留言按钮
     UIToolbar *customToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 158, 44.01)];
     NSMutableArray *rightBarButtonArray = [[NSMutableArray alloc] initWithCapacity:2];
 
+    // FIXME: clickInteract: not found
     UIBarButtonItem *interact = [[UIBarButtonItem alloc] initWithTitle:@"与Ta互动" style:UIBarButtonItemStyleBordered target:self action:@selector(clickInteract:)];
     [rightBarButtonArray addObject:interact];
     UIBarButtonItem *info = [[UIBarButtonItem alloc] initWithTitle:@"Ta的资料/互动" style:UIBarButtonItemStyleBordered target:self action:@selector(clickInfo:)];
@@ -50,7 +51,7 @@
     [customToolbar setItems:rightBarButtonArray animated:NO];
 
     self.parentViewController.navigationItem.rightBarButtonItem = info;
-    
+
     self.tableActivies.backgroundColor = [Tool getBackgroundColor];
 
     [self reload:YES andNoRefresh:YES];
@@ -78,7 +79,7 @@
 - (void)viewDidUnload
 {
     [self setTableActivies:nil];
-    
+
     _refreshHeaderView = nil;
     [activies removeAllObjects];
     activies = nil;
@@ -87,7 +88,7 @@
     [self.tweetDownloadsInProgress removeAllObjects];
     self.imageDownloadsInProgress = nil;
     self.tweetDownloadsInProgress = nil;
-    
+
     [super viewDidUnload];
 }
 -(void)clickInfo:(id)sender
@@ -121,20 +122,20 @@
     {
         url = [NSString stringWithFormat:@"%@?uid=%d&hisname=%@&pageIndex=%d&pageSize=%d",api_user_information,[Config Instance].getUID,self.hisName,pageIndex,20];
     }
-    
+
     [[AFOSCClient sharedClient] getPath:url parameters:nil
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
+
                                     if (!noRefresh) {
                                         [self clear];
                                     }
-                                    
+
                                     self.parentViewController.navigationItem.rightBarButtonItem.enabled = YES;
                                     [Tool getOSCNotice2:operation.responseString];
                                     isLoading = NO;
                                     NSString *response = operation.responseString;
                                     @try {
-                                        
+
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
                                         int count = [Tool isListOver2:operation.responseString];
                                         allCount += count;
@@ -145,11 +146,11 @@
                                         TBXMLElement *user = [TBXML childElementNamed:@"user" parentElement:root];
                                         TBXMLElement *name = [TBXML childElementNamed:@"name" parentElement:user];
                                         TBXMLElement *uid = [TBXML childElementNamed:@"uid" parentElement:user];
-                                        
+
                                         hisUID = [TBXML textForElement:uid].intValue;
                                         hisName = [TBXML textForElement:name];
                                         self.parentViewController.navigationItem.title = hisName;
-                                        
+
                                         TBXMLElement *activelist = [TBXML childElementNamed:@"activies" parentElement:root];
                                         TBXMLElement *first = [TBXML childElementNamed:@"active" parentElement:activelist];
                                         if (!first) {
@@ -173,7 +174,7 @@
                                         TBXMLElement *objectTitle = [TBXML childElementNamed:@"objecttitle" parentElement:first];
                                         TBXMLElement *url = [TBXML childElementNamed:@"url" parentElement:first];
                                         TBXMLElement *appClient = [TBXML childElementNamed:@"appclient" parentElement:first];
-                                        
+
                                         ObjectReply *reply;
                                         TBXMLElement *objectReply = [TBXML childElementNamed:@"objectreply" parentElement:first];
                                         TBXMLElement *objectname;
@@ -191,7 +192,7 @@
                                         while (first) {
                                             first = [TBXML nextSiblingNamed:@"active" searchFromElement:first];
                                             if (first) {
-                                                
+
                                                 _id = [TBXML childElementNamed:@"id" parentElement:first];
                                                 portrait = [TBXML childElementNamed:@"portrait" parentElement:first];
                                                 author = [TBXML childElementNamed:@"author" parentElement:first];
@@ -205,7 +206,6 @@
                                                 objectCatalog = [TBXML childElementNamed:@"objectcatalog" parentElement:first];
                                                 objectTitle = [TBXML childElementNamed:@"objecttitle" parentElement:first];
                                                 url = [TBXML childElementNamed:@"url" parentElement:first];
-                                                appClient = nil;
                                                 appClient = [TBXML childElementNamed:@"appclient" parentElement:first];
                                                 tweetImage = [TBXML childElementNamed:@"tweetimage" parentElement:first];
                                                 reply = nil;
@@ -215,7 +215,7 @@
                                                     objectbody = [TBXML childElementNamed:@"objectbody" parentElement:objectReply];
                                                     reply = [[ObjectReply alloc] initWithParameter:[TBXML textForElement:objectname] andBody:[TBXML textForElement:objectbody]];
                                                 }
-                                                
+
                                                 a = [[Activity alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andCatalog:[[TBXML textForElement:_catalog] intValue] andObjectid:[[TBXML textForElement:objectID] intValue] andMessage:[TBXML textForElement:message]   andPubDate:appClient ? [NSString stringWithFormat:@"%@ %@",[Tool intervalSinceNow:[TBXML textForElement:pubDate]],[Tool getAppClientString:[[TBXML textForElement:appClient] intValue]]]:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andCommentCount:[[TBXML textForElement:commentCount] intValue] andObjectType:[[TBXML textForElement:objectType] intValue] andObjectCatalog:[[TBXML textForElement:objectCatalog] intValue] andObjectTitle:[TBXML textForElement:objectTitle] andForUserView:NO andReply:reply andImgTweet:[TBXML textForElement:tweetImage] andUrl:[TBXML textForElement:url]];
                                                 if (![Tool isRepeatActive: activies andActive:a]) {
                                                     [newActivies addObject:a];
@@ -230,21 +230,21 @@
                                         [self.tableActivies reloadData];
                                         [self doneLoadingTableViewData];
                                     }
-                                    @catch (NSException *exception) {  
+                                    @catch (NSException *exception) {
                                         [NdUncaughtExceptionHandler TakeException:exception];
                                     }
-                                    @finally { 
+                                    @finally {
                                         [self doneLoadingTableViewData];
                                     }
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    
+
                                     NSLog(@"个人动态列表获取出错");
-                                    
+
                                     [self doneLoadingTableViewData];
                                     isLoading = NO;
                                 }];
-    
+
     isLoading = YES;
     [self.tableActivies reloadData];
 }
@@ -261,15 +261,15 @@
                     break;
                 }
             }
-            
+
             //初始化
             [cell initialize];
-            
+
             cell.imgPortrait.image = [UIImage imageNamed:@"avatar_loading.jpg"];
             Activity *a = [activies objectAtIndex:indexPath.row];
-            
+
             [cell.rtLabel setText:a.result];
-            
+
             if (a.catalog >=1 && a.catalog <= 4) {
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
@@ -349,7 +349,7 @@
             [self reload:NO andNoRefresh:YES];
         }
     }
-    else 
+    else
     {
         Activity *a = [activies objectAtIndex:row];
         if (a == nil) {
@@ -363,7 +363,7 @@
             if (a.catalog <= 0 || a.catalog >= 5) {
                 return;
             }
-            
+
             switch (a.catalog) {
                 case 1:
                 {
@@ -376,7 +376,7 @@
                 {
                     Post *p = [[Post alloc] init];
                     p._id = a.objectid;
-                    [Tool pushPostDetail:p andNavController:self.navigationController]; 
+                    [Tool pushPostDetail:p andNavController:self.navigationController];
                 }
                     break;
                 case 3:
@@ -513,7 +513,7 @@
         if (iconDownloader) {
             a.imgData = iconDownloader.imgRecord.img;
         }
-        
+
         IconDownloader *iconTweet = [tweetDownloadsInProgress objectForKey:index];
         if (iconTweet) {
             a.imgTweetData = iconTweet.imgRecord.img;

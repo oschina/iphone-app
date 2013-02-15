@@ -38,13 +38,14 @@
     self.segment_title.frame = CGRectMake(0, 0, 300, 30);
     [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segment_title;
-    
+
     //子页面初始化
     self.newsView = [[NewsView alloc] init];
     self.newsView.catalog = 1;
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.newsView];
     [self.view addSubview:self.newsView.view];
-    
+
     //添加发布动弹的按钮
     UIBarButtonItem *btnSearch = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:nil];
     btnSearch.image = [UIImage imageNamed:@"searchWhite"];
@@ -87,7 +88,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (self.newsView == nil || self.segment_title == nil) 
+    if (self.newsView == nil || self.segment_title == nil)
     {
         [self myInit];
     }

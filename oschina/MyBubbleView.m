@@ -11,7 +11,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //数据集合初始化
     comments = [[NSMutableArray alloc] initWithCapacity:20];
     //标题
@@ -19,9 +19,10 @@
     //留言按钮
     UIBarButtonItem * bar = [[UIBarButtonItem alloc] initWithTitle:@"给Ta留言" style:UIBarButtonItemStyleBordered target:self action:@selector(clickPubMessage:)];
     self.navigationItem.rightBarButtonItem = bar;
-    
+
+    // FIXME: nextBubble: method not found
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBubble:) name:@"NextBubble" object:nil];
-    
+
     //加载
     [self reload];
 }
@@ -50,21 +51,21 @@
     }
     int pageIndex = comments.count / 20;
     NSString *url = [NSString stringWithFormat:@"%@?catalog=4&id=%d&pageIndex=%d&pageSize=20", api_comment_list, self.friendID, pageIndex];
-    
+
     MBProgressHUD * hud = [[MBProgressHUD alloc] initWithView:self.view];
     [Tool showHUD:@"正在加载" andView:self.view andHUD:hud];
-    
+
     [[AFOSCClient sharedClient] getPath:url parameters:nil
-     
+
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     [hud hide:YES];
-                                    
+
                                     isLoading = NO;
-                                    NSString *response = operation.responseString;  
+                                    NSString *response = operation.responseString;
                                     [Tool getOSCNotice2:response];
-                                    
+
                                     @try {
-                                        
+
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
                                         int count = [Tool isListOver2:operation.responseString];
                                         allCount += count;
@@ -79,7 +80,7 @@
                                             isLoadOver = YES;
                                             return;
                                         }
-                                        
+
                                         NSMutableArray *newComments = [[NSMutableArray alloc] initWithCapacity:20];
                                         TBXMLElement *_id = [TBXML childElementNamed:@"id" parentElement:first];
                                         TBXMLElement *portrait = [TBXML childElementNamed:@"portrait" parentElement:first];
@@ -88,13 +89,13 @@
                                         TBXMLElement *content = [TBXML childElementNamed:@"content" parentElement:first];
                                         TBXMLElement *pubDate = [TBXML childElementNamed:@"pubDate" parentElement:first];
                                         TBXMLElement *appclient = [TBXML childElementNamed:@"appclient" parentElement:first];
-                                        
-                                        Comment *c = [[Comment alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andContent:[TBXML textForElement:content]  andPubDate:[TBXML textForElement:pubDate] andReplies:Nil andRefers:Nil andAppClient:appclient == nil ? 1 : [TBXML textForElement:appclient].intValue];
+
+                                        Comment *c = [[Comment alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andContent:[TBXML textForElement:content]  andPubDate:[TBXML textForElement:pubDate] andReplies:nil andRefers:nil andAppClient:appclient == nil ? 1 : [TBXML textForElement:appclient].intValue];
                                         //判断是否
                                         if (![Tool isRepeatComment: comments andComment:c]) {
                                             [newComments addObject:c];
                                         }
-                                        
+
                                         while (first) {
                                             first = [TBXML nextSiblingNamed:@"comment" searchFromElement:first];
                                             if (first) {
@@ -106,7 +107,7 @@
                                                 pubDate = [TBXML childElementNamed:@"pubDate" parentElement:first];
                                                 appclient = nil;
                                                 appclient = [TBXML childElementNamed:@"appclient" parentElement:first];
-                                                c = [[Comment alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andContent:[TBXML textForElement:content]  andPubDate:[TBXML textForElement:pubDate] andReplies:Nil andRefers:Nil andAppClient:appclient == nil ? 1 :[TBXML textForElement:appclient].intValue];
+                                                c = [[Comment alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andContent:[TBXML textForElement:content]  andPubDate:[TBXML textForElement:pubDate] andReplies:nil andRefers:nil andAppClient:appclient == nil ? 1 :[TBXML textForElement:appclient].intValue];
                                                 if (![Tool isRepeatComment:  comments andComment:c]) {
                                                     [newComments addObject:c];
                                                 }
@@ -116,7 +117,7 @@
                                                 break;
                                             }
                                         }
-                                        
+
                                         //计算宽度
                                         for (Comment *c in newComments) {
                                             if (c.authorid == [Config Instance].getUID) {
@@ -133,7 +134,7 @@
                                                 c.width_bubble = l.frame.size.width + 30;
                                             }
                                         }
-                                        
+
                                         [comments addObjectsFromArray:newComments];
                                     }
                                     @catch (NSException *exception) {
@@ -142,7 +143,7 @@
                                     @finally {
                                         [self.tableBubbles reloadData];
                                     }
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                     [hud hide:YES];
                                     NSLog(@"聊天气泡列表获取出错");
@@ -150,7 +151,7 @@
                                     if ([Config Instance].isNetworkRunning) {
                                         [Tool ToastNotification:@"错误 网络无连接" andView:self.view andLoading:NO andIsBottom:NO];
                                     }
-                                }];                                                  
+                                }];
     isLoading = YES;
 }
 
@@ -180,7 +181,7 @@
 {
     //如果有数据
     if (comments.count > 0) {
-        if (indexPath.row < comments.count) 
+        if (indexPath.row < comments.count)
         {
             UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NormalCellIdentifier];
             Comment *c = [comments objectAtIndex:indexPath.row];
@@ -212,7 +213,7 @@
         {
             if ([Config Instance].isNetworkRunning)
             {
-                return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"" andLoadingString:[Config Instance].isCookie ? (isLoading ? loadingTip : loadNext20Tip) : @"您还没有登录,无法查看" andIsLoading:isLoading];   
+                return [[DataSingleton Instance] getLoadMoreCell:tableView andIsLoadOver:isLoadOver andLoadOverString:@"" andLoadingString:[Config Instance].isCookie ? (isLoading ? loadingTip : loadNext20Tip) : @"您还没有登录,无法查看" andIsLoading:isLoading];
             }
             else
             {
@@ -221,7 +222,7 @@
         }
     }
     //如果没有数据
-    else 
+    else
     {
         if ([Config Instance].isNetworkRunning)
         {
@@ -237,7 +238,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int row = [indexPath row];
-    if (row >= comments.count) 
+    if (row >= comments.count)
     {
         [self reload];
     }

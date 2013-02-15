@@ -30,7 +30,6 @@
 #import "LoginView.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "RelativeNews.h"
-#import "FTCoreTextView.h"
 //#import "FTCoreTextStyle.h"
 #import "Software.h"
 #import "Blog.h"
@@ -101,6 +100,7 @@
 
 + (int)getDaysCount:(int)year andMonth:(int)month andDay:(int)day;
 
+// FIXME: @not implement
 + (NSArray *)coreTextStyle;
 
 + (NSString *)getAppClientString:(int)appClient;
@@ -138,12 +138,12 @@
 /*
  注意此方法 可以存储所有的 detail 以及 news列表于 post列表
  type:
- 1 -- news detail 
- 2 -- post detail 
+ 1 -- news detail
+ 2 -- post detail
  3 -- software detail
  4 -- blog detail
  5 -- news 列表  其中 _id 表示 segementIndex
- 6 -- post 列表  其中 _id 表示 segementIndex 
+ 6 -- post 列表  其中 _id 表示 segementIndex
  */
 + (void)saveCache:(int)type andID:(int)_id andString:(NSString *)str;
 + (void)saveSoftware:(NSString *)softwareName andString:(NSString *)str;

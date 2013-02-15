@@ -2,6 +2,7 @@
 #import "ActivesView.h"
 #import "MessageSystemView.h"
 
+// FIXME: appImageDidLoad not implement
 @implementation ActivesView
 @synthesize tableActivies;
 //@synthesize imageDownloadsInProgress;
@@ -30,7 +31,7 @@
 
 //    self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
 //    self.tweetDownloadsInProgress = [NSMutableDictionary dictionary];
-    
+
     activies = [[NSMutableArray alloc] initWithCapacity:20];
     //下拉刷新
     if (_refreshHeaderView == nil) {
@@ -39,12 +40,12 @@
         [self.tableActivies addSubview:view];
         _refreshHeaderView = view;
     }
-    [_refreshHeaderView refreshLastUpdatedDate]; 
-    
+    [_refreshHeaderView refreshLastUpdatedDate];
+
     self.tableActivies.backgroundColor = [Tool getBackgroundColor];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
-    
+
     _iconCache = [[TQImageCache alloc] initWithCachePath:@"icons" andMaxMemoryCacheNumber:50];
 }
 - (void)refreshed:(NSNotification *)notification
@@ -120,10 +121,10 @@
     }
     int pageIndex = allCount / 20;
     NSString *url = [NSString stringWithFormat:@"%@?catalog=%d&pageIndex=%d&pageSize=%d&uid=%d",api_active_list,self.catalog,pageIndex,20,[Config Instance].getUID];
-    
+
     [[AFOSCClient sharedClient] getPath:url parameters:nil
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    
+
                                     if (!noRefresh) {
                                         [self clear];
                                     }
@@ -131,7 +132,7 @@
                                     isLoading = NO;
                                     NSString *response = operation.responseString;
                                     @try {
-                                        
+
                                         TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
                                         int count = [Tool isListOver2:operation.responseString];
                                         allCount += count;
@@ -141,18 +142,18 @@
                                         TBXMLElement *root = xml.rootXMLElement;
                                         TBXMLElement *activelist = [TBXML childElementNamed:@"activies" parentElement:root];
                                         if (activelist == nil) {
-                                            
+
                                             //检测是否未登录
                                             ApiError *error = [Tool getApiError2:operation.responseString];
                                             if (error == nil) {
                                                 [Tool ToastNotification:operation.responseString andView:self.view andLoading:NO andIsBottom:NO];
                                             }
                                             if (error.errorCode == 0) {
-                                                NSLog(error.errorMessage);
+                                                NSLog(@"%@", error.errorMessage);
                                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"用户未登录,需要重新登录" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"登录", nil];
                                                 [alert show];
                                             }
-                                            
+
                                             return;
                                         }
                                         TBXMLElement *first = [TBXML childElementNamed:@"active" parentElement:activelist];
@@ -185,10 +186,10 @@
                                             objectbody = [TBXML childElementNamed:@"objectbody" parentElement:objectReply];
                                             reply = [[ObjectReply alloc] initWithParameter:[TBXML textForElement:objectname] andBody:[TBXML textForElement:objectbody]];
                                         }
-                                        
+
                                         TBXMLElement *appClient = [TBXML childElementNamed:@"appclient" parentElement:first];
                                         TBXMLElement *tweetImage = [TBXML childElementNamed:@"tweetimage" parentElement:first];
-                                        
+
                                         Activity *a = [[Activity alloc] initWithParameters:[[TBXML textForElement:_id] intValue] andImg:[TBXML textForElement:portrait] andAuthor:[TBXML textForElement:author] andAuthorID:[[TBXML textForElement:authorid] intValue] andCatalog:[[TBXML textForElement:_catalog] intValue] andObjectid:[[TBXML textForElement:objectID] intValue] andMessage:[TBXML textForElement:message] andPubDate:appClient ? [NSString stringWithFormat:@"%@ %@",[Tool intervalSinceNow:[TBXML textForElement:pubDate]],[Tool getAppClientString:[[TBXML textForElement:appClient] intValue]]]:[Tool intervalSinceNow:[TBXML textForElement:pubDate]] andCommentCount:[[TBXML textForElement:commentCount] intValue] andObjectType:[[TBXML textForElement:objectType] intValue] andObjectCatalog:[[TBXML textForElement:objectCatalog] intValue] andObjectTitle:[TBXML textForElement:objectTitle] andForUserView:NO andReply:reply andImgTweet:[TBXML textForElement:tweetImage] andUrl:[TBXML textForElement:url]];
                                         if (![Tool isRepeatActive: activies andActive:a]) {
                                             [newActivies addObject:a];
@@ -218,7 +219,7 @@
                                                     objectbody = [TBXML childElementNamed:@"objectbody" parentElement:objectReply];
                                                     reply = [[ObjectReply alloc] initWithParameter:[TBXML textForElement:objectname] andBody:[TBXML textForElement:objectbody]];
                                                 }
-                                                
+
                                                 appClient = nil;
                                                 appClient = [TBXML childElementNamed:@"appclient" parentElement:first];
                                                 tweetImage = [TBXML childElementNamed:@"tweetimage" parentElement:first];
@@ -235,7 +236,7 @@
                                         [activies addObjectsFromArray:newActivies];
                                         [self.tableActivies reloadData];
                                         [self doneLoadingTableViewData];
-                                        
+
                                     }
                                     @catch (NSException *exception) {
                                         [NdUncaughtExceptionHandler TakeException:exception];
@@ -243,11 +244,11 @@
                                     @finally {
                                         [self doneLoadingTableViewData];
                                     }
-                                    
+
                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    
+
                                     NSLog(@"动态列表获取出错");
-                                    
+
                                     //刷新错误
                                     [self doneLoadingTableViewData];
                                     isLoading = NO;
@@ -259,7 +260,7 @@
                                         [Tool ToastNotification:@"错误 网络无连接" andView:self.view andLoading:NO andIsBottom:NO];
                                     }
                                 }];
-    
+
     isLoading = YES;
     [self.tableActivies reloadData];
 }
@@ -340,14 +341,14 @@
             {
                 cell.imgTweet.hidden = YES;
             }
-            
+
             if ([cell.imgPortrait.gestureRecognizers count] > 0) {
                 UITap *tap = (UITap *)[cell.imgPortrait.gestureRecognizers objectAtIndex:0];
                 if (tap) {
                     tap.tag = a.authorid;
                 }
             }
-            
+
             [cell.rtLabel setText:a.result];
             if (a.catalog >=1 && a.catalog <= 4) {
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -371,8 +372,8 @@
 //                    if (imageData) {
 //                        a.imgData = [UIImage imageWithData:imageData];
 //                        cell.imgPortrait = a.imgData;
-//                    } 
-//                    else 
+//                    }
+//                    else
 //                    {
 ////                        IconDownloader *downloader = [imageDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", indexPath.row]];
 ////                        if (downloader == nil) {
@@ -513,9 +514,9 @@
         {
             [Tool analysis:a.url andNavController:self.parentViewController.navigationController];
         }
-                
+
     }
-    
+
 }
 #pragma 下提刷新
 - (void)reloadTableViewDataSource
@@ -602,7 +603,7 @@
 //        if (iconDownloader) {
 //            a.imgData = iconDownloader.imgRecord.img;
 //        }
-//        
+//
 //        IconDownloader *iconTweet = [tweetDownloadsInProgress objectForKey:index];
 //        if (iconTweet) {
 //            a.imgTweetData = iconTweet.imgRecord.img;
@@ -610,7 +611,7 @@
 //        // cache it
 //        NSData * imageData = UIImagePNGRepresentation(a.imgData);
 //        [_iconCache putImage:imageData withName:[TQImageCache parseUrlForCacheName:a.img]];
-//        
+//
 //        [tableActivies reloadData];
 //    }
 //}

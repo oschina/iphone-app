@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsDetail.h"
-#import "PostDetail.h"
 #import "Activity.h"
 //#import "ColorActiveCell.h"
-#import "FTCoreTextView.h"
 #import "ShareView.h"
 #import "News.h"
 #import "Post.h"

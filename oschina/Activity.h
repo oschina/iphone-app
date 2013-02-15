@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Tool.h"
 #import "ObjectReply.h"
-#import "FTCoreTextView.h"
 #import "RTLabel.h"
 #import "RTActiveCell.h"
 

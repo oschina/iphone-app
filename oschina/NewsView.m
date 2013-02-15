@@ -25,11 +25,11 @@
         _refreshHeaderView = view;
     }
     [_refreshHeaderView refreshLastUpdatedDate];
-    
+
     news = [[NSMutableArray alloc] initWithCapacity:20];
     [self reload:YES];
     self.tableNews.backgroundColor = [Tool getBackgroundColor];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
 }
 - (void)refreshed:(NSNotification *)notification
@@ -97,10 +97,10 @@
                 break;
         }
 
-        [[AFOSCClient sharedClient]getPath:url parameters:Nil 
-            
+        [[AFOSCClient sharedClient]getPath:url parameters:nil
+
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
+
             [Tool getOSCNotice2:operation.responseString];
             isLoading = NO;
             if (!noRefresh) {
@@ -109,7 +109,7 @@
 
             @try {
                 NSMutableArray *newNews = self.catalog <= 1 ?
-                
+
                 [Tool readStrNewsArray:operation.responseString andOld: news]:
                 [Tool readStrUserBlogsArray:operation.responseString andOld: news];
                 int count = [Tool isListOver2:operation.responseString];
@@ -121,7 +121,7 @@
                 [news addObjectsFromArray:newNews];
                 [self.tableNews reloadData];
                 [self doneLoadingTableViewData];
-                
+
                 //如果是第一页 则缓存下来
                 if (news.count <= 20) {
                     [Tool saveCache:5 andID:self.catalog andString:operation.responseString];
@@ -137,7 +137,7 @@
             NSLog(@"新闻列表获取出错");
             //如果是刷新
             [self doneLoadingTableViewData];
-            
+
             if ([Config Instance].isNetworkRunning == NO) {
                 return;
             }
@@ -171,7 +171,7 @@
         if (isLoadOver) {
             return news.count == 0 ? 1 : news.count;
         }
-        else 
+        else
             return news.count + 1;
     }
     else
@@ -188,7 +188,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([news count] > 0) {
-        if ([indexPath row] < [news count]) 
+        if ([indexPath row] < [news count])
         {
             NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:NewsCellIdentifier];
             if (!cell) {
@@ -240,16 +240,16 @@
         self.parentViewController.tabBarItem.title = @"综合";
         if (self.catalog == 1) {
             News *n = [news objectAtIndex:row];
-            if (n) 
+            if (n)
             {
-                
+
                 if (n.url.length == 0) {
                     [Tool pushNewsDetail:n andNavController:self.parentViewController.navigationController andIsNextPage:NO];
                 }
                 else
                 {
                     [Tool analysis:n.url andNavController:parent.navigationController];
-                }            
+                }
             }
         }
         else
@@ -302,7 +302,7 @@
     //无网络连接则读取缓存
     else {
         NSString *value = [Tool getCache:5 andID:self.catalog];
-        if (value) 
+        if (value)
         {
             NSMutableArray *newNews = [Tool readStrNewsArray:value andOld:news];
             if (newNews == nil) {

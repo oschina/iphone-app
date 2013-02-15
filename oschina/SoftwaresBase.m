@@ -33,13 +33,15 @@
     self.segment_Title.frame = CGRectMake(0, 0, 300, 30);
     [self.segment_Title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segment_Title;
-    
+
     self.softwareTypeView = [[SoftwareTypeView alloc] init];
     self.softwareTypeView.tag = 0;
     self.softwareView = [[SoftwareView alloc] init];
     self.softwareView.isSoftwareTagList = NO;
     self.softwareView.view.hidden = YES;
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.softwareTypeView];
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.softwareView];
     [self.view addSubview:self.softwareTypeView.view];
     [self.view addSubview:self.softwareView.view];

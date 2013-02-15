@@ -40,6 +40,7 @@
     self.navigationItem.titleView = self.segment_title;
     //子页面初始化
     self.twitterView = [[TwitterView alloc] init];
+    // FIXME addChildViewController not available in 4.0
     [self addChildViewController:self.twitterView];
     [self.view addSubview:self.twitterView.view];
     //添加发布动弹的按钮
@@ -67,7 +68,7 @@
     switch (self.segment_title.selectedSegmentIndex) {
         case 0:
         {
-           [self.twitterView reloadUID:0];            
+           [self.twitterView reloadUID:0];
         }
             break;
         case 1:

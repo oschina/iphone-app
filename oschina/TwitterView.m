@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     //初始化
     allCount = 0;
     self.imageDownloadsInProgress = [NSMutableDictionary dictionary];
@@ -31,10 +31,10 @@
     [self.tableTweets addSubview:view];
     _refreshHeaderView = view;
     [_refreshHeaderView refreshLastUpdatedDate];
-    
+
     //设定背景颜色
     self.tableTweets.backgroundColor = [Tool getBackgroundColor];
-    
+
     //设定Tab双击刷新事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshed:) name:Notification_TabClick object:nil];
     //开始加载
@@ -47,7 +47,7 @@
         [self reload:YES];
         isInitialize = YES;
     }
-    
+
     if ([Config Instance].isNeedReloadTweets && self._uid >= 0) {
         [self clear];
         [self reload:YES];
@@ -72,10 +72,10 @@
 {
     NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
     [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
-    
+
     NSArray *allTweetsimg = [self.tweetDownloadsInProgress allValues];
     [allTweetsimg makeObjectsPerformSelector:@selector(cancelDownload)];
-    
+
     [super didReceiveMemoryWarning];
 }
 - (void)viewDidUnload
@@ -107,7 +107,7 @@
 }
 - (void)reload:(BOOL)noRefresh
 {
-    if (isLoading || isLoadOver) 
+    if (isLoading || isLoadOver)
     {
         return;
     }
@@ -116,17 +116,17 @@
     }
     int pageIndex = allCount/20;
     NSString *url = [NSString stringWithFormat:@"%@?uid=%d&pageIndex=%d&pageSize=%d",api_tweet_list, self._uid,pageIndex, 20];
-    [[AFOSCClient sharedClient] getPath:url parameters:Nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFOSCClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //如果刷新则清空
         if (!noRefresh) {
             [self clear];
         }
-        
+
         [Tool getOSCNotice2:operation.responseString];
         isLoading = NO;
         NSString *response = operation.responseString;
         @try {
-            
+
             TBXML *xml = [[TBXML alloc] initWithXMLString:response error:nil];
             int count = [Tool isListOver2:response];
             allCount += count;
@@ -168,11 +168,11 @@
             if (![Tool isRepeatTweet:tweets andTweet:t]) {
                 [newTweets addObject:t];
             }
-            
-            while (first != nil) 
+
+            while (first != nil)
             {
                 first = [TBXML nextSiblingNamed:@"tweet" searchFromElement:first];
-                if (first) 
+                if (first)
                 {
                     _id = [TBXML childElementNamed:@"id" parentElement:first];
                     portrait = [TBXML childElementNamed:@"portrait" parentElement:first];
@@ -198,7 +198,7 @@
             [tweets addObjectsFromArray:newTweets];
             [self.tableTweets reloadData];
             [self doneLoadingTableViewData];
-            
+
         }
         @catch (NSException *exception) {
             [NdUncaughtExceptionHandler TakeException:exception];
@@ -207,7 +207,7 @@
             [self doneLoadingTableViewData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+
         NSLog(@"动弹列表下载失败");
         //下拉刷新恢复
         [self doneLoadingTableViewData];
@@ -218,7 +218,7 @@
             [Tool ToastNotification:@"错误 网络无连接" andView:self.view andLoading:NO andIsBottom:NO];
         }
     }];
-    
+
     isLoading = YES;
     [self.tableTweets reloadData];
 }
@@ -242,7 +242,7 @@
     if (isLoadOver) {
         return tweets.count == 0 ?  1: tweets.count;
     }
-    else 
+    else
         return tweets.count + 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -260,9 +260,9 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tweets count] > 0) 
+    if ([tweets count] > 0)
     {
-        if (indexPath.row < [tweets count]) 
+        if (indexPath.row < [tweets count])
         {
             TweetCell *cell = nil;
             cell = (TweetCell *)[tableView dequeueReusableCellWithIdentifier:TweetCellIdentifier];
@@ -281,7 +281,7 @@
             }
             cell.img.image = [UIImage imageNamed:@"avatar_loading.jpg"];
             Tweet *t = [tweets objectAtIndex:[indexPath row]];
-            if (t) 
+            if (t)
             {
                 if ([cell.img.gestureRecognizers count] > 0) {
                     UITap *tap = (UITap *)[cell.img.gestureRecognizers objectAtIndex:0];
@@ -290,7 +290,7 @@
                     }
                 }
                 //如果微博带图片
-                if ([t.imgTweet isEqualToString:@""] == NO) 
+                if ([t.imgTweet isEqualToString:@""] == NO)
                 {
                     cell.imgTweet.hidden = NO;
                     cell.lbl_Time.frame = CGRectMake(48, t.height+104, 170, 16);
@@ -301,8 +301,8 @@
                             tap.tagString = t.imgBig;
                         }
                     }
-                    
-                    if (t.imgTweetData == nil) 
+
+                    if (t.imgTweetData == nil)
                     {
                         IconDownloader *d = [tweetDownloadsInProgress objectForKey:[NSString stringWithFormat:@"%d", [indexPath row]]];
                         if (d == nil) {
@@ -355,7 +355,7 @@
                 cell.lbl_Time.text = [NSString stringWithFormat:@"%@ %@", [Tool intervalSinceNow:t.fromNowOn], [Tool getAppClientString:t.appClient]];
                 cell.lblCommentCount.text = [NSString stringWithFormat:@"%d", t.commentCount];
 
-                //添加长按删除功能 
+                //添加长按删除功能
                 [cell initGR];
                 [cell setDelegate:self];
             }
@@ -412,19 +412,19 @@
     else {
         Tweet *t = [tweets objectAtIndex:row];
         if (t) {
-            
+
             TweetBase2 * parent = (TweetBase2 *)self.parentViewController;
             self.parentViewController.title = [parent getSegmentTitle];
             self.parentViewController.tabBarItem.title = @"动弹";
-            
+
             [Tool pushTweetDetail:t andNavController:self.parentViewController.navigationController];
         }
     }
 }
 
-#pragma mark - 删除某项动弹  
+#pragma mark - 删除某项动弹
 - (void)showMenu:(id)cell
-{  
+{
     Tweet * t = [tweets objectAtIndex:[tableTweets indexPathForCell:cell].row];
     if (t) {
         if (t.authorID != [Config Instance].getUID) {
@@ -432,27 +432,27 @@
         }
     }
     //如果没有登录
-    [cell becomeFirstResponder];  
-    UIMenuController * menu = [UIMenuController sharedMenuController];  
+    [cell becomeFirstResponder];
+    UIMenuController * menu = [UIMenuController sharedMenuController];
     CGRect rect = [cell frame];
     CGRect newRect = CGRectMake(rect.origin.x, rect.origin.y - tableTweets.contentOffset.y, rect.size.width, rect.size.height);
     [menu setTargetRect:newRect inView:[self view]];
-    [menu setMenuVisible: YES animated: YES];    
-}  
+    [menu setMenuVisible: YES animated: YES];
+}
 - (void)deleteRow:(UITableViewCell *)cell
 {
     NSIndexPath *path = [tableTweets indexPathForCell:cell];
     Tweet *c = [tweets objectAtIndex:[path row]];
     //是否为我发表的
-    if (c.authorID != [Config Instance].getUID) 
+    if (c.authorID != [Config Instance].getUID)
     {
         [Tool ToastNotification:@"错误 不能删除别人的动弹" andView:self.view andLoading:NO andIsBottom:NO];
         return;
     }
-    
+
     [[AFOSCClient sharedClient] getPath:api_tweet_delete parameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d", c._id],@"tweetid",[NSString stringWithFormat:@"%d", c.authorID],@"uid", nil]
-                                
-        success:^(AFHTTPRequestOperation *operation, id responseObject) 
+
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
             [Tool getOSCNotice2:operation.responseString];
             ApiError *error = [Tool getApiError2:operation.responseString];
@@ -460,7 +460,7 @@
                 [Tool ToastNotification:operation.responseString andView:self.view andLoading:NO andIsBottom:NO];
                 return;
             }
-            switch (error.errorCode) 
+            switch (error.errorCode)
             {
                 case 1:
                 {
@@ -475,8 +475,8 @@
                 }
                     break;
             }
-        
-        } 
+
+        }
         failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
             if ([Config Instance].isNetworkRunning == NO) {
@@ -562,7 +562,7 @@
         if (iconDownloader) {
             t.imgData = iconDownloader.imgRecord.img;
         }
-        
+
         IconDownloader *iconTweet = [tweetDownloadsInProgress objectForKey:index];
         if (iconTweet) {
             t.imgTweetData = iconTweet.imgRecord.img;
