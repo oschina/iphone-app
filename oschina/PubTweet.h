@@ -15,7 +15,8 @@
 #import "MBProgressHUD.h"
 #import "TSEmojiView.h"
 
-@interface PubTweet : UIViewController<UIImagePickerControllerDelegate,MBProgressHUDDelegate,UITextViewDelegate,TSEmojiViewDelegate>
+@interface PubTweet : UIViewController
+<UIImagePickerControllerDelegate,MBProgressHUDDelegate,UITextViewDelegate,TSEmojiViewDelegate>
 {
     //加载指示
     MBProgressHUD * hud;

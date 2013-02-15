@@ -2,6 +2,7 @@
 #import "ActivesView.h"
 #import "MessageSystemView.h"
 
+// FIXME: appImageDidLoad not implement
 @implementation ActivesView
 @synthesize tableActivies;
 //@synthesize imageDownloadsInProgress;
@@ -148,7 +149,7 @@
                                                 [Tool ToastNotification:operation.responseString andView:self.view andLoading:NO andIsBottom:NO];
                                             }
                                             if (error.errorCode == 0) {
-                                                NSLog(error.errorMessage);
+                                                NSLog(@"%@", error.errorMessage);
                                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"用户未登录,需要重新登录" delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"登录", nil];
                                                 [alert show];
                                             }

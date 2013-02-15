@@ -78,7 +78,7 @@
 {
     [self dismissModalViewControllerAnimated:YES];
     //添加到集合中
-    UIImage * imgData = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImage * imgData = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage * photo = [info objectForKey:UIImagePickerControllerOriginalImage];
     SSPhotoCropperViewController *photoCropper =
     [[SSPhotoCropperViewController alloc] initWithPhoto:photo

@@ -203,7 +203,7 @@
     [[AFOSCClient sharedClient] getPath:@"http://www.oschina.net/MobileAppVersion.xml" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         @try {
-            NSLog(operation.responseString);
+            NSLog(@"%@", operation.responseString);
             TBXML *xml = [[TBXML alloc] initWithXMLString:operation.responseString error:nil];
             TBXMLElement *root = xml.rootXMLElement;
             if (root == nil) {

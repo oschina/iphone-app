@@ -7,7 +7,7 @@
 //
 
 #import "Tool.h"
-static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+//static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 @implementation Tool
 
 + (UIAlertView *)getLoadingView:(NSString *)title andMessage:(NSString *)message
