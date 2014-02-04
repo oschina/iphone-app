@@ -84,6 +84,11 @@
         m.imgData = nil;
     }
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 - (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) {
@@ -390,7 +395,7 @@
         else
         {
             if (!isLoading) {
-                [self performSelector:@selector(reload:)];
+                [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
             }
         }
     }

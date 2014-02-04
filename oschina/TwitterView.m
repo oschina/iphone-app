@@ -105,6 +105,11 @@
     [tweetDownloadsInProgress removeAllObjects];
     isLoadOver = NO;
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 - (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) 
@@ -406,7 +411,7 @@
     if (row >= [tweets count]) {
         //启动刷新
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
         }
     }
     else {

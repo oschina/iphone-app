@@ -76,6 +76,10 @@
     [super viewDidUnload];
 }
 
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 -(void)reload:(BOOL)noRefresh
 {
     if (isLoadOver) {
@@ -261,7 +265,7 @@
     int row = [indexPath row];
     if (row >= friends.count) {
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
         }
         
     }

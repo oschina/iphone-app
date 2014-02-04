@@ -161,6 +161,11 @@
 {
     [Tool processLoginNotice:actionSheet andButtonIndex:buttonIndex andNav:self.parentViewController.navigationController andParent:self];
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 - (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) {
@@ -631,7 +636,7 @@
     int row = [indexPath row];
     if (row >= [comments count]) {
         if (!isLoading) {
-            [self performSelector:@selector(reload:)];
+            [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
         }
     }
     else {

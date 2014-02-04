@@ -107,6 +107,11 @@
 //    [imageDownloadsInProgress removeAllObjects];
 //    [tweetDownloadsInProgress removeAllObjects];
 }
+
+- (void)reloadData:(id)noRefresh {
+    [self reload:[(NSNumber *)noRefresh boolValue]];
+}
+
 - (void)reload:(BOOL)noRefresh
 {
     if (isLoading || isLoadOver) {
@@ -441,7 +446,7 @@
 
         if ([Config Instance].isCookie) {
             if (!isLoading) {
-                [self performSelector:@selector(reload:)];
+                [self performSelector:@selector(reloadData:) withObject:[NSNumber numberWithBool:YES]];
             }
         }
         else {
